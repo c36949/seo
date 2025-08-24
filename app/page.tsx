@@ -132,15 +132,28 @@ function DivisionRankingTable({
 
   return (
     <div className="overflow-x-auto">
-      <table className="w-full min-w-[360px]">
+      <table className="w-full min-w-[340px]">
         <thead className="bg-gradient-to-r from-gray-50 to-blue-50 sticky top-0 border-b-2 border-blue-200">
           <tr>
-            <th className="px-1 py-2 text-left font-bold text-gray-900 text-xs w-8">🏆</th>
-            <th className="px-2 py-2 text-left font-bold text-gray-900 text-xs min-w-[80px] md:min-w-[200px]">팀명</th>
-            <th className="px-1 py-2 text-center font-bold text-gray-900 text-xs w-12 md:px-8 md:w-auto">🗺️ 권역</th>
-            <th className="px-1 py-2 text-center font-bold text-yellow-600 text-xs w-8 md:px-8 md:w-auto">🥇 우승</th>
-            <th className="px-1 py-2 text-center font-bold text-gray-500 text-xs w-8 md:px-8 md:w-auto">🥈 준우승</th>
-            <th className="px-1 py-2 text-center font-bold text-orange-600 text-xs w-8 md:px-8 md:w-auto">🥉 3위</th>
+            <th className="px-1 py-2 text-center font-bold text-gray-900 text-xs w-8 md:text-lg">🏆</th>
+            <th className="px-2 py-2 text-left font-bold text-gray-900 text-xs min-w-[70px] md:min-w-[200px] md:text-lg">
+              팀명
+            </th>
+            <th className="px-1 py-2 text-center font-bold text-gray-900 text-xs w-12 md:px-8 md:w-auto md:text-lg">
+              🗺️ 권역
+            </th>
+            <th className="px-1 py-2 text-center font-bold text-yellow-600 text-base w-8 md:px-8 md:w-auto md:text-lg">
+              <span className="md:hidden">🥇</span>
+              <span className="hidden md:inline">🥇 우승</span>
+            </th>
+            <th className="px-1 py-2 text-center font-bold text-gray-500 text-base w-8 md:px-8 md:w-auto md:text-lg">
+              <span className="md:hidden">🥈</span>
+              <span className="hidden md:inline">🥈 준우승</span>
+            </th>
+            <th className="px-1 py-2 text-center font-bold text-orange-600 text-base w-8 md:px-8 md:w-auto md:text-lg">
+              <span className="md:hidden">🥉</span>
+              <span className="hidden md:inline">🥉 3위</span>
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -157,7 +170,7 @@ function DivisionRankingTable({
               <td className="px-1 py-2">
                 <div className="flex items-center justify-center">
                   <span
-                    className={`text-xs font-bold ${
+                    className={`text-xs md:text-base font-bold ${
                       team.displayRank === 1
                         ? "text-yellow-600"
                         : team.displayRank === 2
@@ -171,7 +184,7 @@ function DivisionRankingTable({
                   </span>
                 </div>
               </td>
-              <td className="px-2 py-2 md:px-6 md:py-4 md:min-w-[200px]">
+              <td className="px-1 py-2 md:px-6 md:py-4 md:min-w-[200px]">
                 <button
                   className="text-left hover:text-blue-600 font-semibold text-xs md:text-lg transition-colors w-full text-ellipsis overflow-hidden whitespace-nowrap"
                   onClick={() => onTeamClick(team)}
@@ -186,7 +199,7 @@ function DivisionRankingTable({
               </td>
               <td className="px-1 py-2 text-center md:px-8 md:py-4">
                 <button
-                  className="bg-gradient-to-r from-yellow-100 to-yellow-200 hover:from-yellow-200 hover:to-yellow-300 text-yellow-800 px-1 py-0.5 rounded-full text-xs font-bold transition-all duration-200 shadow-sm hover:shadow-md min-w-[20px] md:px-3 md:py-1 md:text-sm"
+                  className="bg-gradient-to-r from-yellow-100 to-yellow-200 hover:from-yellow-200 hover:to-yellow-300 text-yellow-800 px-1 py-0.5 rounded-full text-xs font-bold transition-all duration-200 shadow-sm hover:shadow-md min-w-[18px] md:px-3 md:py-1 md:text-sm"
                   onClick={() => onTeamClick(team)}
                 >
                   {team.championships}
@@ -194,7 +207,7 @@ function DivisionRankingTable({
               </td>
               <td className="px-1 py-2 text-center md:px-8 md:py-4">
                 <button
-                  className="bg-gradient-to-r from-gray-100 to-gray-200 hover:from-gray-200 hover:to-gray-300 text-gray-800 px-1 py-0.5 rounded-full text-xs font-bold transition-all duration-200 shadow-sm hover:shadow-md min-w-[20px] md:px-3 md:py-1 md:text-sm"
+                  className="bg-gradient-to-r from-gray-100 to-gray-200 hover:from-gray-200 hover:to-gray-300 text-gray-800 px-1 py-0.5 rounded-full text-xs font-bold transition-all duration-200 shadow-sm hover:shadow-md min-w-[18px] md:px-3 md:py-1 md:text-sm"
                   onClick={() => onTeamClick(team)}
                 >
                   {team.runnerUps}
@@ -202,7 +215,7 @@ function DivisionRankingTable({
               </td>
               <td className="px-1 py-2 text-center md:px-8 md:py-4">
                 <button
-                  className="bg-gradient-to-r from-orange-100 to-orange-200 hover:from-orange-200 hover:to-orange-300 text-orange-800 px-1 py-0.5 rounded-full text-xs font-bold transition-all duration-200 shadow-sm hover:shadow-md min-w-[20px] md:px-3 md:py-1 md:text-sm"
+                  className="bg-gradient-to-r from-orange-100 to-orange-200 hover:from-orange-200 hover:to-orange-300 text-orange-800 px-1 py-0.5 rounded-full text-xs font-bold transition-all duration-200 shadow-sm hover:shadow-md min-w-[18px] md:px-3 md:py-1 md:text-sm"
                   onClick={() => onTeamClick(team)}
                 >
                   {team.thirdPlaces}
