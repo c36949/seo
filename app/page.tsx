@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
-import { Search, Trophy, Medal, Award, Filter, Users, MapPin, Calendar, Plus } from "lucide-react"
+import { Search, Trophy, Filter, Users, MapPin, Calendar, Plus } from "lucide-react"
 import { volleyballData, type DivisionTeamStats } from "@/lib/tournament-data-processor"
 
 interface TeamData {
@@ -132,27 +132,15 @@ function DivisionRankingTable({
 
   return (
     <div className="overflow-x-auto">
-      <table className="w-full min-w-[480px]">
+      <table className="w-full min-w-[360px]">
         <thead className="bg-gradient-to-r from-gray-50 to-blue-50 sticky top-0 border-b-2 border-blue-200">
           <tr>
-            <th className="px-1 md:px-4 py-1 md:py-3 text-left font-bold text-gray-900 text-xs md:text-sm w-12 md:w-auto">
-              🏆
-            </th>
-            <th className="px-2 md:px-4 py-1 md:py-3 text-left font-bold text-gray-900 text-xs md:text-sm min-w-[100px] md:min-w-[150px]">
-              🏐 팀명
-            </th>
-            <th className="px-1 md:px-3 py-1 md:py-3 text-center font-bold text-gray-900 text-xs md:text-sm w-12 md:w-auto">
-              🗺️
-            </th>
-            <th className="px-1 md:px-3 py-1 md:py-3 text-center font-bold text-yellow-600 text-xs md:text-sm w-12 md:w-auto">
-              🥇
-            </th>
-            <th className="px-1 md:px-3 py-1 md:py-3 text-center font-bold text-gray-500 text-xs md:text-sm w-12 md:w-auto">
-              🥈
-            </th>
-            <th className="px-1 md:px-3 py-1 md:py-3 text-center font-bold text-orange-600 text-xs md:text-sm w-12 md:w-auto">
-              🥉
-            </th>
+            <th className="px-1 py-2 text-left font-bold text-gray-900 text-xs w-8">🏆</th>
+            <th className="px-2 py-2 text-left font-bold text-gray-900 text-xs min-w-[80px]">팀명</th>
+            <th className="px-1 py-2 text-center font-bold text-yellow-600 text-xs w-8">🥇</th>
+            <th className="px-1 py-2 text-center font-bold text-gray-500 text-xs w-8">🥈</th>
+            <th className="px-1 py-2 text-center font-bold text-orange-600 text-xs w-8">🥉</th>
+            <th className="px-1 py-2 text-center font-bold text-gray-900 text-xs w-12">권역</th>
           </tr>
         </thead>
         <tbody>
@@ -166,10 +154,10 @@ function DivisionRankingTable({
               }`}
               onClick={() => onTeamClick(team)}
             >
-              <td className="px-1 md:px-4 py-1 md:py-3">
-                <div className="flex items-center justify-center md:justify-start">
+              <td className="px-1 py-2">
+                <div className="flex items-center justify-center">
                   <span
-                    className={`text-sm md:text-lg font-bold ${
+                    className={`text-xs font-bold ${
                       team.displayRank === 1
                         ? "text-yellow-600"
                         : team.displayRank === 2
@@ -181,57 +169,44 @@ function DivisionRankingTable({
                   >
                     {team.displayRank}
                   </span>
-                  {team.displayRank <= 3 && (
-                    <div className="hidden md:flex items-center ml-2">
-                      {team.displayRank === 1 && (
-                        <Trophy className="w-3 h-3 md:w-5 md:h-5 text-yellow-500 animate-pulse" />
-                      )}
-                      {team.displayRank === 2 && <Medal className="w-3 h-3 md:w-5 md:h-5 text-gray-400" />}
-                      {team.displayRank === 3 && <Award className="w-3 h-3 md:w-5 md:h-5 text-orange-500" />}
-                    </div>
-                  )}
                 </div>
               </td>
-              <td className="px-2 md:px-4 py-1 md:py-3">
+              <td className="px-2 py-2">
                 <button
-                  className="text-left hover:text-blue-600 font-semibold text-xs md:text-base transition-colors w-full text-ellipsis overflow-hidden"
+                  className="text-left hover:text-blue-600 font-semibold text-xs transition-colors w-full text-ellipsis overflow-hidden"
                   onClick={() => onTeamClick(team)}
                 >
                   {team.teamName}
                 </button>
               </td>
-              <td className="px-1 md:px-3 py-1 md:py-3 text-center">
-                <Badge
-                  variant="outline"
-                  className="text-xs font-medium text-green-600 border-green-300 px-1 py-0 md:px-2 md:py-1"
-                >
-                  <span className="hidden sm:inline">{team.region}</span>
-                  <span className="sm:hidden">{team.region.slice(0, 2)}</span>
-                </Badge>
-              </td>
-              <td className="px-1 md:px-3 py-1 md:py-3 text-center">
+              <td className="px-1 py-2 text-center">
                 <button
-                  className="bg-gradient-to-r from-yellow-100 to-yellow-200 hover:from-yellow-200 hover:to-yellow-300 text-yellow-800 px-1 md:px-3 py-0.5 md:py-1 rounded-full text-xs md:text-sm font-bold transition-all duration-200 shadow-md hover:shadow-lg min-w-[24px] md:min-w-[32px]"
+                  className="bg-gradient-to-r from-yellow-100 to-yellow-200 hover:from-yellow-200 hover:to-yellow-300 text-yellow-800 px-1 py-0.5 rounded-full text-xs font-bold transition-all duration-200 shadow-sm hover:shadow-md min-w-[20px]"
                   onClick={() => onTeamClick(team)}
                 >
                   {team.championships}
                 </button>
               </td>
-              <td className="px-1 md:px-3 py-1 md:py-3 text-center">
+              <td className="px-1 py-2 text-center">
                 <button
-                  className="bg-gradient-to-r from-gray-100 to-gray-200 hover:from-gray-200 hover:to-gray-300 text-gray-800 px-1 md:px-3 py-0.5 md:py-1 rounded-full text-xs md:text-sm font-bold transition-all duration-200 shadow-md hover:shadow-lg min-w-[24px] md:min-w-[32px]"
+                  className="bg-gradient-to-r from-gray-100 to-gray-200 hover:from-gray-200 hover:to-gray-300 text-gray-800 px-1 py-0.5 rounded-full text-xs font-bold transition-all duration-200 shadow-sm hover:shadow-md min-w-[20px]"
                   onClick={() => onTeamClick(team)}
                 >
                   {team.runnerUps}
                 </button>
               </td>
-              <td className="px-1 md:px-3 py-1 md:py-3 text-center">
+              <td className="px-1 py-2 text-center">
                 <button
-                  className="bg-gradient-to-r from-orange-100 to-orange-200 hover:from-orange-200 hover:to-orange-300 text-orange-800 px-1 md:px-3 py-0.5 md:py-1 rounded-full text-xs md:text-sm font-bold transition-all duration-200 shadow-md hover:shadow-lg min-w-[24px] md:min-w-[32px]"
+                  className="bg-gradient-to-r from-orange-100 to-orange-200 hover:from-orange-200 hover:to-orange-300 text-orange-800 px-1 py-0.5 rounded-full text-xs font-bold transition-all duration-200 shadow-sm hover:shadow-md min-w-[20px]"
                   onClick={() => onTeamClick(team)}
                 >
                   {team.thirdPlaces}
                 </button>
+              </td>
+              <td className="px-1 py-2 text-center">
+                <Badge variant="outline" className="text-xs font-medium text-green-600 border-green-300 px-1 py-0">
+                  {team.region.slice(0, 2)}
+                </Badge>
               </td>
             </tr>
           ))}
