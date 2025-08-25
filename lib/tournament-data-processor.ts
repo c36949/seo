@@ -1357,7 +1357,7 @@ export class VolleyballDataProcessor {
       },
       {
         tournament: "제3회 청풍명월 의림지배 전국 생활체육 배구대회",
-        division: "남자클럽 3부",
+        division: "남자클луб 3부",
         teamName: "청주 저스트플레이",
         rank: 3,
       },
@@ -1970,6 +1970,174 @@ export class VolleyballDataProcessor {
 
     this.addTournament("제17회 홍천무궁화배 전국생활체육 배구대회", tournament31Results)
     console.log("[v0] Tournament 31 added successfully - All 31 tournaments now complete!")
+
+    const tournament32Results: TournamentResult[] = [
+      // 남자클럽 2부
+      {
+        teamName: "전주 전라클럽",
+        division: "남자클럽 2부",
+        rank: 1,
+        tournament: "제14회 진안홍삼배 전국남여배구대회",
+      },
+      { teamName: "광주 LBT", division: "남자클럽 2부", rank: 2, tournament: "제14회 진안홍삼배 전국남여배구대회" },
+      { teamName: "서울 98즈", division: "남자클럽 2부", rank: 3, tournament: "제14회 진안홍삼배 전국남여배구대회" },
+      {
+        teamName: "고흥군 배구협회",
+        division: "남자클럽 2부",
+        rank: 3,
+        tournament: "제14회 진안홍삼배 전국남여배구대회",
+      },
+
+      // 남자클럽 3부 - 첫 번째 그룹
+      { teamName: "서대전 구봉", division: "남자클럽 3부", rank: 1, tournament: "제14회 진안홍삼배 전국남여배구대회" },
+      { teamName: "세종 배사모", division: "남자클럽 3부", rank: 2, tournament: "제14회 진안홍삼배 전국남여배구대회" },
+      { teamName: "청양 칠갑산", division: "남자클럽 3부", rank: 3, tournament: "제14회 진안홍삼배 전국남여배구대회" },
+      {
+        teamName: "전주 전라클럽",
+        division: "남자클럽 3부",
+        rank: 3,
+        tournament: "제14회 진안홍삼배 전국남여배구대회",
+      },
+
+      // 남자클럽 3부 - 두 번째 그룹
+      { teamName: "대전 아리", division: "남자클럽 3부", rank: 1, tournament: "제14회 진안홍삼배 전국남여배구대회" },
+      { teamName: "거창 중앙", division: "남자클럽 3부", rank: 2, tournament: "제14회 진안홍삼배 전국남여배구대회" },
+      { teamName: "천안 건심회", division: "남자클럽 3부", rank: 3, tournament: "제14회 진안홍삼배 전국남여배구대회" },
+      { teamName: "장흥 장강보", division: "남자클럽 3부", rank: 3, tournament: "제14회 진안홍삼배 전국남여배구대회" },
+
+      // 여자클럽 3부 - 첫 번째 그룹
+      {
+        teamName: "광주 곰과여우",
+        division: "여자클럽 3부",
+        rank: 1,
+        tournament: "제14회 진안홍삼배 전국남여배구대회",
+      },
+      { teamName: "전주 V9", division: "여자클럽 3부", rank: 2, tournament: "제14회 진안홍삼배 전국남여배구대회" },
+      { teamName: "세종 맥스", division: "여자클럽 3부", rank: 3, tournament: "제14회 진안홍삼배 전국남여배구대회" },
+      { teamName: "서대전 구봉", division: "여자클럽 3부", rank: 3, tournament: "제14회 진안홍삼배 전국남여배구대회" },
+
+      // 여자클럽 3부 - 두 번째 그룹
+      { teamName: "광주 썬클럽", division: "여자클럽 3부", rank: 1, tournament: "제14회 진안홍삼배 전국남여배구대회" },
+      {
+        teamName: "여수시 배구협회",
+        division: "여자클럽 3부",
+        rank: 2,
+        tournament: "제14회 진안홍삼배 전국남여배구대회",
+      },
+      {
+        teamName: "대전 브이로드",
+        division: "여자클럽 3부",
+        rank: 3,
+        tournament: "제14회 진안홍삼배 전국남여배구대회",
+      },
+      { teamName: "군산 서로엘", division: "여자클럽 3부", rank: 3, tournament: "제14회 진안홍삼배 전국남여배구대회" },
+    ]
+
+    this.addTournament("제14회 진안홍삼배 전국남여배구대회", tournament32Results, "2025.8.16.-2025.8.17.")
+
+    const tournament33Results: TournamentResult[] = [
+      // 남자클럽 3부
+      { teamName: "부산 신과함께", division: "남자클럽 3부", rank: 1, tournament: "제8회 울진금강송배 전국배구대회" },
+      { teamName: "부산 신과함께", division: "남자클럽 3부", rank: 2, tournament: "제8회 울진금강송배 전국배구대회" },
+      { teamName: "문경새재배구", division: "남자클럽 3부", rank: 3, tournament: "제8회 울진금강송배 전국배구대회" },
+      { teamName: "부산 배구독존", division: "남자클럽 3부", rank: 3, tournament: "제8회 울진금강송배 전국배구대회" },
+
+      // 여자클럽 3부
+      { teamName: "서울 SJVC", division: "여자클럽 3부", rank: 1, tournament: "제8회 울진금강송배 전국배구대회" },
+      { teamName: "세종 맥스", division: "여자클럽 3부", rank: 2, tournament: "제8회 울진금강송배 전국배구대회" },
+      { teamName: "부산 VTC", division: "여자클럽 3부", rank: 3, tournament: "제8회 울진금강송배 전국배구대회" },
+      { teamName: "대구 브이라인", division: "여자클럽 3부", rank: 3, tournament: "제8회 울진금강송배 전국배구대회" },
+
+      // 남자 장년부
+      { teamName: "수원 ALWAYS", division: "남자 장년부", rank: 1, tournament: "제8회 울진금강송배 전국배구대회" },
+      { teamName: "대구 시니어", division: "남자 장년부", rank: 2, tournament: "제8회 울진금강송배 전국배구대회" },
+      { teamName: "청주 청백회", division: "남자 장년부", rank: 3, tournament: "제8회 울진금강송배 전국배구대회" },
+      { teamName: "남양주 진건", division: "남자 장년부", rank: 3, tournament: "제8회 울진금강송배 전국배구대회" },
+    ]
+
+    this.addTournament("제8회 울진금강송배 전국배구대회", tournament33Results, "2025.8.23.-2025.8.24.")
+
+    const tournament34Results: TournamentResult[] = [
+      // 남자클럽 3부
+      {
+        teamName: "장흥 회진",
+        division: "남자클럽 3부",
+        rank: 1,
+        tournament: "제12회 영암 월출산배 전국 남.녀 배구대회",
+      },
+      {
+        teamName: "광주 문정",
+        division: "남자클럽 3부",
+        rank: 2,
+        tournament: "제12회 영암 월출산배 전국 남.녀 배구대회",
+      },
+      {
+        teamName: "목포 하나",
+        division: "남자클럽 3부",
+        rank: 3,
+        tournament: "제12회 영암 월출산배 전국 남.녀 배구대회",
+      },
+      {
+        teamName: "진도 GO",
+        division: "남자클럽 3부",
+        rank: 3,
+        tournament: "제12회 영암 월출산배 전국 남.녀 배구대회",
+      },
+
+      // 여자클럽 3부
+      {
+        teamName: "광주 썬클럽",
+        division: "여자클럽 3부",
+        rank: 1,
+        tournament: "제12회 영암 월출산배 전국 남.녀 배구대회",
+      },
+      {
+        teamName: "전주 토리",
+        division: "여자클럽 3부",
+        rank: 2,
+        tournament: "제12회 영암 월출산배 전국 남.녀 배구대회",
+      },
+      {
+        teamName: "사천 아자",
+        division: "여자클럽 3부",
+        rank: 3,
+        tournament: "제12회 영암 월출산배 전국 남.녀 배구대회",
+      },
+      {
+        teamName: "목포 유달",
+        division: "여자클럽 3부",
+        rank: 3,
+        tournament: "제12회 영암 월출산배 전국 남.녀 배구대회",
+      },
+
+      // 남자 시니어부
+      {
+        teamName: "광주 문정",
+        division: "남자 시니어부",
+        rank: 1,
+        tournament: "제12회 영암 월출산배 전국 남.녀 배구대회",
+      },
+      {
+        teamName: "광주 무등산",
+        division: "남자 시니어부",
+        rank: 2,
+        tournament: "제12회 영암 월출산배 전국 남.녀 배구대회",
+      },
+      {
+        teamName: "목포 SMC",
+        division: "남자 시니어부",
+        rank: 3,
+        tournament: "제12회 영암 월출산배 전국 남.녀 배구대회",
+      },
+      {
+        teamName: "광주 무등산",
+        division: "남자 시니어부",
+        rank: 3,
+        tournament: "제12회 영암 월출산배 전국 남.녀 배구대회",
+      },
+    ]
+
+    this.addTournament("제12회 영암 월출산배 전국 남.녀 배구대회", tournament34Results, "2025.8.23.-2025.8.24.")
   }
 
   private getRegion(teamName: string): string {
