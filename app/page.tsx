@@ -314,7 +314,7 @@ export default function VolleyballRanking() {
                 <img
                   src="/images/tiger-head.png"
                   alt="랭구랭구 Tiger Head"
-                  className="w-20 h-20 md:w-48 md:h-48 object-contain"
+                  className="w-30 h-30 md:w-48 md:h-48 object-contain"
                 />
                 <div className="text-center -mt-2 md:-mt-6">
                   <div className="text-sm md:text-2xl font-bold text-white mb-1">랭구랭구</div>
@@ -334,30 +334,28 @@ export default function VolleyballRanking() {
                 </p>
               </div>
             </div>
-            {/* </CHANGE> */}
-            <div className="flex space-x-2 md:space-x-3">
-              <Button
-                variant={currentView === "home" ? "secondary" : "outline"}
-                onClick={() => setCurrentView("home")}
-                className="bg-white/20 hover:bg-white/30 text-white border-white/30 backdrop-blur-sm text-sm"
-              >
-                <Users className="w-4 h-4 mr-1 md:mr-2" />
-                <span className="hidden sm:inline">부별 랭킹</span>
-                <span className="sm:hidden">부별</span>
-              </Button>
-              <Button
-                variant={currentView === "regional" ? "secondary" : "outline"}
-                onClick={() => setCurrentView("regional")}
-                className="bg-white/20 hover:bg-white/30 text-white border-white/30 backdrop-blur-sm text-sm"
-              >
-                <MapPin className="w-4 h-4 mr-1 md:mr-2" />
-                <span className="hidden sm:inline">권역별 랭킹</span>
-                <span className="sm:hidden">권역</span>
-              </Button>
-            </div>
           </div>
         </div>
       </header>
+
+      <div className="md:hidden fixed bottom-4 right-4 flex flex-col space-y-2 z-40">
+        <Button
+          variant={currentView === "home" ? "secondary" : "outline"}
+          onClick={() => setCurrentView("home")}
+          className="bg-blue-600 hover:bg-blue-700 text-white border-0 shadow-lg text-sm px-3 py-2"
+        >
+          <Users className="w-4 h-4 mr-1" />
+          부별
+        </Button>
+        <Button
+          variant={currentView === "regional" ? "secondary" : "outline"}
+          onClick={() => setCurrentView("regional")}
+          className="bg-green-600 hover:bg-green-700 text-white border-0 shadow-lg text-sm px-3 py-2"
+        >
+          <MapPin className="w-4 h-4 mr-1" />
+          권역
+        </Button>
+      </div>
 
       <main className="container mx-auto px-4 py-8">
         {currentView === "home" && dataLoaded && (
