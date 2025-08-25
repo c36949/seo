@@ -626,7 +626,7 @@ export class VolleyballDataProcessor {
       { tournament: "제13회 진해군항제기념", division: "남자클럽 3부", teamName: "부산 준혁이와 아이들", rank: 1 },
       { tournament: "제13회 진해군항제기념", division: "남자클럽 3부", teamName: "창원 동우회", rank: 2 },
       { tournament: "제13회 진해군항제기념", division: "남자클럽 3부", teamName: "순천배구클럽", rank: 3 },
-      { tournament: "제13회 진해군항제기념", division: "남자클럽 3부", teamName: "마산 베스트", rank: 3 },
+      { tournament: "제13회 진해군항제기념", division: "남자클럽 3부", teamName: "창원 마산 베스트", rank: 3 },
 
       // 여자클럽 3부
       { tournament: "제13회 진해군항제기념", division: "여자클럽 3부", teamName: "부산 CSN", rank: 1 },
@@ -943,17 +943,23 @@ export class VolleyballDataProcessor {
       { tournament: "제3회 단양 만천하 스카이배", division: "남자 시니어부", teamName: "서울 네잎클로버", rank: 3 },
       { tournament: "제3회 단양 만천하 스카이배", division: "남자 시니어부", teamName: "안산 위너스", rank: 3 },
 
+      // 남자 장년부
+      { tournament: "제3회 단양 만천하 스카이배", division: "남자 장년부", teamName: "울산 단디", rank: 1 },
+      { tournament: "제3회 단양 만천하 스카이배", division: "남자 장년부", teamName: "문경 스카이", rank: 2 },
+      { tournament: "제3회 단양 만천하 스카이배", division: "남자 장년부", teamName: "구미 HVC", rank: 3 },
+      { tournament: "제3회 단양 만천하 스카이배", division: "남자 장년부", teamName: "서울 나인스", rank: 3 },
+
       // 남자클럽 3부 - 첫 번째 그룹
       { tournament: "제3회 단양 만천하 스카이배", division: "남자클럽 3부", teamName: "대전 아리", rank: 1 },
-      { tournament: "제3회 단양 만천하 스카이배", division: "남자클럽 3부", teamName: "서울 TEAM KCK", rank: 2 },
-      { tournament: "제3회 단양 만천하 스카이배", division: "남자클럽 3부", teamName: "남양주 진건", rank: 3 },
-      { tournament: "제3회 단양 만천하 스카이배", division: "남자클럽 3부", teamName: "안산 WE라온", rank: 3 },
+      { tournament: "제3회 단양 만천하 스카이배", division: "남자클럽 3부", teamName: "인천 라이크발리볼", rank: 2 },
+      { tournament: "제3회 단양 만천하 스카이배", division: "남자클럽 3부", teamName: "청주 저스트플레이", rank: 3 },
+      { tournament: "제3회 단양 만천하 스카이배", division: "남자클럽 3부", teamName: "서울 VNUE", rank: 3 },
 
       // 남자클럽 3부 - 두 번째 그룹
       { tournament: "제3회 단양 만천하 스카이배", division: "남자클럽 3부", teamName: "서울 송파창스", rank: 1 },
       { tournament: "제3회 단양 만천하 스카이배", division: "남자클럽 3부", teamName: "서울 중랑구", rank: 2 },
-      { tournament: "제3회 단양 만천하 스카이배", division: "남자클럽 3부", teamName: "남양주 하누리", rank: 3 },
-      { tournament: "제3회 단양 만천하 스카이배", division: "남자클럽 3부", teamName: "이천 JVC", rank: 3 },
+      { tournament: "제3회 단양 만천하 스카이배", division: "남자클럽 3부", teamName: "전주 하랑", rank: 3 },
+      { tournament: "제3회 단양 만천하 스카이배", division: "남자클럽 3부", teamName: "서울 서초배사모", rank: 3 },
 
       // 남자 대학부
       { tournament: "제3회 단양 만천하 스카이배", division: "남자 대학부", teamName: "국민대 VAT", rank: 1 },
@@ -962,12 +968,18 @@ export class VolleyballDataProcessor {
       { tournament: "제3회 단양 만천하 스카이배", division: "남자 대학부", teamName: "서원대", rank: 3 },
 
       // 여자클럽 3부 - 첫 번째 그룹
-      { tournament: "제3회 단양 만천하 스카이배", division: "여자클럽 3부", teamName: "함안 TOP", rank: 1 },
-      { tournament: "제3회 단양 만천하 스카이배", division: "여자클럽 3부", teamName: "안산 WE라온", rank: 2 },
-      { tournament: "제3회 단양 만천하 스카이배", division: "여자클럽 3부", teamName: "안양 유니티", rank: 3 },
-      { tournament: "제3회 단양 만천하 스카이배", division: "여자클럽 3부", teamName: "서울 앵두", rank: 3 },
+      { tournament: "제3회 단양 만천하 스카이배", division: "여자클럽 3부", teamName: "서울 차차차", rank: 1 },
+      { tournament: "제3회 단양 만천하 스카이배", division: "여자클럽 3부", teamName: "서울 유앤아이", rank: 2 },
+      { tournament: "제3회 단양 만천하 스카이배", division: "여자클럽 3부", teamName: "청주 DIG", rank: 3 },
+      { tournament: "제3회 단양 만천하 스카이배", division: "여자클럽 3부", teamName: "서울 GVT", rank: 3 },
 
       // 여자클럽 3부 - 두 번째 그룹
+      { tournament: "제3회 단양 만천하 스카이배", division: "여자클럽 3부", teamName: "함안 TOP", rank: 1 },
+      { tournament: "제3회 단양 만천하 스카이배", division: "여자클럽 3부", teamName: "서울 새로", rank: 2 },
+      { tournament: "제3회 단양 만천하 스카이배", division: "여자클럽 3부", teamName: "서울 앞라대구클럽", rank: 3 },
+      { tournament: "제3회 단양 만천하 스카이배", division: "여자클럽 3부", teamName: "하남 유미온", rank: 3 },
+
+      // 여자클럽 3부 - 세 번째 그룹
       { tournament: "제3회 단양 만천하 스카이배", division: "여자클럽 3부", teamName: "대전 아리", rank: 1 },
       { tournament: "제3회 단양 만천하 스카이배", division: "여자클럽 3부", teamName: "서울 우리하모니", rank: 2 },
       { tournament: "제3회 단양 만천하 스카이배", division: "여자클럽 3부", teamName: "서울 VNUE", rank: 3 },
@@ -1809,7 +1821,8 @@ export class VolleyballDataProcessor {
       // 여자클럽 3부
       { tournament: "제7회 선비배 전국 남녀 배구대회", division: "여자클럽 3부", teamName: "대구 브이라인", rank: 1 },
       { tournament: "제7회 선비배 전국 남녀 배구대회", division: "여자클럽 3부", teamName: "진주교대OB", rank: 2 },
-      { tournament: "제7회 선비배 전국 남녀 배구대회", division: "여자클럽 3부", teamName: "EVE", rank: 3 },
+      { tournament: "제7회 선비배 전국 남녀 배구대회", division: "여자클럽 3부", teamName: "대구 EVE", rank: 3 },
+      { tournament: "제7회 선비배 전국 남녀 배구대회", division: "여자클럽 3부", teamName: "", rank: 3 },
     ]
 
     this.addTournament("제7회 선비배 전국 남녀 배구대회", tournament30Results)
@@ -2144,6 +2157,12 @@ export class VolleyballDataProcessor {
     if (teamName.includes("광주")) {
       return "전라권"
     }
+    if (teamName.includes("광명")) {
+      return "수도권"
+    }
+    if (teamName.includes("일산")) {
+      return "수도권"
+    }
     if (
       teamName.includes("서울") ||
       teamName.includes("인천") ||
@@ -2180,7 +2199,6 @@ export class VolleyballDataProcessor {
     ) {
       return "수도권"
     }
-    if (teamName.includes("광명 선우")) return "수도권"
     if (
       teamName.includes("부산") ||
       teamName.includes("울산") ||
