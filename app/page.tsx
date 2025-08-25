@@ -309,17 +309,23 @@ export default function VolleyballRanking() {
       <header className="bg-gradient-to-r from-blue-600 via-blue-700 to-orange-600 shadow-2xl">
         <div className="container mx-auto px-4 py-6 md:py-8">
           <div className="flex flex-col md:flex-row md:items-center justify-between mb-6 md:mb-8 space-y-4 md:space-y-0">
-            <div className="flex items-center space-x-3 md:space-x-4">
-              <div className="relative">
-                <div className="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-r from-orange-400 to-red-500 rounded-full flex items-center justify-center shadow-lg animate-pulse">
-                  <Trophy className="w-6 h-6 md:w-8 md:h-8 text-white" />
-                </div>
-                <div className="absolute -top-1 -right-1 w-5 h-5 md:w-6 md:h-6 bg-yellow-400 rounded-full flex items-center justify-center">
-                  <span className="text-xs font-bold text-yellow-900">🏐</span>
+            <div className="flex flex-col md:flex-row md:items-center space-y-3 md:space-y-0 md:space-x-4">
+              <div className="flex flex-col items-center">
+                <img
+                  src="/images/tiger-head.png"
+                  alt="랭구랭구 Tiger Head"
+                  className="w-36 h-36 md:w-48 md:h-48 object-contain"
+                />
+                <div className="text-center -mt-4 md:-mt-6">
+                  <div className="text-xl md:text-2xl font-bold text-white mb-1">랭구랭구</div>
+                  <div className="text-xs md:text-sm text-blue-100">
+                    <span className="font-bold text-yellow-300">랭</span>킹+배
+                    <span className="font-bold text-yellow-300">구</span>=랭구
+                  </div>
                 </div>
               </div>
               <div>
-                <h1 className="text-2xl md:text-4xl font-bold text-white mb-1">전국 배구클럽 부별 랭킹</h1>
+                <h1 className="text-2xl md:text-4xl font-bold text-white mb-1">전국 배구 클럽 랭킹</h1>
                 <p className="text-blue-100 text-sm md:text-lg">National Volleyball Club Division Rankings</p>
                 <p className="text-blue-200 text-xs md:text-sm">
                   {dataLoaded
