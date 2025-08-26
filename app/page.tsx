@@ -442,22 +442,18 @@ export default function VolleyballRanking() {
                 <CardTitle className="text-xl md:text-2xl flex flex-col md:flex-row md:items-center justify-between space-y-2 md:space-y-0">
                   <div className="flex items-center">
                     <img
-                      src="/images/volleyball-small.png"
-                      alt="Volleyball"
-                      className="w-8 h-8 md:w-9 md:h-9 mr-2 md:mr-3"
+                      src="/images/podium-mascots.png"
+                      alt="Podium Mascots"
+                      className="w-36 h-36 md:w-54 md:h-54 mr-2 md:mr-3 object-contain"
                     />
                     <div className="flex items-center">
                       <div>
-                        <div className="text-xl md:text-2xl font-bold">{selectedDivision} 순위표</div>
+                        <div className="text-xl md:text-2xl font-bold">{selectedDivision}</div>
+                        <div className="text-2xl md:text-3xl font-bold">순위표</div>
                         {selectedRegion !== "전체권역" && (
                           <div className="text-base md:text-lg text-blue-100 mt-1">📍 {selectedRegion}</div>
                         )}
                       </div>
-                      <img
-                        src="/images/podium-mascots.png"
-                        alt="Podium Mascots"
-                        className="w-36 h-36 md:w-54 md:h-54 ml-3 md:ml-4 object-contain"
-                      />
                     </div>
                   </div>
                   <div className="text-left md:text-right">
