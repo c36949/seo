@@ -162,7 +162,7 @@ function DivisionRankingTable({
               팀명
             </th>
             <th className="px-1 py-2 text-center font-bold text-gray-900 text-xs w-12 md:px-8 md:w-auto md:text-lg">
-              🗺️ 권역
+              권역
             </th>
             <th className="px-1 py-2 text-center font-bold text-yellow-600 text-base w-8 md:px-8 md:w-auto md:text-lg">
               <span className="md:hidden">🥇</span>
@@ -362,7 +362,10 @@ export default function VolleyballRanking() {
           <div className="space-y-4 md:space-y-6">
             <Card className="shadow-xl border-0">
               <CardHeader className="bg-gradient-to-r from-blue-600 via-purple-600 to-orange-600 text-white p-3 md:p-4">
-                <CardTitle className="text-lg md:text-xl">📅 부별 선택</CardTitle>
+                <CardTitle className="text-lg md:text-xl flex items-center">
+                  <img src="/images/volleyball-small.png" alt="Volleyball" className="w-8 h-8 md:w-9 md:h-9 mr-2" />
+                  부별 선택
+                </CardTitle>
               </CardHeader>
               <CardContent className="p-3 md:p-4 space-y-3">
                 <div>
@@ -408,7 +411,10 @@ export default function VolleyballRanking() {
 
             <Card className="shadow-xl border-0">
               <CardHeader className="bg-gradient-to-r from-green-600 via-teal-600 to-blue-600 text-white p-3 md:p-4">
-                <CardTitle className="text-lg md:text-xl">🗺️ 권역별 선택</CardTitle>
+                <CardTitle className="text-lg md:text-xl flex items-center">
+                  <img src="/images/volleyball-small.png" alt="Volleyball" className="w-8 h-8 md:w-9 md:h-9 mr-2" />
+                  권역별 선택
+                </CardTitle>
               </CardHeader>
               <CardContent className="p-3 md:p-4">
                 <div className="flex flex-wrap gap-2">
@@ -434,11 +440,13 @@ export default function VolleyballRanking() {
               <CardHeader className="bg-gradient-to-r from-blue-600 via-purple-600 to-orange-600 text-white p-4 md:p-6">
                 <CardTitle className="text-xl md:text-2xl flex flex-col md:flex-row md:items-center justify-between space-y-2 md:space-y-0">
                   <div className="flex items-center">
-                    <div className="w-6 h-6 md:w-8 md:h-8 bg-white/20 rounded-full flex items-center justify-center mr-2 md:mr-3">
-                      <Trophy className="w-4 h-4 md:w-5 md:h-5 text-white" />
-                    </div>
+                    <img
+                      src="/images/volleyball-small.png"
+                      alt="Volleyball"
+                      className="w-8 h-8 md:w-9 md:h-9 mr-2 md:mr-3"
+                    />
                     <div>
-                      <div className="text-xl md:text-2xl font-bold">📅 {selectedDivision} 순위표</div>
+                      <div className="text-xl md:text-2xl font-bold">{selectedDivision} 순위표</div>
                       {selectedRegion !== "전체권역" && (
                         <div className="text-base md:text-lg text-blue-100 mt-1">📍 {selectedRegion}</div>
                       )}

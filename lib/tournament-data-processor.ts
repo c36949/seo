@@ -761,12 +761,12 @@ export class VolleyballDataProcessor {
       // 남자 시니어부
       { tournament: "제53회 생활체육 카네이션", division: "남자 시니어부", teamName: "군산배구클럽", rank: 1 },
       { tournament: "제53회 생활체육 카네이션", division: "남자 시니어부", teamName: "창원 바람개비", rank: 2 },
-      { tournament: "제53회 생활체육 카네이션", division: "남자 시니어부", teamName: "수원 뉴에이스", rank: 3 },
+      { tournament: "제53회 생활체육 카네이션", division: "남자 시니어부", teamName: "수원 유에이스", rank: 3 },
       { tournament: "제53회 생활체육 카네이션", division: "남자 시니어부", teamName: "포항 영일만", rank: 3 },
 
       // 남자 실버부
-      { tournament: "제53회 생활체육 카네이션", division: "남자 실버부", teamName: "동영 실버", rank: 1 },
-      { tournament: "제53회 생활체육 카네이션", division: "남자 실버부", teamName: "수원 뉴에이스", rank: 2 },
+      { tournament: "제53회 생활체육 카네이션", division: "남자 실버부", teamName: "통영실버", rank: 1 },
+      { tournament: "제53회 생활체육 카네이션", division: "남자 실버부", teamName: "수원 유에이스", rank: 2 },
       { tournament: "제53회 생활체육 카네이션", division: "남자 실버부", teamName: "순천 무진", rank: 3 },
       { tournament: "제53회 생활체육 카네이션", division: "남자 실버부", teamName: "순천 실버드림", rank: 3 },
     ]
@@ -1003,7 +1003,7 @@ export class VolleyballDataProcessor {
 
       // Женский клуб 3부
       { tournament: "제2회보성녹차배", division: "여자클럽 3부", teamName: "진주 HAMO", rank: 1 },
-      { tournament: "제2회보성녹차배", division: "여자클럽 3부", teamName: "광주 썬", rank: 2 },
+      { tournament: "제2회보성녹차배", division: "여자클럽 3부", teamName: "광주 썬클럽", rank: 2 },
       { tournament: "제2회보성녹차배", division: "여자클럽 3부", teamName: "전주 V9", rank: 3 },
       { tournament: "제2회보성녹차배", division: "여자클럽 3부", teamName: "광주 곰과여우", rank: 3 },
     ]
@@ -1780,7 +1780,7 @@ export class VolleyballDataProcessor {
       { tournament: "제12회 순창장류배", division: "남자클럽 3부", teamName: "영암 하나", rank: 3 },
 
       // 여자클럽 3부
-      { tournament: "제12회 순창장류배", division: "여자클럽 3부", teamName: "광주 썬", rank: 1 },
+      { tournament: "제12회 순창장류배", division: "여자클럽 3부", teamName: "광주 썬클럽", rank: 1 },
       { tournament: "제12회 순창장류배", division: "여자클럽 3부", teamName: "순천 배구", rank: 2 },
       { tournament: "제12회 순창장류배", division: "여자클럽 3부", teamName: "전주 V9", rank: 3 },
       { tournament: "제12회 순창장류배", division: "여자클럽 3부", teamName: "광주 곰과여우", rank: 3 },
@@ -1821,8 +1821,6 @@ export class VolleyballDataProcessor {
       // 여자클럽 3부
       { tournament: "제7회 선비배 전국 남녀 배구대회", division: "여자클럽 3부", teamName: "대구 브이라인", rank: 1 },
       { tournament: "제7회 선비배 전국 남녀 배구대회", division: "여자클럽 3부", teamName: "진주교대OB", rank: 2 },
-      { tournament: "제7회 선비배 전국 남녀 배구대회", division: "여자클럽 3부", teamName: "대구 EVE", rank: 3 },
-      { tournament: "제7회 선비배 전국 남녀 배구대회", division: "여자클럽 3부", teamName: "", rank: 3 },
     ]
 
     this.addTournament("제7회 선비배 전국 남녀 배구대회", tournament30Results)
@@ -2154,12 +2152,19 @@ export class VolleyballDataProcessor {
   }
 
   private getRegion(teamName: string): string {
+    if (teamName === "광주 문정") {
+      console.log("[v0] Calculating region for 광주 문정")
+    }
+
     if (teamName.includes("광주")) {
+      if (teamName === "광주 문정") {
+        console.log("[v0] 광주 문정 matched 광주 condition, returning 전라권")
+      }
       return "전라권"
     }
-    if (teamName.includes("광명")) {
-      return "수도권"
-    }
+
+    if (teamName.includes("광명")) return "수도권"
+    if (teamName.includes("과천시")) return "수도권"
     if (teamName.includes("일산")) {
       return "수도권"
     }
@@ -2359,7 +2364,11 @@ export class VolleyballDataProcessor {
 
   // 팀 상세 정보 가져오기
   getTeamRegion(teamName: string): string {
-    return this.getRegion(teamName)
+    const region = this.getRegion(teamName)
+    if (teamName === "광주 문정") {
+      console.log("[v0] getTeamRegion for 광주 문정 returning:", region)
+    }
+    return region
   }
 }
 
