@@ -960,6 +960,9 @@ export class VolleyballDataProcessor {
       { tournament: "제3회 단양 만천하 스카이배", division: "남자클럽 3부", teamName: "전주 하랑", rank: 3 },
       { tournament: "제3회 단양 만천하 스카이배", division: "남자클럽 3부", teamName: "서울 서초배사모", rank: 3 },
 
+      // 남자클럽 3부 - 세 번째 그룹 (추가된 KCK 준우승 결과)
+      { tournament: "제3회 단양 만천하 스카이배", division: "남자클럽 3부", teamName: "서울 TEAM KCK", rank: 2 },
+
       // 남자 대학부
       { tournament: "제3회 단양 만천하 스카이배", division: "남자 대학부", teamName: "국민대 VAT", rank: 1 },
       { tournament: "제3회 단양 만천하 스카이배", division: "남자 대학부", teamName: "삼육대 SU-WINGS", rank: 2 },
