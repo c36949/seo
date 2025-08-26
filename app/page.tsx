@@ -418,21 +418,149 @@ export default function VolleyballRanking() {
                 </CardTitle>
               </CardHeader>
               <CardContent className="p-3 md:p-4">
-                <div className="flex flex-wrap gap-2">
-                  {REGIONS.map((region) => (
-                    <Button
-                      key={region}
-                      variant={selectedRegion === region ? "default" : "outline"}
-                      onClick={() => setSelectedRegion(region)}
-                      className={`text-xs md:text-sm px-2 md:px-3 py-1 md:py-2 ${
-                        selectedRegion === region
-                          ? "bg-gradient-to-r from-green-500 to-teal-500 text-white"
-                          : "hover:bg-green-50"
-                      }`}
-                    >
-                      {region}
-                    </Button>
-                  ))}
+                <div className="flex flex-col md:flex-row gap-4 md:gap-6">
+                  {/* Left side - Map (half size) */}
+                  <div className="flex-1 md:max-w-sm">
+                    <div className="relative">
+                      <img
+                        src="/images/korea-regions-map.png"
+                        alt="Korea Regions Map"
+                        className="w-full max-w-xs mx-auto md:max-w-sm"
+                      />
+
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <div className="relative w-full max-w-xs md:max-w-sm">
+                          {/* 전체권역 button - top center */}
+                          <Button
+                            variant={selectedRegion === "전체권역" ? "default" : "outline"}
+                            onClick={() => setSelectedRegion("전체권역")}
+                            className={`absolute top-4 left-1/2 transform -translate-x-1/2 text-xs px-2 py-1 font-bold ${
+                              selectedRegion === "전체권역"
+                                ? "bg-gradient-to-r from-gray-600 to-gray-700 text-white shadow-lg"
+                                : "bg-white/95 hover:bg-gray-100 border-2 border-gray-300"
+                            }`}
+                          >
+                            전체권역
+                          </Button>
+
+                          {/* 수도권 button */}
+                          <Button
+                            variant={selectedRegion === "수도권" ? "default" : "outline"}
+                            onClick={() => setSelectedRegion("수도권")}
+                            className={`absolute top-[35%] left-[25%] transform -translate-x-1/2 -translate-y-1/2 text-xs px-2 py-1 font-bold ${
+                              selectedRegion === "수도권"
+                                ? "bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-lg"
+                                : "bg-white/95 hover:bg-blue-100 border-2 border-blue-300"
+                            }`}
+                          >
+                            수도권
+                          </Button>
+
+                          {/* 강원권 button */}
+                          <Button
+                            variant={selectedRegion === "강원권" ? "default" : "outline"}
+                            onClick={() => setSelectedRegion("강원권")}
+                            className={`absolute top-[25%] right-[20%] transform translate-x-1/2 -translate-y-1/2 text-xs px-2 py-1 font-bold ${
+                              selectedRegion === "강원권"
+                                ? "bg-gradient-to-r from-green-500 to-green-600 text-white shadow-lg"
+                                : "bg-white/95 hover:bg-green-100 border-2 border-green-300"
+                            }`}
+                          >
+                            강원권
+                          </Button>
+
+                          {/* 충청권 button */}
+                          <Button
+                            variant={selectedRegion === "충청권" ? "default" : "outline"}
+                            onClick={() => setSelectedRegion("충청권")}
+                            className={`absolute top-[52%] left-[22%] transform -translate-x-1/2 -translate-y-1/2 text-xs px-2 py-1 font-bold ${
+                              selectedRegion === "충청권"
+                                ? "bg-gradient-to-r from-red-500 to-red-600 text-white shadow-lg"
+                                : "bg-white/95 hover:bg-red-100 border-2 border-red-300"
+                            }`}
+                          >
+                            충청권
+                          </Button>
+
+                          {/* 경상권 button */}
+                          <Button
+                            variant={selectedRegion === "경상권" ? "default" : "outline"}
+                            onClick={() => setSelectedRegion("경상권")}
+                            className={`absolute top-[65%] right-[15%] transform translate-x-1/2 -translate-y-1/2 text-xs px-2 py-1 font-bold ${
+                              selectedRegion === "경상권"
+                                ? "bg-gradient-to-r from-pink-500 to-pink-600 text-white shadow-lg"
+                                : "bg-white/95 hover:bg-pink-100 border-2 border-pink-300"
+                            }`}
+                          >
+                            경상권
+                          </Button>
+
+                          {/* 전라권 button */}
+                          <Button
+                            variant={selectedRegion === "전라권" ? "default" : "outline"}
+                            onClick={() => setSelectedRegion("전라권")}
+                            className={`absolute bottom-[15%] left-[25%] transform -translate-x-1/2 translate-y-1/2 text-xs px-2 py-1 font-bold ${
+                              selectedRegion === "전라권"
+                                ? "bg-gradient-to-r from-purple-500 to-purple-600 text-white shadow-lg"
+                                : "bg-white/95 hover:bg-purple-100 border-2 border-purple-300"
+                            }`}
+                          >
+                            전라권
+                          </Button>
+
+                          {/* 제주권 button */}
+                          <Button
+                            variant={selectedRegion === "제주권" ? "default" : "outline"}
+                            onClick={() => setSelectedRegion("제주권")}
+                            className={`absolute bottom-[8%] left-[15%] transform -translate-x-1/2 text-xs px-2 py-1 font-bold ${
+                              selectedRegion === "제주권"
+                                ? "bg-gradient-to-r from-teal-500 to-teal-600 text-white shadow-lg"
+                                : "bg-white/95 hover:bg-teal-100 border-2 border-teal-300"
+                            }`}
+                          >
+                            제주권
+                          </Button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Right side - Region tabs */}
+                  <div className="flex-1">
+                    <div className="space-y-3">
+                      <h3 className="text-lg font-semibold text-gray-800 mb-4">권역별 선택</h3>
+                      <div className="grid grid-cols-1 gap-3">
+                        {REGIONS.map((region) => {
+                          const regionTeamCount = filteredTeams.filter((t) =>
+                            region === "전체권역" ? true : t.region === region,
+                          ).length
+
+                          return (
+                            <Button
+                              key={region}
+                              variant={selectedRegion === region ? "default" : "outline"}
+                              onClick={() => setSelectedRegion(region)}
+                              className={`w-full justify-between p-4 h-auto ${
+                                selectedRegion === region
+                                  ? "bg-gradient-to-r from-blue-500 to-purple-500 text-white"
+                                  : "hover:bg-gray-50 border-2"
+                              }`}
+                            >
+                              <span className="font-semibold">{region}</span>
+                              <Badge
+                                variant="secondary"
+                                className={`${
+                                  selectedRegion === region ? "bg-white/20 text-white" : "bg-gray-100 text-gray-600"
+                                }`}
+                              >
+                                {regionTeamCount}개 팀
+                              </Badge>
+                            </Button>
+                          )
+                        })}
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </CardContent>
             </Card>
