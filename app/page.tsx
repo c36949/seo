@@ -438,7 +438,7 @@ export default function VolleyballRanking() {
             </Card>
 
             <Card className="shadow-2xl border-0 overflow-hidden">
-              <CardHeader className="bg-gradient-to-r from-blue-600 via-purple-600 to-orange-600 text-white p-4 md:p-6">
+              <CardHeader className="bg-gradient-to-r from-blue-600 via-purple-600 to-orange-600 text-white p-2 md:p-4">
                 <CardTitle className="text-xl md:text-2xl flex flex-col md:flex-row md:items-center justify-between space-y-2 md:space-y-0">
                   <div className="flex items-center">
                     <img
@@ -448,7 +448,7 @@ export default function VolleyballRanking() {
                     />
                     <div className="flex items-center">
                       <div>
-                        <div className="text-xl md:text-2xl font-bold">{selectedDivision}</div>
+                        <div className="text-2xl md:text-3xl font-bold">{selectedDivision}</div>
                         <div className="text-2xl md:text-3xl font-bold">순위표</div>
                         {selectedRegion !== "전체권역" && (
                           <div className="text-base md:text-lg text-blue-100 mt-1">📍 {selectedRegion}</div>
@@ -457,13 +457,15 @@ export default function VolleyballRanking() {
                     </div>
                   </div>
                   <div className="text-left md:text-right">
-                    <div className="text-base md:text-lg font-bold">
+                    <div className="text-sm md:text-lg font-bold">
                       {selectedDivision === "모든부 종합"
                         ? filteredTeams.length
                         : filteredTeams.filter((t) => t.division === selectedDivision).length}
                       개 팀
                     </div>
-                    <div className="text-sm text-blue-100">{tournamentStats.totalTournaments}개 대회 집계</div>
+                    <div className="text-xs md:text-sm text-blue-100">
+                      {tournamentStats.totalTournaments}개 대회 집계
+                    </div>
                   </div>
                 </CardTitle>
               </CardHeader>
