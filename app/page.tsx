@@ -456,7 +456,7 @@ export default function VolleyballRanking() {
                       <img
                         src="/images/podium-mascots.png"
                         alt="Podium Mascots"
-                        className="w-24 h-24 md:w-36 md:h-36 ml-3 md:ml-4 object-contain"
+                        className="w-36 h-36 md:w-54 md:h-54 ml-3 md:ml-4 object-contain"
                       />
                     </div>
                   </div>
