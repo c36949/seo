@@ -322,6 +322,7 @@ export default function VolleyballRanking() {
                     <span className="font-bold text-yellow-300">랭</span>킹+배
                     <span className="font-bold text-yellow-300">구</span>=랭구
                   </div>
+                  <div className="text-xs md:text-sm text-yellow-300 font-bold">"랭구랭구 마스코트 호랭이"</div>
                 </div>
               </div>
               <div>
@@ -445,11 +446,18 @@ export default function VolleyballRanking() {
                       alt="Volleyball"
                       className="w-8 h-8 md:w-9 md:h-9 mr-2 md:mr-3"
                     />
-                    <div>
-                      <div className="text-xl md:text-2xl font-bold">{selectedDivision} 순위표</div>
-                      {selectedRegion !== "전체권역" && (
-                        <div className="text-base md:text-lg text-blue-100 mt-1">📍 {selectedRegion}</div>
-                      )}
+                    <div className="flex items-center">
+                      <div>
+                        <div className="text-xl md:text-2xl font-bold">{selectedDivision} 순위표</div>
+                        {selectedRegion !== "전체권역" && (
+                          <div className="text-base md:text-lg text-blue-100 mt-1">📍 {selectedRegion}</div>
+                        )}
+                      </div>
+                      <img
+                        src="/images/podium-mascots.png"
+                        alt="Podium Mascots"
+                        className="w-24 h-24 md:w-36 md:h-36 ml-3 md:ml-4 object-contain"
+                      />
                     </div>
                   </div>
                   <div className="text-left md:text-right">
