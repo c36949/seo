@@ -62,7 +62,6 @@ export class VolleyballDataProcessor {
       "안성",
       "김포",
       "화성",
-      "광주",
       "양주",
       "포천",
       "여주",
