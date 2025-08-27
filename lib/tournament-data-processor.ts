@@ -483,7 +483,7 @@ export class VolleyballDataProcessor {
       { tournament: "제18회 광양백운산기", division: "여자클럽 3부", teamName: "부산 CSN", rank: 3 },
     ]
 
-    this.addTournament("제18회 광양백운산기", tournament2Results)
+    this.addTournament("제18회 광양백운산기", tournament2Results, "2025.3.15-3.16")
 
     const tournament3Results: TournamentResult[] = [
       // 남자 시니어부
@@ -505,7 +505,7 @@ export class VolleyballDataProcessor {
       { tournament: "제2회 빛고을 무등산배", division: "여자클럽 3부", teamName: "광주 히트", rank: 3 },
     ]
 
-    this.addTournament("제2회 빛고을 무등산배", tournament3Results)
+    this.addTournament("제2회 빛고을 무등산배", tournament3Results, "2025.3.22-3.23")
 
     const tournament4Results: TournamentResult[] = [
       // 남자클럽 2부
@@ -538,7 +538,7 @@ export class VolleyballDataProcessor {
       { tournament: "2025 청양칠갑산배", division: "여자 장년부", teamName: "김제 태종", rank: 3 },
     ]
 
-    this.addTournament("2025 청양칠갑산배", tournament4Results)
+    this.addTournament("2025 청양칠갑산배", tournament4Results, "2025.3.29-3.30")
 
     const tournament5Results: TournamentResult[] = [
       // 남자 시니어부
@@ -566,7 +566,7 @@ export class VolleyballDataProcessor {
       { tournament: "제23회 나주 배꽃배", division: "남자 장년부", teamName: "장흥 정남진천관", rank: 3 },
     ]
 
-    this.addTournament("제23회 나주 배꽃배", tournament5Results)
+    this.addTournament("제23회 나주 배꽃배", tournament5Results, "2025.4.5-4.6")
 
     const tournament6Results: TournamentResult[] = [
       // 남자클럽 3부 - 첫 번째 그룹
@@ -612,7 +612,7 @@ export class VolleyballDataProcessor {
       { tournament: "제6회 단양소백산배", division: "여자 대학부", teamName: "상명대 SUV", rank: 3 },
     ]
 
-    this.addTournament("제6회 단양소백산배", tournament6Results)
+    this.addTournament("제6회 단양소백산배", tournament6Results, "2025.4.12-4.13")
 
     const tournament7Results: TournamentResult[] = [
       // 남자 시니어부
@@ -640,7 +640,7 @@ export class VolleyballDataProcessor {
       { tournament: "제13회 진해군항제기념", division: "남자 장년부", teamName: "창원 동우회", rank: 3 },
     ]
 
-    this.addTournament("제13회 진해군항제기념", tournament7Results)
+    this.addTournament("제13회 진해군항제기념", tournament7Results, "2025.4.19-4.20")
 
     const tournament8Results: TournamentResult[] = [
       // 남자클럽 2부
@@ -686,7 +686,7 @@ export class VolleyballDataProcessor {
       { tournament: "제4회단양도담삼봉배", division: "남자 시니어부", teamName: "남양주 배구사랑", rank: 3 },
     ]
 
-    this.addTournament("제4회단양도담삼봉배", tournament8Results)
+    this.addTournament("제4회단양도담삼봉배", tournament8Results, "2025.4.26-4.27")
 
     const tournament9Results: TournamentResult[] = [
       // 남자 시니어부
@@ -720,7 +720,7 @@ export class VolleyballDataProcessor {
       { tournament: "제16회 순천만갈대배", division: "여자 장년부", teamName: "광양 플렉스", rank: 3 },
     ]
 
-    this.addTournament("제16회 순천만갈대배", tournament9Results)
+    this.addTournament("제16회 순천만갈대배", tournament9Results, "2025.5.3-5.4")
 
     const tournament10Results: TournamentResult[] = [
       // 남자클럽 3부
@@ -736,7 +736,7 @@ export class VolleyballDataProcessor {
       { tournament: "제1회 횡성한우배", division: "여자클럽 3부", teamName: "이천 TEAM YRI", rank: 3 },
     ]
 
-    this.addTournament("제1회 횡성한우배", tournament10Results)
+    this.addTournament("제1회 횡성한우배", tournament10Results, "2025.5.10-5.11")
 
     const tournament11Results: TournamentResult[] = [
       // 여자클럽 3부 - 첫 번째 그룹
@@ -770,7 +770,7 @@ export class VolleyballDataProcessor {
       { tournament: "제53회 생활체육 카네이션", division: "남자 실버부", teamName: "순천 실버드림", rank: 3 },
     ]
 
-    this.addTournament("제53회 생활체육 카네이션", tournament11Results)
+    this.addTournament("제53회 생활체육 카네이션", tournament11Results, "2025.5.17-5.18")
 
     const tournament12Results: TournamentResult[] = [
       // 남자클럽 3부
@@ -816,7 +816,7 @@ export class VolleyballDataProcessor {
       { tournament: "제61회 박계조배", division: "남자 시니어부", teamName: "서울 서초배사모", rank: 3 },
     ]
 
-    this.addTournament("제61회 박계조배", tournament12Results)
+    this.addTournament("제61회 박계조배", tournament12Results, "2025.5.24-5.25")
 
     const tournament13Results: TournamentResult[] = [
       // 남자클럽 3부
@@ -832,7 +832,7 @@ export class VolleyballDataProcessor {
       { tournament: "제131주년 동학농민혁명기념", division: "여자클럽 3부", teamName: "대전 자이언트", rank: 3 },
     ]
 
-    this.addTournament("제131주년 동학농민혁명기념", tournament13Results)
+    this.addTournament("제131주년 동학농민혁명기념", tournament13Results, "2025.5.31-6.1")
 
     const tournament14Results: TournamentResult[] = [
       // 남자 시니어부
@@ -866,7 +866,7 @@ export class VolleyballDataProcessor {
       { tournament: "제5회 강진청자배", division: "여자 장년부", teamName: "광주 빛고을", rank: 3 },
     ]
 
-    this.addTournament("제5회 강진청자배", tournament14Results)
+    this.addTournament("제5회 강진청자배", tournament14Results, "2025.6.14-6.15")
 
     const tournament15Results: TournamentResult[] = [
       // 남자클럽 2부
@@ -917,7 +917,7 @@ export class VolleyballDataProcessor {
       { tournament: "제17회 용인특례시 경기일보", division: "여자 대학부", teamName: "성신여대 하랑", rank: 3 },
     ]
 
-    this.addTournament("제17회 용인특례시 경기일보", tournament15Results)
+    this.addTournament("제17회 용인특례시 경기일보", tournament15Results, "2025.6.21-6.22")
 
     const tournament16Results: TournamentResult[] = [
       // 남자클럽 3부
@@ -933,7 +933,7 @@ export class VolleyballDataProcessor {
       { tournament: "BIG5 스포츠페스타 in 부산 2025", division: "여자클럽 3부", teamName: "부산 BS", rank: 3 },
     ]
 
-    this.addTournament("BIG5 스포츠페스타 in 부산 2025", tournament16Results)
+    this.addTournament("BIG5 스포츠페스타 in 부산 2025", tournament16Results, "2025.6.28-6.29")
 
     const tournament17Results: TournamentResult[] = [
       // 남자 시니어부
@@ -1010,7 +1010,7 @@ export class VolleyballDataProcessor {
       { tournament: "제2회보성녹차배", division: "여자클럽 3부", teamName: "광주 곰과여우", rank: 3 },
     ]
 
-    this.addTournament("제2회보성녹차배", tournament18Results)
+    this.addTournament("제2회보성녹차배", tournament18Results, "2025.7.5-7.6")
 
     const tournament19Results: TournamentResult[] = [
       // Мужской клуб 2부
@@ -1196,7 +1196,7 @@ export class VolleyballDataProcessor {
       },
     ]
 
-    this.addTournament("제19회 한산대첩기 전국남녀생활체육배구대회", tournament19Results)
+    this.addTournament("제19회 한산대첩기 전국남녀생활체육배구대회", tournament19Results, "2025.7.12-7.13")
 
     const tournament20Results: TournamentResult[] = [
       // Мужской клуб 3부
@@ -1278,7 +1278,7 @@ export class VolleyballDataProcessor {
       },
     ]
 
-    this.addTournament("2025 고창군수배 전국 남녀배구대회", tournament20Results)
+    this.addTournament("2025 고창군수배 전국 남녀배구대회", tournament20Results, "2025.7.19-7.20")
 
     // Tournament 21: 제9회기장미역다시마배전국남.여배구대회 (2025.6.28.-2025.6.29)
     const tournament21Results: TournamentResult[] = [
@@ -1320,7 +1320,7 @@ export class VolleyballDataProcessor {
       },
     ]
 
-    this.addTournament("제9회기장미역다시마배전국남.여배구대회", tournament21Results)
+    this.addTournament("제9회기장미역다시마배전국남.여배구대회", tournament21Results, "2025.7.26-7.27")
 
     // Tournament 22: 제3회 청풍명월 의림지배 전국 생활체육 배구대회 (2025.6.28.-2025.6.29)
     const tournament22Results: TournamentResult[] = [
@@ -1429,7 +1429,7 @@ export class VolleyballDataProcessor {
       },
     ]
 
-    this.addTournament("제3회 청풍명월 의림지배 전국 생활체육 배구대회", tournament22Results)
+    this.addTournament("제3회 청풍명월 의림지배 전국 생활체육 배구대회", tournament22Results, "2025.8.2-8.3")
 
     // Tournament 23: 제36회 해림배 배구대회
     const tournament23Results: TournamentResult[] = [
@@ -1452,7 +1452,7 @@ export class VolleyballDataProcessor {
       { tournament: "제36회 해림배 배구대회", division: "남자 시니어부", teamName: "광주 빛고을", rank: 3 },
     ]
 
-    this.addTournament("제36회 해림배 배구대회", tournament23Results)
+    this.addTournament("제36회 해림배 배구대회", tournament23Results, "2025.8.9-8.10")
 
     // Tournament 24: 2025년 안산 상록수 9인제 남·여 배구대회
     const tournament24Results: TournamentResult[] = [
@@ -1530,7 +1530,7 @@ export class VolleyballDataProcessor {
       },
     ]
 
-    this.addTournament("2025년 안산 상록수 9인제 남·여 배구대회", tournament24Results)
+    this.addTournament("2025년 안산 상록수 9인제 남·여 배구대회", tournament24Results, "2025.8.30-8.31")
 
     // Tournament 25: 제7회 남원춘향배 전국남녀 배구대회
     const tournament25Results: TournamentResult[] = [
@@ -1665,7 +1665,7 @@ export class VolleyballDataProcessor {
       },
     ]
 
-    this.addTournament("제7회 남원춘향배 전국남녀 배구대회", tournament25Results)
+    this.addTournament("제7회 남원춘향배 전국남녀 배구대회", tournament25Results, "2025.9.6-9.7")
 
     // 제2회 영양 별천지배 스포츠클럽 배구대회 (2025.7.5-7.6)
     const tournament26Results: TournamentResult[] = [
@@ -1694,7 +1694,7 @@ export class VolleyballDataProcessor {
       { tournament: "제2회 영양 별천지배", division: "여자클럽 3부", teamName: "대전 디그팡팡", rank: 3 },
     ]
 
-    this.addTournament("제2회 영양 별천지배 스포츠클럽 배구대회", tournament26Results)
+    this.addTournament("제2회 영양 별천지배 스포츠클럽 배구대회", tournament26Results, "2025.9.13-9.14")
 
     // 제19회 문화체육관광부장관기 전국생활체육배구대회 (2025.7.12-7.13)
     const tournament27Results: TournamentResult[] = [
@@ -1746,7 +1746,7 @@ export class VolleyballDataProcessor {
       { tournament: "제19회 문화체육관광부장관기", division: "남자 국제부", teamName: "군포 올스타", rank: 3 },
     ]
 
-    this.addTournament("제19회 문화체육관광부장관기 전국생활체육배구대회", tournament27Results)
+    this.addTournament("제19회 문화체육관광부장관기 전국생활체육배구대회", tournament27Results, "2025.9.20-9.21")
 
     // 제18회고흥우주항공배생활체육동호인배구대회 (2025.7.12-7.13)
     const tournament28Results: TournamentResult[] = [
@@ -1763,7 +1763,7 @@ export class VolleyballDataProcessor {
       { tournament: "제18회고흥우주항공배", division: "여자클럽 3부", teamName: "목포 클럽", rank: 3 },
     ]
 
-    this.addTournament("제18회고흥우주항공배생활체육동호인배구대회", tournament28Results)
+    this.addTournament("제18회고흥우주항공배생활체육동호인배구대회", tournament28Results, "2025.9.27-9.28")
 
     console.log("[v0] About to add tournament 29: 제12회 순창장류배전국남여배구대회")
 
@@ -1789,7 +1789,7 @@ export class VolleyballDataProcessor {
     ]
 
     console.log("[v0] Tournament 29 results array length:", tournament29Results.length)
-    this.addTournament("제12회 순창장류배전국남여배구대회", tournament29Results)
+    this.addTournament("제12회 순창장류배전국남여배구대회", tournament29Results, "2025.10.4-10.5")
     console.log("[v0] Tournament 29 added successfully")
 
     const tournament30Results: TournamentResult[] = [
@@ -1825,7 +1825,7 @@ export class VolleyballDataProcessor {
       { tournament: "제7회 선비배 전국 남녀 배구대회", division: "여자클럽 3부", teamName: "진주교대OB", rank: 2 },
     ]
 
-    this.addTournament("제7회 선비배 전국 남녀 배구대회", tournament30Results)
+    this.addTournament("제7회 선비배 전국 남녀 배구대회", tournament30Results, "2025.10.11-10.12")
     console.log("[v0] Tournament 30 added successfully")
 
     const tournament31Results: TournamentResult[] = [
@@ -1981,7 +1981,7 @@ export class VolleyballDataProcessor {
       },
     ]
 
-    this.addTournament("제17회 홍천무궁화배 전국생활체육 배구대회", tournament31Results)
+    this.addTournament("제17회 홍천무궁화배 전국생활체육 배구대회", tournament31Results, "2025.10.18-10.19")
     console.log("[v0] Tournament 31 added successfully - All 31 tournaments now complete!")
 
     const tournament32Results: TournamentResult[] = [

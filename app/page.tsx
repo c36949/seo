@@ -152,6 +152,36 @@ function DivisionRankingTable({
     return { ...team, displayRank: rank }
   })
 
+  const getBadgeForTeam = (team: any, rank: number) => {
+    const badges = []
+
+    // National #1 badge
+    if (rank === 1 && selectedRegion === "전체권역") {
+      badges.push(
+        <Badge
+          key="national"
+          className="bg-gradient-to-r from-yellow-400 to-yellow-600 text-white text-xs px-2 py-0.5 ml-2"
+        >
+          전국 1위
+        </Badge>,
+      )
+    }
+
+    // Regional #1 badge
+    if (rank === 1 && selectedRegion !== "전체권역") {
+      badges.push(
+        <Badge
+          key="regional"
+          className="bg-gradient-to-r from-green-400 to-green-600 text-white text-xs px-2 py-0.5 ml-2"
+        >
+          {selectedRegion} 1위
+        </Badge>,
+      )
+    }
+
+    return badges
+  }
+
   return (
     <div className="overflow-x-auto">
       <table className="w-full min-w-[340px]">
@@ -207,12 +237,15 @@ function DivisionRankingTable({
                 </div>
               </td>
               <td className="px-1 py-2 md:px-6 md:py-4 md:min-w-[200px]">
-                <button
-                  className="text-left hover:text-blue-600 font-semibold text-xs md:text-lg transition-colors w-full text-ellipsis overflow-hidden whitespace-nowrap"
-                  onClick={() => onTeamClick(team)}
-                >
-                  {team.teamName}
-                </button>
+                <div className="flex items-center">
+                  <button
+                    className="text-left hover:text-blue-600 font-semibold text-xs md:text-lg transition-colors text-ellipsis overflow-hidden whitespace-nowrap"
+                    onClick={() => onTeamClick(team)}
+                  >
+                    {team.teamName}
+                  </button>
+                  {getBadgeForTeam(team, team.displayRank)}
+                </div>
               </td>
               <td className="px-1 py-2 text-center md:px-8 md:py-4">
                 <Badge variant="outline" className="text-xs font-medium text-green-600 border-green-300 px-1 py-0">
@@ -260,7 +293,7 @@ export default function VolleyballRanking() {
   const [dataLoaded, setDataLoaded] = useState(false)
   const [tournamentStats, setTournamentStats] = useState({ totalTournaments: 0, totalTeams: 0, totalResults: 0 })
   const [tournamentNames, setTournamentNames] = useState<string[]>([])
-  const [tournamentNamesWithDates, setTournamentNamesWithDates] = useState<Array<{ name: string; dates: string }>>([])
+  const [tournamentNamesWithDates, setTournamentNamesWithDates] = useState<Array<{ name: string; date: string }>>([])
   const [showAllTournaments, setShowAllTournaments] = useState(false)
   const [showAllTournamentsList, setShowAllTournamentsList] = useState(false)
   const [showRegionMap, setShowRegionMap] = useState(false)
@@ -420,15 +453,50 @@ export default function VolleyballRanking() {
                     variant="outline"
                     size="sm"
                     onClick={() => setShowRegionMap(!showRegionMap)}
-                    className="text-white border-white hover:bg-white hover:text-green-600 text-xs px-2 py-1"
+                    className="bg-white text-green-600 border-white hover:bg-green-50 hover:text-green-700 text-xs md:text-sm px-3 py-2 font-medium shadow-sm"
                   >
-                    {showRegionMap ? "지도 숨기기" : "권역 보기"}
+                    {showRegionMap ? "권역 숨기기" : "권역 보기"}
                   </Button>
                 </CardTitle>
               </CardHeader>
               <CardContent className="p-3 md:p-4">
-                {showRegionMap ? (
-                  <div className="flex flex-col md:flex-row gap-4 md:gap-6">
+                <div className="space-y-3">
+                  {/* 전체권역 button at top */}
+                  <div className="flex justify-start">
+                    <Button
+                      variant={selectedRegion === "전체권역" ? "default" : "outline"}
+                      onClick={() => setSelectedRegion("전체권역")}
+                      className={`px-4 py-2 md:px-6 md:py-3 text-sm md:text-base font-medium w-full max-w-lg ${
+                        selectedRegion === "전체권역"
+                          ? "bg-gradient-to-r from-green-500 to-teal-500 text-white"
+                          : "hover:bg-green-50 border-green-300 text-green-700"
+                      }`}
+                    >
+                      전체권역
+                    </Button>
+                  </div>
+
+                  {/* Other regional tabs in one line */}
+                  <div className="flex flex-wrap gap-1 md:gap-3 justify-start">
+                    {REGIONS.slice(1).map((region) => (
+                      <Button
+                        key={region}
+                        variant={selectedRegion === region ? "default" : "outline"}
+                        onClick={() => setSelectedRegion(region)}
+                        className={`text-xs md:text-sm px-2 py-1 md:px-4 md:py-2 h-7 md:h-10 flex-shrink-0 ${
+                          selectedRegion === region
+                            ? "bg-gradient-to-r from-green-500 to-teal-500 text-white"
+                            : "hover:bg-green-50 border-green-300 text-green-700"
+                        }`}
+                      >
+                        {region}
+                      </Button>
+                    ))}
+                  </div>
+                </div>
+
+                {showRegionMap && (
+                  <div className="mt-4 flex flex-col md:flex-row gap-4 md:gap-6">
                     <div className="flex-1 md:max-w-sm">
                       <div className="relative">
                         <img
@@ -438,47 +506,8 @@ export default function VolleyballRanking() {
                         />
                       </div>
                     </div>
-                    <div className="hidden md:flex flex-1">
-                      <div className="space-y-2">
-                        <h3 className="text-lg font-semibold text-gray-800 mb-3">권역별 선택</h3>
-                        <div className="grid grid-cols-1 gap-2">
-                          {REGIONS.map((region) => (
-                            <Button
-                              key={region}
-                              variant={selectedRegion === region ? "default" : "outline"}
-                              onClick={() => setSelectedRegion(region)}
-                              className={`w-full justify-center p-2 h-auto text-sm ${
-                                selectedRegion === region
-                                  ? "bg-gradient-to-r from-blue-500 to-purple-500 text-white"
-                                  : "hover:bg-gray-50 border"
-                              }`}
-                            >
-                              <span className="font-medium">{region}</span>
-                            </Button>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
                   </div>
-                ) : null}
-                <div className={showRegionMap ? "md:hidden mt-3" : ""}>
-                  <div className="flex flex-wrap gap-1 justify-center md:justify-start">
-                    {REGIONS.map((region) => (
-                      <Button
-                        key={region}
-                        variant={selectedRegion === region ? "default" : "outline"}
-                        onClick={() => setSelectedRegion(region)}
-                        className={`text-xs px-2 py-1 h-7 flex-shrink-0 ${
-                          selectedRegion === region
-                            ? "bg-gradient-to-r from-blue-500 to-purple-500 text-white"
-                            : "hover:bg-gray-50 border"
-                        }`}
-                      >
-                        {region}
-                      </Button>
-                    ))}
-                  </div>
-                </div>
+                )}
               </CardContent>
             </Card>
 
@@ -548,21 +577,11 @@ export default function VolleyballRanking() {
                   <div className="mt-3 p-2 md:p-3 bg-white rounded-lg border border-gray-200">
                     <div className="space-y-2">
                       <span className="font-semibold text-gray-700 block mb-3">📋 반영된 대회 목록:</span>
-                      <div className="space-y-2">
+                      <div className="text-sm text-gray-700 leading-relaxed">
                         {(showAllTournamentsList ? tournamentNamesWithDates : tournamentNamesWithDates.slice(0, 3)).map(
                           (tournament, index) => (
-                            <div
-                              key={index}
-                              className="block w-full p-2 md:p-3 bg-gray-50 rounded border-l-4 border-blue-400"
-                            >
-                              <div className="flex justify-between items-center">
-                                <span className="block text-sm font-medium text-gray-800">
-                                  {index + 1}. {tournament.name}
-                                </span>
-                                <span className="text-blue-600 font-medium text-xs whitespace-nowrap ml-2">
-                                  {tournament.dates}
-                                </span>
-                              </div>
+                            <div key={index} className="mb-1">
+                              {index + 1}. {tournament.name}
                             </div>
                           ),
                         )}
