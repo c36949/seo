@@ -155,28 +155,72 @@ function DivisionRankingTable({
   const getBadgeForTeam = (team: any, rank: number) => {
     const badges = []
 
-    // National #1 badge
-    if (rank === 1 && selectedRegion === "전체권역") {
-      badges.push(
-        <Badge
-          key="national"
-          className="bg-gradient-to-r from-yellow-400 to-yellow-600 text-white text-xs px-2 py-0.5 ml-2"
-        >
-          전국 1위
-        </Badge>,
-      )
+    // Get all teams for national ranking calculation
+    const allNationalTeams = volleyballData.getDivisionRankings(division === "모든부 종합" ? undefined : division)
+
+    // Calculate national ranking for this team
+    let nationalRank = 1
+    for (const otherTeam of allNationalTeams) {
+      if (
+        otherTeam.championships > team.championships ||
+        (otherTeam.championships === team.championships && otherTeam.runnerUps > team.runnerUps) ||
+        (otherTeam.championships === team.championships &&
+          otherTeam.runnerUps === team.runnerUps &&
+          otherTeam.thirdPlaces > team.thirdPlaces)
+      ) {
+        nationalRank++
+      }
     }
 
-    // Regional #1 badge
-    if (rank === 1 && selectedRegion !== "전체권역") {
-      badges.push(
-        <Badge
-          key="regional"
-          className="bg-gradient-to-r from-green-400 to-green-600 text-white text-xs px-2 py-0.5 ml-2"
-        >
-          {selectedRegion} 1위
-        </Badge>,
-      )
+    // Calculate regional #1 positions
+    const regionalTeams = allNationalTeams.filter((t) => t.region === team.region)
+    let regionalRank = 1
+    for (const otherTeam of regionalTeams) {
+      if (
+        otherTeam.championships > team.championships ||
+        (otherTeam.championships === team.championships && otherTeam.runnerUps > team.runnerUps) ||
+        (otherTeam.championships === team.championships &&
+          otherTeam.runnerUps === team.runnerUps &&
+          otherTeam.thirdPlaces > team.thirdPlaces)
+      ) {
+        regionalRank++
+      }
+    }
+
+    if (selectedRegion === "전체권역") {
+      // In 전체권역 view: Only show regional #1 badges, but exclude "기타" region
+      if (regionalRank === 1 && team.region !== "기타") {
+        badges.push(
+          <Badge
+            key="regional-1"
+            className="bg-gradient-to-r from-green-400 to-green-600 text-white text-xs px-2 py-0.5 ml-1"
+          >
+            {team.region} 1위
+          </Badge>,
+        )
+      }
+    } else {
+      // In regional views: Show national ranking badges (1st to 10th place)
+      if (nationalRank <= 10) {
+        let badgeClass = ""
+        if (nationalRank === 1) {
+          badgeClass = "bg-gradient-to-r from-yellow-400 to-yellow-600 text-white"
+        } else if (nationalRank === 2) {
+          badgeClass = "bg-gradient-to-r from-gray-400 to-gray-600 text-white"
+        } else if (nationalRank === 3) {
+          badgeClass = "bg-gradient-to-r from-orange-400 to-orange-600 text-white"
+        } else if (nationalRank <= 5) {
+          badgeClass = "bg-gradient-to-r from-blue-400 to-blue-600 text-white"
+        } else if (nationalRank <= 10) {
+          badgeClass = "bg-gradient-to-r from-purple-400 to-purple-600 text-white"
+        }
+
+        badges.push(
+          <Badge key={`national-${nationalRank}`} className={`${badgeClass} text-xs px-2 py-0.5 ml-1`}>
+            전국 {nationalRank}위
+          </Badge>,
+        )
+      }
     }
 
     return badges
@@ -237,19 +281,19 @@ function DivisionRankingTable({
                 </div>
               </td>
               <td className="px-1 py-2 md:px-6 md:py-4 md:min-w-[200px]">
-                <div className="flex items-center">
+                <div className="flex items-center flex-wrap">
                   <button
                     className="text-left hover:text-blue-600 font-semibold text-xs md:text-lg transition-colors text-ellipsis overflow-hidden whitespace-nowrap"
                     onClick={() => onTeamClick(team)}
                   >
                     {team.teamName}
                   </button>
-                  {getBadgeForTeam(team, team.displayRank)}
+                  <div className="flex flex-wrap">{getBadgeForTeam(team, team.displayRank)}</div>
                 </div>
               </td>
               <td className="px-1 py-2 text-center md:px-8 md:py-4">
                 <Badge variant="outline" className="text-xs font-medium text-green-600 border-green-300 px-1 py-0">
-                  {team.region}
+                  {team.region === "기타" ? "수도권" : team.region}
                 </Badge>
               </td>
               <td className="px-1 py-2 text-center md:px-8 md:py-4">
@@ -530,7 +574,7 @@ export default function VolleyballRanking() {
                       </div>
                     </div>
                   </div>
-                  <div className="text-left md:text-right">
+                  <div className="text-left md:text-right hidden md:block">
                     <div className="text-sm md:text-lg font-bold">
                       {selectedDivision === "모든부 종합"
                         ? filteredTeams.length
@@ -581,7 +625,7 @@ export default function VolleyballRanking() {
                         {(showAllTournamentsList ? tournamentNamesWithDates : tournamentNamesWithDates.slice(0, 3)).map(
                           (tournament, index) => (
                             <div key={index} className="mb-1">
-                              {index + 1}. {tournament.name}
+                              {index + 1}. {index === 16 ? "제17회 고흥 우주항공배" : tournament.name}
                             </div>
                           ),
                         )}
@@ -644,7 +688,7 @@ export default function VolleyballRanking() {
                   <h2 className="text-2xl md:text-3xl font-bold mb-2">{selectedTeam.teamName}</h2>
                   <div className="flex flex-wrap space-x-2 md:space-x-4 text-xs md:text-sm">
                     <span>📋 {selectedTeam.division}</span>
-                    <span>🗺️ {selectedTeam.region}</span>
+                    <span>🗺️ {selectedTeam.region === "기타" ? "수도권" : selectedTeam.region}</span>
                     <span>🏆 총 {selectedTeam.tournaments.length}개 대회 입상</span>
                   </div>
                 </div>
