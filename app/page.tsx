@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { Trophy, Users, MapPin, Plus } from "lucide-react"
+import { Trophy, MapPin, Plus } from "lucide-react"
 import { volleyballData, type DivisionTeamStats } from "@/lib/tournament-data-processor"
 
 interface TeamData {
@@ -226,104 +226,333 @@ function DivisionRankingTable({
     return badges
   }
 
-  return (
-    <div className="overflow-x-auto">
-      <table className="w-full min-w-[340px]">
-        <thead className="bg-gradient-to-r from-gray-50 to-blue-50 sticky top-0 border-b-2 border-blue-200">
-          <tr>
-            <th className="px-1 py-2 text-center font-bold text-gray-900 text-xs w-8 md:text-lg">🏆</th>
-            <th className="px-2 py-2 text-left font-bold text-gray-900 text-xs min-w-[70px] md:min-w-[200px] md:text-lg">
-              팀명
-            </th>
-            <th className="px-1 py-2 text-center font-bold text-gray-900 text-xs w-12 md:px-8 md:w-auto md:text-lg">
-              권역
-            </th>
-            <th className="px-1 py-2 text-center font-bold text-yellow-600 text-base w-8 md:px-8 md:w-auto md:text-lg">
-              <span className="md:hidden">🥇</span>
-              <span className="hidden md:inline">🥇 우승</span>
-            </th>
-            <th className="px-1 py-2 text-center font-bold text-gray-500 text-base w-8 md:px-8 md:w-auto md:text-lg">
-              <span className="md:hidden">🥈</span>
-              <span className="hidden md:inline">🥈 준우승</span>
-            </th>
-            <th className="px-1 py-2 text-center font-bold text-orange-600 text-base w-8 md:px-8 md:w-auto md:text-lg">
-              <span className="md:hidden">🥉</span>
-              <span className="hidden md:inline">🥉 3위</span>
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {teamsWithRanks.map((team, index) => (
-            <tr
-              key={`${team.teamName}-${team.division}`}
-              className={`border-b hover:bg-gradient-to-r hover:from-blue-50 hover:to-orange-50 transition-all duration-200 cursor-pointer ${
-                team.displayRank <= 3
-                  ? "bg-gradient-to-r from-yellow-50 via-orange-50 to-red-50 border-l-4 border-l-yellow-400"
-                  : ""
-              }`}
-              onClick={() => onTeamClick(team)}
-            >
-              <td className="px-1 py-2">
-                <div className="flex items-center justify-center">
-                  <span
-                    className={`text-xs md:text-base font-bold ${
-                      team.displayRank === 1
-                        ? "text-yellow-600"
-                        : team.displayRank === 2
-                          ? "text-gray-500"
-                          : team.displayRank === 3
-                            ? "text-orange-600"
-                            : "text-gray-700"
-                    }`}
-                  >
-                    {team.displayRank}
-                  </span>
+  const generateRankingAnalysis = () => {
+    const analysisTitle =
+      selectedRegion === "전체권역" ? `${division} 전국 순위 종합 분석` : `${division} ${selectedRegion} 순위 분석`
+
+    // Calculate statistics for analysis
+    const totalTeams = divisionTeams.length
+    const totalChampionships = divisionTeams.reduce((sum, team) => sum + team.championships, 0)
+    const totalRunnerUps = divisionTeams.reduce((sum, team) => sum + team.runnerUps, 0)
+    const totalThirdPlaces = divisionTeams.reduce((sum, team) => sum + team.thirdPlaces, 0)
+
+    // Regional distribution analysis
+    const regionDistribution = divisionTeams.reduce(
+      (acc, team) => {
+        const region = team.region === "기타" ? "수도권" : team.region
+        acc[region] = (acc[region] || 0) + 1
+        return acc
+      },
+      {} as Record<string, number>,
+    )
+
+    // Performance analysis
+    const topPerformers = divisionTeams.slice(0, 3)
+    const championshipLeaders = divisionTeams.filter((team) => team.championships > 0).length
+    const consistentPerformers = divisionTeams.filter(
+      (team) => team.championships + team.runnerUps + team.thirdPlaces >= 3,
+    ).length
+
+    // Competition intensity analysis
+    const averageScore = totalTeams > 0 ? (totalChampionships + totalRunnerUps + totalThirdPlaces) / totalTeams : 0
+    const competitionLevel = averageScore > 2 ? "매우 높음" : averageScore > 1 ? "높음" : "보통"
+
+    return (
+      <Card className="mt-6 shadow-lg border-0 bg-gradient-to-br from-blue-50 to-purple-50">
+        <CardHeader className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white">
+          <CardTitle className="text-lg md:text-xl flex items-center">
+            <div className="w-8 h-8 bg-white bg-opacity-20 rounded-full flex items-center justify-center mr-3">🤖</div>
+            AI 순위 분석 리포트
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="p-4 md:p-6">
+          <div className="space-y-6">
+            {/* 종합 개요 */}
+            <div className="bg-white rounded-lg p-4 border-l-4 border-indigo-500">
+              <h3 className="text-lg font-bold text-gray-800 mb-3">📊 {analysisTitle}</h3>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                <div className="text-center p-3 bg-blue-50 rounded-lg">
+                  <div className="text-2xl font-bold text-blue-600">{totalTeams}</div>
+                  <div className="text-sm text-gray-600">참가 팀 수</div>
                 </div>
-              </td>
-              <td className="px-1 py-2 md:px-6 md:py-4 md:min-w-[200px]">
-                <div className="flex items-center flex-wrap">
+                <div className="text-center p-3 bg-green-50 rounded-lg">
+                  <div className="text-2xl font-bold text-green-600">{championshipLeaders}</div>
+                  <div className="text-sm text-gray-600">우승 경험팀</div>
+                </div>
+                <div className="text-center p-3 bg-purple-50 rounded-lg">
+                  <div className="text-2xl font-bold text-purple-600">{consistentPerformers}</div>
+                  <div className="text-sm text-gray-600">안정적 성과팀</div>
+                </div>
+              </div>
+              <p className="text-gray-700 leading-relaxed">
+                {division}에는 총 <strong>{totalTeams}개 팀</strong>이 참가하여 치열한 경쟁을 펼치고 있습니다. 이 중{" "}
+                <strong>{championshipLeaders}개 팀</strong>이 우승 경험을 보유하고 있으며,
+                <strong>{consistentPerformers}개 팀</strong>이 3회 이상의 안정적인 입상 성과를 기록했습니다. 전체적인
+                경쟁 수준은 <strong>{competitionLevel}</strong>으로 평가됩니다.
+              </p>
+            </div>
+
+            {/* 상위권 팀 분석 */}
+            {topPerformers.length > 0 && (
+              <div className="bg-white rounded-lg p-4 border-l-4 border-yellow-500">
+                <h3 className="text-lg font-bold text-gray-800 mb-3">🏆 상위권 팀 심층 분석</h3>
+                <div className="space-y-3">
+                  {topPerformers.map((team, index) => (
+                    <div key={team.teamName} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                      <div className="flex items-center space-x-3">
+                        <div
+                          className={`w-8 h-8 rounded-full flex items-center justify-center text-white font-bold ${
+                            index === 0 ? "bg-yellow-500" : index === 1 ? "bg-gray-400" : "bg-orange-500"
+                          }`}
+                        >
+                          {index + 1}
+                        </div>
+                        <div>
+                          <div className="font-semibold text-gray-800">{team.teamName}</div>
+                          <div className="text-sm text-gray-600">{team.region === "기타" ? "수도권" : team.region}</div>
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <div className="text-sm font-medium">
+                          🥇{team.championships} 🥈{team.runnerUps} 🥉{team.thirdPlaces}
+                        </div>
+                        <div className="text-xs text-gray-500">총 {team.tournaments.length}회 입상</div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                <div className="mt-4 p-3 bg-yellow-50 rounded-lg">
+                  <p className="text-gray-700 text-sm leading-relaxed">
+                    <strong>{topPerformers[0]?.teamName}</strong>이 {topPerformers[0]?.championships}회 우승으로
+                    압도적인 1위를 차지하고 있습니다.
+                    {topPerformers.length > 1 && (
+                      <>
+                        상위 3팀의 총 우승 횟수는 {topPerformers.reduce((sum, team) => sum + team.championships, 0)}
+                        회로, 전체 우승의{" "}
+                        {Math.round(
+                          (topPerformers.reduce((sum, team) => sum + team.championships, 0) / totalChampionships) * 100,
+                        )}
+                        %를 차지하여 상위권 집중도가{" "}
+                        {topPerformers.reduce((sum, team) => sum + team.championships, 0) / totalChampionships > 0.6
+                          ? "매우 높은"
+                          : "적절한"}{" "}
+                        수준입니다.
+                      </>
+                    )}
+                  </p>
+                </div>
+              </div>
+            )}
+
+            {/* 권역별 분포 분석 */}
+            {selectedRegion === "전체권역" && Object.keys(regionDistribution).length > 1 && (
+              <div className="bg-white rounded-lg p-4 border-l-4 border-green-500">
+                <h3 className="text-lg font-bold text-gray-800 mb-3">🗺️ 권역별 참가 현황 분석</h3>
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mb-4">
+                  {Object.entries(regionDistribution)
+                    .sort(([, a], [, b]) => b - a)
+                    .map(([region, count]) => (
+                      <div key={region} className="text-center p-3 bg-green-50 rounded-lg">
+                        <div className="text-xl font-bold text-green-600">{count}</div>
+                        <div className="text-sm text-gray-600">{region}</div>
+                        <div className="text-xs text-gray-500">{Math.round((count / totalTeams) * 100)}%</div>
+                      </div>
+                    ))}
+                </div>
+                <div className="p-3 bg-green-50 rounded-lg">
+                  <p className="text-gray-700 text-sm leading-relaxed">
+                    권역별 참가 분포를 보면{" "}
+                    <strong>{Object.entries(regionDistribution).sort(([, a], [, b]) => b - a)[0][0]}</strong>이
+                    {Object.entries(regionDistribution).sort(([, a], [, b]) => b - a)[0][1]}개 팀(
+                    {Math.round(
+                      (Object.entries(regionDistribution).sort(([, a], [, b]) => b - a)[0][1] / totalTeams) * 100,
+                    )}
+                    %)으로 가장 많은 참가율을 보이고 있습니다.
+                    {Object.keys(regionDistribution).length}개 권역에서 고르게 참가하여
+                    {Object.keys(regionDistribution).length >= 5 ? "전국적인 대회의 성격" : "지역적 특성"}을 잘 보여주고
+                    있습니다.
+                  </p>
+                </div>
+              </div>
+            )}
+
+            {/* 경쟁 구조 분석 */}
+            <div className="bg-white rounded-lg p-4 border-l-4 border-purple-500">
+              <h3 className="text-lg font-bold text-gray-800 mb-3">⚔️ 경쟁 구조 및 트렌드 분석</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <div className="p-3 bg-purple-50 rounded-lg">
+                  <div className="text-lg font-bold text-purple-600 mb-1">경쟁 강도</div>
+                  <div className="text-2xl font-bold text-gray-800">{competitionLevel}</div>
+                  <div className="text-sm text-gray-600">평균 입상 횟수: {averageScore.toFixed(1)}회</div>
+                </div>
+                <div className="p-3 bg-purple-50 rounded-lg">
+                  <div className="text-lg font-bold text-purple-600 mb-1">성과 분산도</div>
+                  <div className="text-2xl font-bold text-gray-800">
+                    {championshipLeaders / totalTeams > 0.3
+                      ? "높음"
+                      : championshipLeaders / totalTeams > 0.15
+                        ? "보통"
+                        : "낮음"}
+                  </div>
+                  <div className="text-sm text-gray-600">
+                    우승팀 비율: {Math.round((championshipLeaders / totalTeams) * 100)}%
+                  </div>
+                </div>
+              </div>
+              <div className="space-y-3">
+                <div className="p-3 bg-purple-50 rounded-lg">
+                  <h4 className="font-semibold text-gray-800 mb-2">📈 주요 특징 및 트렌드</h4>
+                  <ul className="text-sm text-gray-700 space-y-1 list-disc list-inside">
+                    <li>
+                      전체 {totalChampionships + totalRunnerUps + totalThirdPlaces}개의 입상 기록 중 우승{" "}
+                      {Math.round(
+                        (totalChampionships / (totalChampionships + totalRunnerUps + totalThirdPlaces)) * 100,
+                      )}
+                      %, 준우승{" "}
+                      {Math.round((totalRunnerUps / (totalChampionships + totalRunnerUps + totalThirdPlaces)) * 100)}%,
+                      3위{" "}
+                      {Math.round((totalThirdPlaces / (totalChampionships + totalRunnerUps + totalThirdPlaces)) * 100)}
+                      %의 분포를 보임
+                    </li>
+                    <li>
+                      {championshipLeaders / totalTeams > 0.2
+                        ? "다수의 팀이 우승 경험을 보유하여 경쟁이 치열한 구조"
+                        : "소수 강팀의 독주 체제가 형성된 구조"}
+                    </li>
+                    <li>
+                      {consistentPerformers / totalTeams > 0.4
+                        ? "안정적인 성과를 내는 팀들이 많아 전체적인 수준이 높음"
+                        : "상위권과 하위권의 격차가 존재하는 양극화 현상"}
+                    </li>
+                    {selectedRegion !== "전체권역" && (
+                      <li>
+                        {selectedRegion} 지역 특성상 지역 내 라이벌 구도가 형성되어 있으며, 전국 대회에서의 경쟁력도{" "}
+                        {topPerformers[0]?.championships > 2 ? "매우 우수한" : "양호한"} 수준
+                      </li>
+                    )}
+                  </ul>
+                </div>
+                <div className="p-3 bg-indigo-50 rounded-lg">
+                  <h4 className="font-semibold text-gray-800 mb-2">🎯 향후 전망 및 관전 포인트</h4>
+                  <p className="text-sm text-gray-700 leading-relaxed">
+                    {topPerformers.length > 1 && topPerformers[0].championships - topPerformers[1].championships <= 1
+                      ? `현재 1위 ${topPerformers[0].teamName}과 2위 ${topPerformers[1].teamName}의 격차가 근소하여 향후 순위 변동 가능성이 높습니다. `
+                      : `${topPerformers[0]?.teamName}의 독주 체제가 공고하지만, 추격팀들의 성장세도 주목할 만합니다. `}
+                    {consistentPerformers > totalTeams * 0.3
+                      ? "다수의 팀이 꾸준한 성과를 보이고 있어 앞으로도 흥미진진한 경쟁이 예상됩니다."
+                      : "신흥 강팀의 등장과 기존 강팀들의 재정비가 관전 포인트가 될 것입니다."}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+    )
+  }
+
+  return (
+    <div>
+      <div className="overflow-x-auto">
+        <table className="w-full min-w-[340px]">
+          <thead className="bg-gradient-to-r from-gray-50 to-blue-50 sticky top-0 border-b-2 border-blue-200">
+            <tr>
+              <th className="px-1 py-2 text-center font-bold text-gray-900 text-xs w-8 md:text-lg">🏆</th>
+              <th className="px-2 py-2 text-left font-bold text-gray-900 text-xs min-w-[70px] md:min-w-[200px] md:text-lg">
+                팀명
+              </th>
+              <th className="px-1 py-2 text-center font-bold text-gray-900 text-xs w-12 md:px-8 md:w-auto md:text-lg">
+                권역
+              </th>
+              <th className="px-1 py-2 text-center font-bold text-yellow-600 text-base w-8 md:px-8 md:w-auto md:text-lg">
+                <span className="md:hidden">🥇</span>
+                <span className="hidden md:inline">🥇 우승</span>
+              </th>
+              <th className="px-1 py-2 text-center font-bold text-gray-500 text-base w-8 md:px-8 md:w-auto md:text-lg">
+                <span className="md:hidden">🥈</span>
+                <span className="hidden md:inline">🥈 준우승</span>
+              </th>
+              <th className="px-1 py-2 text-center font-bold text-orange-600 text-base w-8 md:px-8 md:w-auto md:text-lg">
+                <span className="md:hidden">🥉</span>
+                <span className="hidden md:inline">🥉 3위</span>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {teamsWithRanks.map((team, index) => (
+              <tr
+                key={`${team.teamName}-${team.division}`}
+                className={`border-b hover:bg-gradient-to-r hover:from-blue-50 hover:to-orange-50 transition-all duration-200 cursor-pointer ${
+                  team.displayRank <= 3
+                    ? "bg-gradient-to-r from-yellow-50 via-orange-50 to-red-50 border-l-4 border-l-yellow-400"
+                    : ""
+                }`}
+                onClick={() => onTeamClick(team)}
+              >
+                <td className="px-1 py-2">
+                  <div className="flex items-center justify-center">
+                    <span
+                      className={`text-xs md:text-base font-bold ${
+                        team.displayRank === 1
+                          ? "text-yellow-600"
+                          : team.displayRank === 2
+                            ? "text-gray-500"
+                            : team.displayRank === 3
+                              ? "text-orange-600"
+                              : "text-gray-700"
+                      }`}
+                    >
+                      {team.displayRank}
+                    </span>
+                  </div>
+                </td>
+                <td className="px-1 py-2 md:px-6 md:py-4 md:min-w-[200px]">
+                  <div className="flex items-center flex-wrap">
+                    <button
+                      className="text-left hover:text-blue-600 font-semibold text-xs md:text-lg transition-colors text-ellipsis overflow-hidden whitespace-nowrap"
+                      onClick={() => onTeamClick(team)}
+                    >
+                      {team.teamName}
+                    </button>
+                    <div className="flex flex-wrap">{getBadgeForTeam(team, team.displayRank)}</div>
+                  </div>
+                </td>
+                <td className="px-1 py-2 text-center md:px-8 md:py-4">
+                  <Badge variant="outline" className="text-xs font-medium text-green-600 border-green-300 px-1 py-0">
+                    {team.region === "기타" ? "수도권" : team.region}
+                  </Badge>
+                </td>
+                <td className="px-1 py-2 text-center md:px-8 md:py-4">
                   <button
-                    className="text-left hover:text-blue-600 font-semibold text-xs md:text-lg transition-colors text-ellipsis overflow-hidden whitespace-nowrap"
+                    className="bg-gradient-to-r from-yellow-100 to-yellow-200 hover:from-yellow-200 hover:to-yellow-300 text-yellow-800 px-1 py-0.5 rounded-full text-xs font-bold transition-all duration-200 shadow-sm hover:shadow-md min-w-[18px] md:px-3 md:py-1 md:text-sm"
                     onClick={() => onTeamClick(team)}
                   >
-                    {team.teamName}
+                    {team.championships}
                   </button>
-                  <div className="flex flex-wrap">{getBadgeForTeam(team, team.displayRank)}</div>
-                </div>
-              </td>
-              <td className="px-1 py-2 text-center md:px-8 md:py-4">
-                <Badge variant="outline" className="text-xs font-medium text-green-600 border-green-300 px-1 py-0">
-                  {team.region === "기타" ? "수도권" : team.region}
-                </Badge>
-              </td>
-              <td className="px-1 py-2 text-center md:px-8 md:py-4">
-                <button
-                  className="bg-gradient-to-r from-yellow-100 to-yellow-200 hover:from-yellow-200 hover:to-yellow-300 text-yellow-800 px-1 py-0.5 rounded-full text-xs font-bold transition-all duration-200 shadow-sm hover:shadow-md min-w-[18px] md:px-3 md:py-1 md:text-sm"
-                  onClick={() => onTeamClick(team)}
-                >
-                  {team.championships}
-                </button>
-              </td>
-              <td className="px-1 py-2 text-center md:px-8 md:py-4">
-                <button
-                  className="bg-gradient-to-r from-gray-100 to-gray-200 hover:from-gray-200 hover:to-gray-300 text-gray-800 px-1 py-0.5 rounded-full text-xs font-bold transition-all duration-200 shadow-sm hover:shadow-md min-w-[18px] md:px-3 md:py-1 md:text-sm"
-                  onClick={() => onTeamClick(team)}
-                >
-                  {team.runnerUps}
-                </button>
-              </td>
-              <td className="px-1 py-2 text-center md:px-8 md:py-4">
-                <button
-                  className="bg-gradient-to-r from-orange-100 to-orange-200 hover:from-orange-200 hover:to-orange-300 text-orange-800 px-1 py-0.5 rounded-full text-xs font-bold transition-all duration-200 shadow-sm hover:shadow-md min-w-[18px] md:px-3 md:py-1 md:text-sm"
-                  onClick={() => onTeamClick(team)}
-                >
-                  {team.thirdPlaces}
-                </button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+                </td>
+                <td className="px-1 py-2 text-center md:px-8 md:py-4">
+                  <button
+                    className="bg-gradient-to-r from-gray-100 to-gray-200 hover:from-gray-200 hover:to-gray-300 text-gray-800 px-1 py-0.5 rounded-full text-xs font-bold transition-all duration-200 shadow-sm hover:shadow-md min-w-[18px] md:px-3 md:py-1 md:text-sm"
+                    onClick={() => onTeamClick(team)}
+                  >
+                    {team.runnerUps}
+                  </button>
+                </td>
+                <td className="px-1 py-2 text-center md:px-8 md:py-4">
+                  <button
+                    className="bg-gradient-to-r from-orange-100 to-orange-200 hover:from-orange-200 hover:to-orange-300 text-orange-800 px-1 py-0.5 rounded-full text-xs font-bold transition-all duration-200 shadow-sm hover:shadow-md min-w-[18px] md:px-3 md:py-1 md:text-sm"
+                    onClick={() => onTeamClick(team)}
+                  >
+                    {team.thirdPlaces}
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      {divisionTeams.length > 0 && generateRankingAnalysis()}
     </div>
   )
 }
@@ -414,25 +643,6 @@ export default function VolleyballRanking() {
           </div>
         </div>
       </header>
-
-      <div className="md:hidden fixed bottom-4 right-4 flex flex-col space-y-2 z-40">
-        <Button
-          variant={currentView === "home" ? "secondary" : "outline"}
-          onClick={() => setCurrentView("home")}
-          className="bg-blue-600 hover:bg-blue-700 text-white border-0 shadow-lg text-sm px-3 py-2"
-        >
-          <Users className="w-4 h-4 mr-1" />
-          부별
-        </Button>
-        <Button
-          variant={currentView === "regional" ? "secondary" : "outline"}
-          onClick={() => setCurrentView("regional")}
-          className="bg-green-600 hover:bg-green-700 text-white border-0 shadow-lg text-sm px-3 py-2"
-        >
-          <MapPin className="w-4 h-4 mr-1" />
-          권역
-        </Button>
-      </div>
 
       <main className="container mx-auto px-4 py-8">
         {currentView === "home" && dataLoaded && (
