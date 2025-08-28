@@ -77,11 +77,13 @@ function DivisionRankingTable({
   teams,
   onTeamClick,
   selectedRegion,
+  tournamentNames,
 }: {
   division: string
   teams: TeamData[]
   onTeamClick: (team: TeamData) => void
   selectedRegion: string
+  tournamentNames: string[]
 }) {
   let divisionTeams: TeamData[]
 
@@ -230,13 +232,197 @@ function DivisionRankingTable({
     const analysisTitle =
       selectedRegion === "전체권역" ? `${division} 전국 순위 종합 분석` : `${division} ${selectedRegion} 순위 분석`
 
-    // Calculate statistics for analysis
+    // Calculate comprehensive statistics for detailed analysis
     const totalTeams = divisionTeams.length
     const totalChampionships = divisionTeams.reduce((sum, team) => sum + team.championships, 0)
     const totalRunnerUps = divisionTeams.reduce((sum, team) => sum + team.runnerUps, 0)
     const totalThirdPlaces = divisionTeams.reduce((sum, team) => sum + team.thirdPlaces, 0)
 
-    // Regional distribution analysis
+    const analyzeTournamentTrends = () => {
+      const totalTournaments = 34 // Current total tournaments
+      const earlyEnd = Math.ceil(totalTournaments / 3) // 1-11
+      const midEnd = Math.ceil((totalTournaments * 2) / 3) // 12-22
+      // Late period: 23-34
+
+      const teamsWithPeriods = divisionTeams.map((team) => {
+        const earlyTournaments = team.tournaments.filter((t) => {
+          const tournamentIndex = tournamentNames.findIndex((name) => name === t.tournament)
+          const tournamentNumber = tournamentIndex + 1
+          const isEarly = tournamentNumber >= 1 && tournamentNumber <= earlyEnd
+          if (team.teamName === "전주 V9" || team.teamName === "목포하나") {
+            console.log(
+              `[v0] ${team.teamName} - ${t.tournament}: index=${tournamentIndex}, number=${tournamentNumber}, isEarly=${isEarly}`,
+            )
+          }
+          return isEarly
+        })
+
+        const midTournaments = team.tournaments.filter((t) => {
+          const tournamentIndex = tournamentNames.findIndex((name) => name === t.tournament)
+          const tournamentNumber = tournamentIndex + 1
+          const isMid = tournamentNumber > earlyEnd && tournamentNumber <= midEnd
+          if (team.teamName === "전주 V9" || team.teamName === "목포하나") {
+            console.log(
+              `[v0] ${team.teamName} - ${t.tournament}: index=${tournamentIndex}, number=${tournamentNumber}, isMid=${isMid}`,
+            )
+          }
+          return isMid
+        })
+
+        const lateTournaments = team.tournaments.filter((t) => {
+          const tournamentIndex = tournamentNames.findIndex((name) => name === t.tournament)
+          const tournamentNumber = tournamentIndex + 1
+          const isLate = tournamentNumber > midEnd && tournamentNumber <= totalTournaments
+          if (team.teamName === "전주 V9" || team.teamName === "목포하나") {
+            console.log(
+              `[v0] ${team.teamName} - ${t.tournament}: index=${tournamentIndex}, number=${tournamentNumber}, isLate=${isLate}`,
+            )
+          }
+          return isLate
+        })
+
+        if (team.teamName === "전주 V9" || team.teamName === "목포하나") {
+          console.log(
+            `[v0] ${team.teamName} totals: early=${earlyTournaments.length}, mid=${midTournaments.length}, late=${lateTournaments.length}, total=${team.tournaments.length}`,
+          )
+        }
+
+        return {
+          ...team,
+          earlyPerformance: earlyTournaments.length,
+          midPerformance: midTournaments.length,
+          latePerformance: lateTournaments.length,
+        }
+      })
+
+      // 신흥 강자 (Rising Stars) - teams with increasing performance over time
+      const risingStars = teamsWithPeriods
+        .filter((team) => team.latePerformance > team.earlyPerformance && team.latePerformance >= 2)
+        .sort((a, b) => b.latePerformance - b.earlyPerformance - (a.latePerformance - a.earlyPerformance))
+        .slice(0, 3)
+
+      // 잠자는 용 (Sleeping Dragons) - teams with early success but recent decline
+      const sleepingDragons = teamsWithPeriods
+        .filter((team) => team.earlyPerformance > team.latePerformance && team.earlyPerformance >= 2)
+        .sort((a, b) => b.earlyPerformance - b.latePerformance - (a.earlyPerformance - a.latePerformance))
+        .slice(0, 3)
+
+      // 꾸준함 지수 (Consistency Index) - teams with steady performance across all periods
+      const consistentPerformers = teamsWithPeriods
+        .filter((team) => {
+          const performances = [team.earlyPerformance, team.midPerformance, team.latePerformance]
+          const maxDiff = Math.max(...performances) - Math.min(...performances)
+          return maxDiff <= 1 && team.tournaments.length >= 3
+        })
+        .slice(0, 3)
+
+      return { risingStars, sleepingDragons, consistentPerformers, earlyEnd, midEnd, totalTournaments }
+    }
+
+    // Advanced medal/ranking indicators
+    const getAdvancedMetrics = () => {
+      // 우승만 한 팀 (Championship-only teams)
+      const championshipOnlyTeams = divisionTeams.filter(
+        (team) => team.championships > 0 && team.runnerUps === 0 && team.thirdPlaces === 0,
+      )
+
+      // 준우승을 가장 많이 한 팀 (Most runner-ups)
+      const mostRunnerUps = divisionTeams
+        .filter((team) => team.runnerUps > 0)
+        .sort((a, b) => b.runnerUps - a.runnerUps)
+        .slice(0, 3)
+
+      // 최소 결승은 간다 (Always reaches finals)
+      const alwaysFinalists = divisionTeams.filter(
+        (team) => team.thirdPlaces === 0 && (team.championships > 0 || team.runnerUps > 0),
+      )
+
+      // 최다 3위 입상 팀 (Most 3rd places)
+      const mostThirdPlaces = divisionTeams
+        .filter((team) => team.thirdPlaces > 0)
+        .sort((a, b) => b.thirdPlaces - a.thirdPlaces)
+        .slice(0, 3)
+
+      // 홈/어웨이 성과 분석
+      const getRegionFromTournament = (tournamentName: string) => {
+        if (tournamentName.includes("인제") || tournamentName.includes("강릉") || tournamentName.includes("춘천"))
+          return "강원권"
+        if (
+          tournamentName.includes("단양") ||
+          tournamentName.includes("진천") ||
+          tournamentName.includes("충주") ||
+          tournamentName.includes("천안")
+        )
+          return "충청권"
+        if (
+          tournamentName.includes("전주") ||
+          tournamentName.includes("광주") ||
+          tournamentName.includes("목포") ||
+          tournamentName.includes("순천")
+        )
+          return "전라권"
+        if (
+          tournamentName.includes("부산") ||
+          tournamentName.includes("울산") ||
+          tournamentName.includes("대구") ||
+          tournamentName.includes("경주") ||
+          tournamentName.includes("울진") ||
+          tournamentName.includes("진안")
+        )
+          return "경상권"
+        if (tournamentName.includes("제주")) return "제주권"
+        if (
+          tournamentName.includes("서울") ||
+          tournamentName.includes("인천") ||
+          tournamentName.includes("수원") ||
+          tournamentName.includes("용인") ||
+          tournamentName.includes("광명") ||
+          tournamentName.includes("일산")
+        )
+          return "수도권"
+        return "기타"
+      }
+
+      const teamsWithHomeAway = divisionTeams.map((team) => {
+        const homeResults = team.tournaments.filter((t) => getRegionFromTournament(t.tournament) === team.region)
+        const awayResults = team.tournaments.filter(
+          (t) =>
+            getRegionFromTournament(t.tournament) !== team.region && getRegionFromTournament(t.tournament) !== "기타",
+        )
+
+        return {
+          ...team,
+          homeCount: homeResults.length,
+          awayCount: awayResults.length,
+          homeWins: homeResults.filter((t) => t.rank === 1).length,
+          awayWins: awayResults.filter((t) => t.rank === 1).length,
+        }
+      })
+
+      // 어웨이 최강팀 (Best away performers)
+      const bestAwayPerformers = teamsWithHomeAway
+        .filter((team) => team.awayCount > 0)
+        .sort((a, b) => b.awayCount - a.awayCount)
+        .slice(0, 3)
+
+      // 결승만 가면 우승하는 팀 (Teams that always win finals - excluding single wins)
+      const finalsWinners = divisionTeams
+        .filter((team) => team.championships > 1 && team.runnerUps === 0)
+        .sort((a, b) => b.championships - a.championships)
+        .slice(0, 3)
+
+      return {
+        championshipOnlyTeams,
+        mostRunnerUps,
+        alwaysFinalists,
+        mostThirdPlaces,
+        bestAwayPerformers,
+        finalsWinners,
+      }
+    }
+
+    const trendAnalysis = analyzeTournamentTrends()
+    const advancedMetrics = getAdvancedMetrics()
     const regionDistribution = divisionTeams.reduce(
       (acc, team) => {
         const region = team.region === "기타" ? "수도권" : team.region
@@ -246,16 +432,17 @@ function DivisionRankingTable({
       {} as Record<string, number>,
     )
 
-    // Performance analysis
-    const topPerformers = divisionTeams.slice(0, 3)
-    const championshipLeaders = divisionTeams.filter((team) => team.championships > 0).length
-    const consistentPerformers = divisionTeams.filter(
-      (team) => team.championships + team.runnerUps + team.thirdPlaces >= 3,
-    ).length
+    const topPerformers = divisionTeams.sort((a, b) => b.championships - a.championships)
 
-    // Competition intensity analysis
-    const averageScore = totalTeams > 0 ? (totalChampionships + totalRunnerUps + totalThirdPlaces) / totalTeams : 0
-    const competitionLevel = averageScore > 2 ? "매우 높음" : averageScore > 1 ? "높음" : "보통"
+    // Calculate competition level
+    const championshipLeaders = divisionTeams.filter((team) => team.championships > 0).length
+    const consistentPerformers = divisionTeams.filter((team) => team.tournaments.length >= 3).length
+    const competitionLevel =
+      championshipLeaders / totalTeams > 0.5
+        ? "높음 (High)"
+        : championshipLeaders / totalTeams > 0.2
+          ? "보통 (Medium)"
+          : "낮음 (Low)"
 
     return (
       <Card className="mt-6 shadow-lg border-0 bg-gradient-to-br from-blue-50 to-purple-50">
@@ -292,155 +479,391 @@ function DivisionRankingTable({
               </p>
             </div>
 
-            {/* 상위권 팀 분석 */}
-            {topPerformers.length > 0 && (
-              <div className="bg-white rounded-lg p-4 border-l-4 border-yellow-500">
-                <h3 className="text-lg font-bold text-gray-800 mb-3">🏆 상위권 팀 심층 분석</h3>
-                <div className="space-y-3">
-                  {topPerformers.map((team, index) => (
-                    <div key={team.teamName} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                      <div className="flex items-center space-x-3">
-                        <div
-                          className={`w-8 h-8 rounded-full flex items-center justify-center text-white font-bold ${
-                            index === 0 ? "bg-yellow-500" : index === 1 ? "bg-gray-400" : "bg-orange-500"
-                          }`}
-                        >
-                          {index + 1}
-                        </div>
-                        <div>
-                          <div className="font-semibold text-gray-800">{team.teamName}</div>
-                          <div className="text-sm text-gray-600">{team.region === "기타" ? "수도권" : team.region}</div>
-                        </div>
+            {/* 트렌드 분석 */}
+            <div className="bg-white rounded-lg p-4 border-l-4 border-orange-500">
+              <h3 className="text-lg font-bold text-gray-800 mb-3">
+                📈 트렌드 분석 (초반부 1-{trendAnalysis.earlyEnd}번 대회 / 중반부 {trendAnalysis.earlyEnd + 1}-
+                {trendAnalysis.midEnd}번 대회 / 후반부 {trendAnalysis.midEnd + 1}-{trendAnalysis.totalTournaments}번
+                대회)
+              </h3>
+
+              {/* 신흥 강자 */}
+              {trendAnalysis.risingStars.length > 0 && (
+                <div className="mb-4 p-3 bg-green-50 rounded-lg">
+                  <h4 className="font-semibold text-green-800 mb-2">🚀 신흥 강자 (후반부 급상승)</h4>
+                  <div className="space-y-2">
+                    {trendAnalysis.risingStars.map((team, index) => (
+                      <div key={team.teamName} className="flex justify-between items-center">
+                        <span className="font-medium">{team.teamName}</span>
+                        <span className="text-sm text-green-600">
+                          초반 {team.earlyPerformance}회 → 중반 {team.midPerformance}회 → 후반 {team.latePerformance}회
+                        </span>
                       </div>
-                      <div className="text-right">
-                        <div className="text-sm font-medium">
-                          🥇{team.championships} 🥈{team.runnerUps} 🥉{team.thirdPlaces}
-                        </div>
-                        <div className="text-xs text-gray-500">총 {team.tournaments.length}회 입상</div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-                <div className="mt-4 p-3 bg-yellow-50 rounded-lg">
-                  <p className="text-gray-700 text-sm leading-relaxed">
-                    <strong>{topPerformers[0]?.teamName}</strong>이 {topPerformers[0]?.championships}회 우승으로
-                    압도적인 1위를 차지하고 있습니다.
-                    {topPerformers.length > 1 && (
-                      <>
-                        상위 3팀의 총 우승 횟수는 {topPerformers.reduce((sum, team) => sum + team.championships, 0)}
-                        회로, 전체 우승의{" "}
-                        {Math.round(
-                          (topPerformers.reduce((sum, team) => sum + team.championships, 0) / totalChampionships) * 100,
-                        )}
-                        %를 차지하여 상위권 집중도가{" "}
-                        {topPerformers.reduce((sum, team) => sum + team.championships, 0) / totalChampionships > 0.6
-                          ? "매우 높은"
-                          : "적절한"}{" "}
-                        수준입니다.
-                      </>
-                    )}
+                    ))}
+                  </div>
+                  <p className="text-sm text-green-700 mt-2">
+                    후반부 대회에서 급격한 성장세를 보이며 앞으로의 활약이 기대되는 팀들입니다.
                   </p>
                 </div>
+              )}
+
+              {/* 잠자는 용 */}
+              {trendAnalysis.sleepingDragons.length > 0 && (
+                <div className="mb-4 p-3 bg-red-50 rounded-lg">
+                  <h4 className="font-semibold text-red-800 mb-2">🐉 잠자는 용 (초반 강세, 후반 약세)</h4>
+                  <div className="space-y-2">
+                    {trendAnalysis.sleepingDragons.map((team, index) => (
+                      <div key={team.teamName} className="flex justify-between items-center">
+                        <span className="font-medium">{team.teamName}</span>
+                        <span className="text-sm text-red-600">
+                          초반 {team.earlyPerformance}회 → 중반 {team.midPerformance}회 → 후반 {team.latePerformance}회
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                  <p className="text-sm text-red-700 mt-2">
+                    초반 강세를 보였지만 후반부 성적이 아쉬운 팀들로, 재기가 주목되는 팀들입니다.
+                  </p>
+                </div>
+              )}
+
+              {/* 꾸준함 지수 */}
+              {trendAnalysis.consistentPerformers.length > 0 && (
+                <div className="mb-4 p-3 bg-blue-50 rounded-lg">
+                  <h4 className="font-semibold text-blue-800 mb-2">⚖️ 꾸준함 지수 (전 기간 안정적 성과)</h4>
+                  <div className="space-y-2">
+                    {trendAnalysis.consistentPerformers.map((team, index) => (
+                      <div key={team.teamName} className="flex justify-between items-center">
+                        <span className="font-medium">{team.teamName}</span>
+                        <span className="text-sm text-blue-600">
+                          초반 {team.earlyPerformance}회, 중반 {team.midPerformance}회, 후반 {team.latePerformance}회
+                          (총 {team.tournaments.length}회)
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                  <p className="text-sm text-blue-700 mt-2">
+                    초반부터 후반부까지 꾸준한 성과를 내며 안정적인 경기력을 보여주는 믿을 만한 팀들입니다.
+                  </p>
+                </div>
+              )}
+            </div>
+
+            {/* 메달/랭킹 심화 지표 */}
+            <div className="bg-white rounded-lg p-4 border-l-4 border-purple-500">
+              <h3 className="text-lg font-bold text-gray-800 mb-3">🏅 메달/랭킹 심화 지표</h3>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {/* 우승만 한 팀 */}
+                {advancedMetrics.championshipOnlyTeams.length > 0 && (
+                  <div className="p-3 bg-yellow-50 rounded-lg">
+                    <h4 className="font-semibold text-yellow-800 mb-2">👑 완벽주의자 (우승만)</h4>
+                    <div className="space-y-1">
+                      {advancedMetrics.championshipOnlyTeams.map((team) => (
+                        <div key={team.teamName} className="text-sm">
+                          <span className="font-medium">{team.teamName}</span>
+                          <span className="text-yellow-600 ml-2">{team.championships}회 우승</span>
+                        </div>
+                      ))}
+                    </div>
+                    <p className="text-xs text-yellow-700 mt-2">우승 아니면 입상하지 않는 승부사 기질의 팀들</p>
+                  </div>
+                )}
+
+                {/* 준우승 최다 */}
+                {advancedMetrics.mostRunnerUps.length > 0 && (
+                  <div className="p-3 bg-gray-50 rounded-lg">
+                    <h4 className="font-semibold text-gray-800 mb-2">🥈 아쉬운 2인자</h4>
+                    <div className="space-y-1">
+                      {advancedMetrics.mostRunnerUps.slice(0, 3).map((team) => (
+                        <div key={team.teamName} className="text-sm">
+                          <span className="font-medium">{team.teamName}</span>
+                          <span className="text-gray-600 ml-2">{team.runnerUps}회 준우승</span>
+                        </div>
+                      ))}
+                    </div>
+                    <p className="text-xs text-gray-700 mt-2">한 발 차이로 아쉬웠던 순간들이 많은 팀들</p>
+                  </div>
+                )}
+
+                {/* 항상 결승 */}
+                {advancedMetrics.alwaysFinalists.length > 0 && (
+                  <div className="p-3 bg-indigo-50 rounded-lg">
+                    <h4 className="font-semibold text-indigo-800 mb-2">🎯 결승 단골</h4>
+                    <div className="space-y-1">
+                      {advancedMetrics.alwaysFinalists.slice(0, 3).map((team) => (
+                        <div key={team.teamName} className="text-sm">
+                          <span className="font-medium">{team.teamName}</span>
+                          <span className="text-indigo-600 ml-2">
+                            우승 {team.championships}회, 준우승 {team.runnerUps}회
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                    <p className="text-xs text-indigo-700 mt-2">3위는 없고 우승과 준우승만 있는 결승 전문팀들</p>
+                  </div>
+                )}
+
+                {/* 3위 최다 */}
+                {advancedMetrics.mostThirdPlaces.length > 0 && (
+                  <div className="p-3 bg-orange-50 rounded-lg">
+                    <h4 className="font-semibold text-orange-800 mb-2">🥉 동메달 컬렉터</h4>
+                    <div className="space-y-1">
+                      {advancedMetrics.mostThirdPlaces.slice(0, 3).map((team) => (
+                        <div key={team.teamName} className="text-sm">
+                          <span className="font-medium">{team.teamName}</span>
+                          <span className="text-orange-600 ml-2">{team.thirdPlaces}회 3위</span>
+                        </div>
+                      ))}
+                    </div>
+                    <p className="text-xs text-orange-700 mt-2">꾸준히 상위권에 머물며 3위 입상이 많은 팀들</p>
+                  </div>
+                )}
+
+                {/* 어웨이 최강팀 */}
+                {advancedMetrics.bestAwayPerformers.length > 0 && (
+                  <div className="p-3 bg-teal-50 rounded-lg">
+                    <h4 className="font-semibold text-teal-800 mb-2">✈️ 어웨이 최강팀</h4>
+                    <div className="space-y-1">
+                      {advancedMetrics.bestAwayPerformers.map((team) => (
+                        <div key={team.teamName} className="text-sm">
+                          <span className="font-medium">{team.teamName}</span>
+                          <span className="text-teal-600 ml-2">
+                            어웨이 {team.awayCount}회 입상 (우승 {team.awayWins}회)
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                    <p className="text-xs text-teal-700 mt-2">타 지역에서도 뛰어난 실력을 발휘하는 원정 전문팀들</p>
+                  </div>
+                )}
+
+                {/* 결승 승률 100% 팀 */}
+                {advancedMetrics.finalsWinners.length > 0 && (
+                  <div className="p-3 bg-yellow-50 rounded-lg">
+                    <h4 className="font-semibold text-yellow-800 mb-2">🏆 결승 승률 100% 팀</h4>
+                    <div className="space-y-1">
+                      {advancedMetrics.finalsWinners.map((team) => (
+                        <div key={team.teamName} className="text-sm">
+                          <span className="font-medium">{team.teamName}</span>
+                          <span className="text-yellow-600 ml-2">
+                            결승 진출 시 {team.championships}전 {team.championships}승 (승률 100%)
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                    <p className="text-xs text-yellow-700 mt-2">결승에만 가면 반드시 우승하는 클러치 팀들</p>
+                  </div>
+                )}
               </div>
-            )}
+            </div>
 
             {/* 권역별 분포 분석 */}
             {selectedRegion === "전체권역" && Object.keys(regionDistribution).length > 1 && (
               <div className="bg-white rounded-lg p-4 border-l-4 border-green-500">
-                <h3 className="text-lg font-bold text-gray-800 mb-3">🗺️ 권역별 참가 현황 분석</h3>
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mb-4">
-                  {Object.entries(regionDistribution)
-                    .sort(([, a], [, b]) => b - a)
-                    .map(([region, count]) => (
-                      <div key={region} className="text-center p-3 bg-green-50 rounded-lg">
-                        <div className="text-xl font-bold text-green-600">{count}</div>
-                        <div className="text-sm text-gray-600">{region}</div>
-                        <div className="text-xs text-gray-500">{Math.round((count / totalTeams) * 100)}%</div>
-                      </div>
-                    ))}
+                <h3 className="text-lg font-bold text-gray-800 mb-3">🗺️ 권역별 메달 분포</h3>
+
+                {/* 권역별 상세 메달 분석 */}
+                <div className="mb-6">
+                  <h4 className="font-semibold text-green-800 mb-3">🏅 권역별 메달 상세 분석</h4>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    {Object.entries(regionDistribution)
+                      .map(([region, teamCount]) => {
+                        const regionTeams = divisionTeams.filter(
+                          (team) => (team.region === "기타" ? "수도권" : team.region) === region,
+                        )
+                        const goldMedals = regionTeams.reduce((sum, team) => sum + team.championships, 0)
+                        const silverMedals = regionTeams.reduce((sum, team) => sum + team.runnerUps, 0)
+                        const bronzeMedals = regionTeams.reduce((sum, team) => sum + team.thirdPlaces, 0)
+                        const totalMedals = goldMedals + silverMedals + bronzeMedals
+
+                        return { region, teamCount, goldMedals, silverMedals, bronzeMedals, totalMedals }
+                      })
+                      .sort((a, b) => b.totalMedals - a.totalMedals)
+                      .map(({ region, teamCount, goldMedals, silverMedals, bronzeMedals, totalMedals }) => (
+                        <div key={region} className="p-4 bg-gradient-to-br from-green-50 to-blue-50 rounded-lg border">
+                          <div className="text-center mb-3">
+                            <h5 className="font-bold text-lg text-gray-800">{region}</h5>
+                            <p className="text-sm text-gray-600">{teamCount}개 팀 참가</p>
+                          </div>
+
+                          <div className="space-y-2">
+                            <div className="flex justify-between items-center">
+                              <span className="text-sm font-medium">🥇 금메달</span>
+                              <span className="font-bold text-yellow-600">{goldMedals}개</span>
+                            </div>
+                            <div className="flex justify-between items-center">
+                              <span className="text-sm font-medium">🥈 은메달</span>
+                              <span className="font-bold text-gray-600">{silverMedals}개</span>
+                            </div>
+                            <div className="flex justify-between items-center">
+                              <span className="text-sm font-medium">🥉 동메달</span>
+                              <span className="font-bold text-orange-600">{bronzeMedals}개</span>
+                            </div>
+                            <div className="border-t pt-2 mt-2">
+                              <div className="flex justify-between items-center">
+                                <span className="text-sm font-bold">총 메달</span>
+                                <span className="font-bold text-green-600 text-lg">{totalMedals}개</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                  </div>
                 </div>
-                <div className="p-3 bg-green-50 rounded-lg">
-                  <p className="text-gray-700 text-sm leading-relaxed">
-                    권역별 참가 분포를 보면{" "}
-                    <strong>{Object.entries(regionDistribution).sort(([, a], [, b]) => b - a)[0][0]}</strong>이
-                    {Object.entries(regionDistribution).sort(([, a], [, b]) => b - a)[0][1]}개 팀(
-                    {Math.round(
-                      (Object.entries(regionDistribution).sort(([, a], [, b]) => b - a)[0][1] / totalTeams) * 100,
-                    )}
-                    %)으로 가장 많은 참가율을 보이고 있습니다.
-                    {Object.keys(regionDistribution).length}개 권역에서 고르게 참가하여
-                    {Object.keys(regionDistribution).length >= 5 ? "전국적인 대회의 성격" : "지역적 특성"}을 잘 보여주고
-                    있습니다.
-                  </p>
+
+                {/* 권역별 금메달 분포 */}
+                <div className="mb-4 p-4 bg-yellow-50 rounded-lg">
+                  <h4 className="font-semibold text-yellow-800 mb-3">👑 권역별 금메달 분포</h4>
+                  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
+                    {Object.entries(regionDistribution)
+                      .map(([region]) => {
+                        const regionTeams = divisionTeams.filter(
+                          (team) => (team.region === "기타" ? "수도권" : team.region) === region,
+                        )
+                        const goldMedals = regionTeams.reduce((sum, team) => sum + team.championships, 0)
+                        return { region, goldMedals }
+                      })
+                      .sort((a, b) => b.goldMedals - a.goldMedals)
+                      .map(({ region, goldMedals }) => (
+                        <div key={region} className="text-center p-3 bg-white rounded-lg border-2 border-yellow-200">
+                          <div className="text-2xl font-bold text-yellow-600">{goldMedals}</div>
+                          <div className="text-sm text-gray-700">{region}</div>
+                        </div>
+                      ))}
+                  </div>
+                </div>
+
+                {/* 강한 권역 vs 약한 권역 분류 */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {(() => {
+                    const regionMedalData = Object.entries(regionDistribution)
+                      .map(([region]) => {
+                        const regionTeams = divisionTeams.filter(
+                          (team) => (team.region === "기타" ? "수도권" : team.region) === region,
+                        )
+                        const totalMedals = regionTeams.reduce(
+                          (sum, team) => sum + team.championships + team.runnerUps + team.thirdPlaces,
+                          0,
+                        )
+                        return { region, totalMedals, teamCount: regionTeams.length }
+                      })
+                      .sort((a, b) => b.totalMedals - a.totalMedals)
+
+                    const strongRegions = regionMedalData.slice(0, Math.ceil(regionMedalData.length / 2))
+                    const weakRegions = regionMedalData.slice(Math.ceil(regionMedalData.length / 2))
+
+                    return (
+                      <>
+                        <div className="p-3 bg-red-50 rounded-lg">
+                          <h4 className="font-semibold text-red-800 mb-2">💪 강한 권역 (메달 다수 보유)</h4>
+                          <div className="space-y-2">
+                            {strongRegions.map(({ region, totalMedals, teamCount }) => (
+                              <div key={region} className="flex justify-between items-center">
+                                <span className="font-medium">{region}</span>
+                                <span className="text-sm text-red-600">
+                                  {totalMedals}개 메달 ({teamCount}팀)
+                                </span>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+
+                        <div className="p-3 bg-blue-50 rounded-lg">
+                          <h4 className="font-semibold text-blue-800 mb-2">📈 성장 가능 권역</h4>
+                          <div className="space-y-2">
+                            {weakRegions.map(({ region, totalMedals, teamCount }) => (
+                              <div key={region} className="flex justify-between items-center">
+                                <span className="font-medium">{region}</span>
+                                <span className="text-sm text-blue-600">
+                                  {totalMedals}개 메달 ({teamCount}팀)
+                                </span>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      </>
+                    )
+                  })()}
+                </div>
+
+                {/* 순위권 상위 10개팀의 권역별 분석 */}
+                <div className="mt-4 p-3 bg-green-50 rounded-lg">
+                  <h4 className="font-semibold text-green-800 mb-2">🏆 상위 10개팀 권역별 분포</h4>
+                  {(() => {
+                    const top10Teams = divisionTeams.slice(0, 10)
+                    const top10RegionDist = top10Teams.reduce(
+                      (acc, team) => {
+                        const region = team.region === "기타" ? "수도권" : team.region
+                        acc[region] = (acc[region] || 0) + 1
+                        return acc
+                      },
+                      {} as Record<string, number>,
+                    )
+
+                    const dominantRegion = Object.entries(top10RegionDist).sort(([, a], [, b]) => b - a)[0]
+
+                    return (
+                      <>
+                        <div className="grid grid-cols-3 md:grid-cols-6 gap-2 mb-3">
+                          {Object.entries(top10RegionDist)
+                            .sort(([, a], [, b]) => b - a)
+                            .map(([region, count]) => (
+                              <div key={region} className="text-center p-2 bg-white rounded border">
+                                <div className="text-lg font-bold text-green-600">{count}</div>
+                                <div className="text-xs text-gray-600">{region}</div>
+                              </div>
+                            ))}
+                        </div>
+                        <p className="text-sm text-green-700">
+                          상위 10개팀 중 <strong>{dominantRegion[0]}</strong>이 {dominantRegion[1]}개 팀으로 가장 많은
+                          강팀을 보유하고 있어 해당 권역의 배구 수준이 높음을 보여줍니다.
+                        </p>
+                      </>
+                    )
+                  })()}
                 </div>
               </div>
             )}
 
-            {/* 경쟁 구조 분석 */}
-            <div className="bg-white rounded-lg p-4 border-l-4 border-purple-500">
-              <h3 className="text-lg font-bold text-gray-800 mb-3">⚔️ 경쟁 구조 및 트렌드 분석</h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                <div className="p-3 bg-purple-50 rounded-lg">
-                  <div className="text-lg font-bold text-purple-600 mb-1">경쟁 강도</div>
-                  <div className="text-2xl font-bold text-gray-800">{competitionLevel}</div>
-                  <div className="text-sm text-gray-600">평균 입상 횟수: {averageScore.toFixed(1)}회</div>
-                </div>
-                <div className="p-3 bg-purple-50 rounded-lg">
-                  <div className="text-lg font-bold text-purple-600 mb-1">성과 분산도</div>
-                  <div className="text-2xl font-bold text-gray-800">
-                    {championshipLeaders / totalTeams > 0.3
-                      ? "높음"
-                      : championshipLeaders / totalTeams > 0.15
-                        ? "보통"
-                        : "낮음"}
-                  </div>
-                  <div className="text-sm text-gray-600">
-                    우승팀 비율: {Math.round((championshipLeaders / totalTeams) * 100)}%
-                  </div>
-                </div>
-              </div>
+            {/* 앞으로의 예상 및 관전 포인트 */}
+            <div className="bg-white rounded-lg p-4 border-l-4 border-red-500">
+              <h3 className="text-lg font-bold text-gray-800 mb-3">🔮 앞으로의 예상 및 관전 포인트</h3>
               <div className="space-y-3">
-                <div className="p-3 bg-purple-50 rounded-lg">
-                  <h4 className="font-semibold text-gray-800 mb-2">📈 주요 특징 및 트렌드</h4>
-                  <ul className="text-sm text-gray-700 space-y-1 list-disc list-inside">
-                    <li>
-                      전체 {totalChampionships + totalRunnerUps + totalThirdPlaces}개의 입상 기록 중 우승{" "}
-                      {Math.round(
-                        (totalChampionships / (totalChampionships + totalRunnerUps + totalThirdPlaces)) * 100,
-                      )}
-                      %, 준우승{" "}
-                      {Math.round((totalRunnerUps / (totalChampionships + totalRunnerUps + totalThirdPlaces)) * 100)}%,
-                      3위{" "}
-                      {Math.round((totalThirdPlaces / (totalChampionships + totalRunnerUps + totalThirdPlaces)) * 100)}
-                      %의 분포를 보임
-                    </li>
-                    <li>
-                      {championshipLeaders / totalTeams > 0.2
-                        ? "다수의 팀이 우승 경험을 보유하여 경쟁이 치열한 구조"
-                        : "소수 강팀의 독주 체제가 형성된 구조"}
-                    </li>
-                    <li>
-                      {consistentPerformers / totalTeams > 0.4
-                        ? "안정적인 성과를 내는 팀들이 많아 전체적인 수준이 높음"
-                        : "상위권과 하위권의 격차가 존재하는 양극화 현상"}
-                    </li>
-                    {selectedRegion !== "전체권역" && (
-                      <li>
-                        {selectedRegion} 지역 특성상 지역 내 라이벌 구도가 형성되어 있으며, 전국 대회에서의 경쟁력도{" "}
-                        {topPerformers[0]?.championships > 2 ? "매우 우수한" : "양호한"} 수준
-                      </li>
-                    )}
-                  </ul>
-                </div>
-                <div className="p-3 bg-indigo-50 rounded-lg">
-                  <h4 className="font-semibold text-gray-800 mb-2">🎯 향후 전망 및 관전 포인트</h4>
-                  <p className="text-sm text-gray-700 leading-relaxed">
+                <div className="p-3 bg-red-50 rounded-lg">
+                  <h4 className="font-semibold text-red-800 mb-2">📊 경쟁 구조 전망</h4>
+                  <p className="text-sm text-red-700 leading-relaxed">
                     {topPerformers.length > 1 && topPerformers[0].championships - topPerformers[1].championships <= 1
                       ? `현재 1위 ${topPerformers[0].teamName}과 2위 ${topPerformers[1].teamName}의 격차가 근소하여 향후 순위 변동 가능성이 높습니다. `
                       : `${topPerformers[0]?.teamName}의 독주 체제가 공고하지만, 추격팀들의 성장세도 주목할 만합니다. `}
-                    {consistentPerformers > totalTeams * 0.3
-                      ? "다수의 팀이 꾸준한 성과를 보이고 있어 앞으로도 흥미진진한 경쟁이 예상됩니다."
-                      : "신흥 강팀의 등장과 기존 강팀들의 재정비가 관전 포인트가 될 것입니다."}
+                    {trendAnalysis.risingStars.length > 0 &&
+                      `특히 신흥 강자로 분류된 ${trendAnalysis.risingStars[0]?.teamName} 등의 약진이 기존 순위에 변화를 가져올 것으로 예상됩니다.`}
+                  </p>
+                </div>
+
+                <div className="p-3 bg-blue-50 rounded-lg">
+                  <h4 className="font-semibold text-blue-800 mb-2">🎯 주요 관전 포인트</h4>
+                  <ul className="text-sm text-blue-700 space-y-1 list-disc list-inside">
+                    {trendAnalysis.sleepingDragons.length > 0 && (
+                      <li>잠자는 용 {trendAnalysis.sleepingDragons[0]?.teamName}의 재기 여부</li>
+                    )}
+                    {advancedMetrics.mostRunnerUps.length > 0 && (
+                      <li>준우승 최다팀 {advancedMetrics.mostRunnerUps[0]?.teamName}의 우승 도전</li>
+                    )}
+                    {trendAnalysis.risingStars.length > 0 && <li>신흥 강자들의 지속적인 성장세 유지 가능성</li>}
+                    <li>권역별 라이벌 구도의 변화와 새로운 강팀의 등장</li>
+                  </ul>
+                </div>
+
+                <div className="p-3 bg-purple-50 rounded-lg">
+                  <h4 className="font-semibold text-purple-800 mb-2">🏐 배구계 트렌드 분석</h4>
+                  <p className="text-sm text-purple-700 leading-relaxed">
+                    전체적으로 {competitionLevel} 수준의 경쟁이 펼쳐지고 있으며,
+                    {championshipLeaders / totalTeams > 0.3
+                      ? "다수의 팀이 우승 경험을 보유하여 예측하기 어려운 흥미진진한 리그"
+                      : "소수 강팀 중심의 안정적인 리그 구조"}
+                    를 보이고 있습니다. 향후 대회에서는 기존 강팀들의 수성과 신흥 세력의 도전이 만나 더욱 치열한 경쟁이
+                    예상됩니다.
                   </p>
                 </div>
               </div>
@@ -803,6 +1226,7 @@ export default function VolleyballRanking() {
                   teams={filteredTeams}
                   onTeamClick={handleTeamClick}
                   selectedRegion={selectedRegion}
+                  tournamentNames={tournamentNames}
                 />
               </CardContent>
             </Card>
@@ -887,93 +1311,95 @@ export default function VolleyballRanking() {
             </Card>
           </div>
         )}
-      </main>
 
-      {selectedTeam && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-2 md:p-4">
-          <div className="bg-white rounded-lg max-w-4xl w-full max-h-[95vh] md:max-h-[90vh] overflow-y-auto">
-            <div className="p-4 md:p-6 border-b bg-gradient-to-r from-blue-600 to-orange-600 text-white rounded-t-lg">
-              <div className="flex justify-between items-start">
-                <div>
-                  <h2 className="text-2xl md:text-3xl font-bold mb-2">{selectedTeam.teamName}</h2>
-                  <div className="flex flex-wrap space-x-2 md:space-x-4 text-xs md:text-sm">
-                    <span>📋 {selectedTeam.division}</span>
-                    <span>🗺️ {selectedTeam.region === "기타" ? "수도권" : selectedTeam.region}</span>
-                    <span>🏆 총 {selectedTeam.tournaments.length}개 대회 입상</span>
+        {selectedTeam && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-2 md:p-4">
+            <div className="bg-white rounded-lg max-w-4xl w-full max-h-[95vh] md:max-h-[90vh] overflow-y-auto">
+              <div className="p-4 md:p-6 border-b bg-gradient-to-r from-blue-600 to-orange-600 text-white rounded-t-lg">
+                <div className="flex justify-between items-start">
+                  <div>
+                    <h2 className="text-2xl md:text-3xl font-bold mb-2">{selectedTeam.teamName}</h2>
+                    <div className="flex flex-wrap space-x-2 md:space-x-4 text-xs md:text-sm">
+                      <span>📋 {selectedTeam.division}</span>
+                      <span>🗺️ {selectedTeam.region === "기타" ? "수도권" : selectedTeam.region}</span>
+                      <span>🏆 총 {selectedTeam.tournaments.length}개 대회 입상</span>
+                    </div>
+                  </div>
+                  <button onClick={() => setSelectedTeam(null)} className="text-white hover:text-gray-200 text-2xl">
+                    ×
+                  </button>
+                </div>
+              </div>
+              <div className="p-4 md:p-6">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-4 md:mb-6">
+                  <div className="text-center p-3 md:p-4 bg-yellow-50 rounded-lg">
+                    <div className="text-2xl md:text-3xl font-bold text-yellow-600">{selectedTeam.championships}</div>
+                    <div className="text-xs md:text-sm text-gray-600">🥇 우승</div>
+                  </div>
+                  <div className="text-center p-3 md:p-4 bg-gray-50 rounded-lg">
+                    <div className="text-2xl md:text-3xl font-bold text-gray-600">{selectedTeam.runnerUps}</div>
+                    <div className="text-xs md:text-sm text-gray-600">🥈 준우승</div>
+                  </div>
+                  <div className="text-center p-3 md:p-4 bg-orange-50 rounded-lg">
+                    <div className="text-2xl md:text-3xl font-bold text-orange-600">{selectedTeam.thirdPlaces}</div>
+                    <div className="text-xs md:text-sm text-gray-600">🥉 3위</div>
+                  </div>
+                  <div className="text-center p-3 md:p-4 bg-green-50 rounded-lg">
+                    <div className="text-2xl md:text-3xl font-bold text-green-600">
+                      {selectedTeam.tournaments.length}
+                    </div>
+                    <div className="text-xs md:text-sm text-gray-600">🏆 입상횟수</div>
                   </div>
                 </div>
-                <button onClick={() => setSelectedTeam(null)} className="text-white hover:text-gray-200 text-2xl">
-                  ×
-                </button>
-              </div>
-            </div>
-            <div className="p-4 md:p-6">
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-4 md:mb-6">
-                <div className="text-center p-3 md:p-4 bg-yellow-50 rounded-lg">
-                  <div className="text-2xl md:text-3xl font-bold text-yellow-600">{selectedTeam.championships}</div>
-                  <div className="text-xs md:text-sm text-gray-600">🥇 우승</div>
-                </div>
-                <div className="text-center p-3 md:p-4 bg-gray-50 rounded-lg">
-                  <div className="text-2xl md:text-3xl font-bold text-gray-600">{selectedTeam.runnerUps}</div>
-                  <div className="text-xs md:text-sm text-gray-600">🥈 준우승</div>
-                </div>
-                <div className="text-center p-3 md:p-4 bg-orange-50 rounded-lg">
-                  <div className="text-2xl md:text-3xl font-bold text-orange-600">{selectedTeam.thirdPlaces}</div>
-                  <div className="text-xs md:text-sm text-gray-600">🥉 3위</div>
-                </div>
-                <div className="text-center p-3 md:p-4 bg-green-50 rounded-lg">
-                  <div className="text-2xl md:text-3xl font-bold text-green-600">{selectedTeam.tournaments.length}</div>
-                  <div className="text-xs md:text-sm text-gray-600">🏆 입상횟수</div>
-                </div>
-              </div>
-              <div className="space-y-4">
-                <h3 className="text-base md:text-lg font-bold">🏆 대회 참가 기록</h3>
-                <div className="max-h-48 md:max-h-64 overflow-y-auto space-y-2">
-                  {(showAllTournaments ? selectedTeam.tournaments : selectedTeam.tournaments.slice(0, 3)).map(
-                    (tournament, index) => (
-                      <div key={index} className="flex justify-between items-center p-2 md:p-3 bg-gray-50 rounded">
-                        <div className="flex-1 min-w-0">
-                          <div className="text-sm font-medium">{tournament.tournament}</div>
-                          <div className="text-xs text-gray-600 mt-1">📋 {tournament.division}</div>
+                <div className="space-y-4">
+                  <h3 className="text-base md:text-lg font-bold">🏆 대회 참가 기록</h3>
+                  <div className="max-h-48 md:max-h-64 overflow-y-auto space-y-2">
+                    {(showAllTournaments ? selectedTeam.tournaments : selectedTeam.tournaments.slice(0, 3)).map(
+                      (tournament, index) => (
+                        <div key={index} className="flex justify-between items-center p-2 md:p-3 bg-gray-50 rounded">
+                          <div className="flex-1 min-w-0">
+                            <div className="text-sm font-medium">{tournament.tournament}</div>
+                            <div className="text-xs text-gray-600 mt-1">📋 {tournament.division}</div>
+                          </div>
+                          <div className="flex items-center space-x-2 ml-2">
+                            <Badge
+                              className={
+                                tournament.rank === 1
+                                  ? "bg-yellow-500"
+                                  : tournament.rank === 2
+                                    ? "bg-gray-400"
+                                    : tournament.rank === 3
+                                      ? "bg-orange-500"
+                                      : "bg-blue-400"
+                              }
+                            >
+                              {tournament.rank === 1 ? "우승" : tournament.rank === 2 ? "준우승" : "3위"}
+                            </Badge>
+                          </div>
                         </div>
-                        <div className="flex items-center space-x-2 ml-2">
-                          <Badge
-                            className={
-                              tournament.rank === 1
-                                ? "bg-yellow-500"
-                                : tournament.rank === 2
-                                  ? "bg-gray-400"
-                                  : tournament.rank === 3
-                                    ? "bg-orange-500"
-                                    : "bg-blue-400"
-                            }
-                          >
-                            {tournament.rank === 1 ? "우승" : tournament.rank === 2 ? "준우승" : "3위"}
-                          </Badge>
-                        </div>
+                      ),
+                    )}
+                    {selectedTeam.tournaments.length > 3 && (
+                      <div className="text-center pt-2">
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={() => setShowAllTournaments(!showAllTournaments)}
+                          className="text-xs px-3 py-1"
+                        >
+                          {showAllTournaments
+                            ? `접기 (${selectedTeam.tournaments.length - 3}개 숨기기)`
+                            : `더보기 (${selectedTeam.tournaments.length - 3}개 더)`}
+                        </Button>
                       </div>
-                    ),
-                  )}
-                  {selectedTeam.tournaments.length > 3 && (
-                    <div className="text-center pt-2">
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() => setShowAllTournaments(!showAllTournaments)}
-                        className="text-xs px-3 py-1"
-                      >
-                        {showAllTournaments
-                          ? `접기 (${selectedTeam.tournaments.length - 3}개 숨기기)`
-                          : `더보기 (${selectedTeam.tournaments.length - 3}개 더)`}
-                      </Button>
-                    </div>
-                  )}
+                    )}
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      )}
+        )}
+      </main>
     </div>
   )
 }
