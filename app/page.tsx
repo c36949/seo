@@ -463,8 +463,8 @@ function DivisionRankingTable({
       <Card className="mt-6 shadow-lg border-0 bg-gradient-to-br from-blue-50 to-purple-50">
         <CardHeader className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white">
           <CardTitle className="text-lg md:text-xl flex items-center">
-            <div className="w-8 h-8 bg-white bg-opacity-20 rounded-full flex items-center justify-center mr-3">🤖</div>
-            AI 순위 분석 리포트
+            <img src="/images/tiger-mascot.png" alt="Tiger Mascot" className="w-12 h-12 mr-3" />
+            랭구랭구 인사이트 리포트
           </CardTitle>
         </CardHeader>
         <CardContent className="p-4 md:p-6">
@@ -1065,6 +1065,7 @@ export default function VolleyballRanking() {
                   className="w-30 h-30 md:w-48 md:h-48 object-contain"
                 />
                 <div className="text-center -mt-2 md:-mt-6">
+                  <div className="text-xs text-orange-400 font-medium mb-1">마스코트 호랭이</div>
                   <div className="text-sm md:text-2xl font-bold text-white mb-1">랭구랭구</div>
                   <div className="text-xs md:text-sm text-blue-100">
                     <span className="font-bold text-yellow-300">랭</span>킹+배
