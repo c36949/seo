@@ -244,11 +244,26 @@ function DivisionRankingTable({
       const midEnd = Math.ceil((totalTournaments * 2) / 3) // 12-22
       // Late period: 23-34
 
+      const findTournamentIndex = (tournamentName: string) => {
+        // First try exact match
+        let index = tournamentNames.findIndex((name) => name === tournamentName)
+
+        // If no exact match, try partial match
+        if (index === -1) {
+          index = tournamentNames.findIndex(
+            (name) =>
+              name.includes(tournamentName) || tournamentName.includes(name.split(" ")[0] + " " + name.split(" ")[1]),
+          )
+        }
+
+        return index
+      }
+
       const teamsWithPeriods = divisionTeams.map((team) => {
         const earlyTournaments = team.tournaments.filter((t) => {
-          const tournamentIndex = tournamentNames.findIndex((name) => name === t.tournament)
+          const tournamentIndex = findTournamentIndex(t.tournament)
           const tournamentNumber = tournamentIndex + 1
-          const isEarly = tournamentNumber >= 1 && tournamentNumber <= earlyEnd
+          const isEarly = tournamentIndex !== -1 && tournamentNumber >= 1 && tournamentNumber <= earlyEnd
           if (team.teamName === "전주 V9" || team.teamName === "목포하나") {
             console.log(
               `[v0] ${team.teamName} - ${t.tournament}: index=${tournamentIndex}, number=${tournamentNumber}, isEarly=${isEarly}`,
@@ -258,9 +273,9 @@ function DivisionRankingTable({
         })
 
         const midTournaments = team.tournaments.filter((t) => {
-          const tournamentIndex = tournamentNames.findIndex((name) => name === t.tournament)
+          const tournamentIndex = findTournamentIndex(t.tournament)
           const tournamentNumber = tournamentIndex + 1
-          const isMid = tournamentNumber > earlyEnd && tournamentNumber <= midEnd
+          const isMid = tournamentIndex !== -1 && tournamentNumber > earlyEnd && tournamentNumber <= midEnd
           if (team.teamName === "전주 V9" || team.teamName === "목포하나") {
             console.log(
               `[v0] ${team.teamName} - ${t.tournament}: index=${tournamentIndex}, number=${tournamentNumber}, isMid=${isMid}`,
@@ -270,9 +285,9 @@ function DivisionRankingTable({
         })
 
         const lateTournaments = team.tournaments.filter((t) => {
-          const tournamentIndex = tournamentNames.findIndex((name) => name === t.tournament)
+          const tournamentIndex = findTournamentIndex(t.tournament)
           const tournamentNumber = tournamentIndex + 1
-          const isLate = tournamentNumber > midEnd && tournamentNumber <= totalTournaments
+          const isLate = tournamentIndex !== -1 && tournamentNumber > midEnd && tournamentNumber <= totalTournaments
           if (team.teamName === "전주 V9" || team.teamName === "목포하나") {
             console.log(
               `[v0] ${team.teamName} - ${t.tournament}: index=${tournamentIndex}, number=${tournamentNumber}, isLate=${isLate}`,
