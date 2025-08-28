@@ -496,11 +496,7 @@ function DivisionRankingTable({
 
             {/* 트렌드 분석 */}
             <div className="bg-white rounded-lg p-4 border-l-4 border-orange-500">
-              <h3 className="text-lg font-bold text-gray-800 mb-3">
-                📈 트렌드 분석 (초반부 1-{trendAnalysis.earlyEnd}번 대회 / 중반부 {trendAnalysis.earlyEnd + 1}-
-                {trendAnalysis.midEnd}번 대회 / 후반부 {trendAnalysis.midEnd + 1}-{trendAnalysis.totalTournaments}번
-                대회)
-              </h3>
+              <h3 className="text-lg font-bold text-gray-800 mb-3">📈 승부의 곡선 (초반~후반 성적 변화)</h3>
 
               {/* 신흥 강자 */}
               {trendAnalysis.risingStars.length > 0 && (
@@ -508,11 +504,11 @@ function DivisionRankingTable({
                   <h4 className="font-semibold text-green-800 mb-2">🚀 신흥 강자 (후반부 급상승)</h4>
                   <div className="space-y-2">
                     {trendAnalysis.risingStars.map((team, index) => (
-                      <div key={team.teamName} className="flex justify-between items-center">
-                        <span className="font-medium">{team.teamName}</span>
-                        <span className="text-sm text-green-600">
+                      <div key={team.teamName} className="space-y-1">
+                        <div className="font-medium">{team.teamName}</div>
+                        <div className="text-sm text-green-600">
                           초반 {team.earlyPerformance}회 → 중반 {team.midPerformance}회 → 후반 {team.latePerformance}회
-                        </span>
+                        </div>
                       </div>
                     ))}
                   </div>
@@ -528,11 +524,11 @@ function DivisionRankingTable({
                   <h4 className="font-semibold text-red-800 mb-2">🐉 잠자는 용 (초반 강세, 후반 약세)</h4>
                   <div className="space-y-2">
                     {trendAnalysis.sleepingDragons.map((team, index) => (
-                      <div key={team.teamName} className="flex justify-between items-center">
-                        <span className="font-medium">{team.teamName}</span>
-                        <span className="text-sm text-red-600">
+                      <div key={team.teamName} className="space-y-1">
+                        <div className="font-medium">{team.teamName}</div>
+                        <div className="text-sm text-red-600">
                           초반 {team.earlyPerformance}회 → 중반 {team.midPerformance}회 → 후반 {team.latePerformance}회
-                        </span>
+                        </div>
                       </div>
                     ))}
                   </div>
@@ -548,12 +544,12 @@ function DivisionRankingTable({
                   <h4 className="font-semibold text-blue-800 mb-2">⚖️ 꾸준함 지수 (전 기간 안정적 성과)</h4>
                   <div className="space-y-2">
                     {trendAnalysis.consistentPerformers.map((team, index) => (
-                      <div key={team.teamName} className="flex justify-between items-center">
-                        <span className="font-medium">{team.teamName}</span>
-                        <span className="text-sm text-blue-600">
+                      <div key={team.teamName} className="space-y-1">
+                        <div className="font-medium">{team.teamName}</div>
+                        <div className="text-sm text-blue-600">
                           초반 {team.earlyPerformance}회, 중반 {team.midPerformance}회, 후반 {team.latePerformance}회
                           (총 {team.tournaments.length}회)
-                        </span>
+                        </div>
                       </div>
                     ))}
                   </div>
@@ -566,7 +562,7 @@ function DivisionRankingTable({
 
             {/* 메달/랭킹 심화 지표 */}
             <div className="bg-white rounded-lg p-4 border-l-4 border-purple-500">
-              <h3 className="text-lg font-bold text-gray-800 mb-3">🏅 메달/랭킹 심화 지표</h3>
+              <h3 className="text-lg font-bold text-gray-800 mb-3">🏆 랭킹 속 히든 스토리</h3>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {/* 완벽주의자 - 1st position */}
@@ -676,7 +672,7 @@ function DivisionRankingTable({
             {/* 권역별 분포 분석 */}
             {selectedRegion === "전체권역" && Object.keys(regionDistribution).length > 1 && (
               <div className="bg-white rounded-lg p-4 border-l-4 border-green-500">
-                <h3 className="text-lg font-bold text-gray-800 mb-3">🗺️ 권역별 메달 분포</h3>
+                <h3 className="text-lg font-bold text-gray-800 mb-3">🥇 권역별 성적표</h3>
 
                 {/* 권역별 상세 메달 분석 */}
                 <div className="mb-6">
@@ -699,7 +695,7 @@ function DivisionRankingTable({
                         <div key={region} className="p-4 bg-gradient-to-br from-green-50 to-blue-50 rounded-lg border">
                           <div className="text-center mb-3">
                             <h5 className="font-bold text-lg text-gray-800">{region}</h5>
-                            <p className="text-sm text-gray-600">{teamCount}개 팀 참가</p>
+                            <p className="text-sm text-gray-600">{teamCount}개 팀 입상</p>
                           </div>
 
                           <div className="space-y-2">
@@ -846,7 +842,7 @@ function DivisionRankingTable({
               <h3 className="text-lg font-bold text-gray-800 mb-3">🔮 앞으로의 예상 및 관전 포인트</h3>
               <div className="space-y-3">
                 <div className="p-3 bg-red-50 rounded-lg">
-                  <h4 className="font-semibold text-red-800 mb-2">📊 경쟁 구조 전망</h4>
+                  <h4 className="font-semibold text-red-800 mb-2">🐯 우승권 판도</h4>
                   <p className="text-sm text-red-700 leading-relaxed">
                     {topPerformers.length > 1 && topPerformers[0].championships - topPerformers[1].championships <= 1
                       ? `현재 1위 ${topPerformers[0].teamName}과 2위 ${topPerformers[1].teamName}의 격차가 근소하여 향후 순위 변동 가능성이 높습니다. `
@@ -857,7 +853,7 @@ function DivisionRankingTable({
                 </div>
 
                 <div className="p-3 bg-blue-50 rounded-lg">
-                  <h4 className="font-semibold text-blue-800 mb-2">🎯 주요 관전 포인트</h4>
+                  <h4 className="font-semibold text-blue-800 mb-2">🏆 우승권 판도 키포인트</h4>
                   <ul className="text-sm text-blue-700 space-y-1 list-disc list-inside">
                     {trendAnalysis.sleepingDragons.length > 0 && (
                       <li>잠자는 용 {trendAnalysis.sleepingDragons[0]?.teamName}의 재기 여부</li>
@@ -1058,14 +1054,12 @@ export default function VolleyballRanking() {
           <div className="flex flex-col md:flex-row md:items-center justify-between mb-6 md:mb-8 space-y-4 md:space-y-0">
             <div className="flex items-center space-x-3 md:space-x-4">
               <div className="flex flex-col items-center">
-                <div className="text-xs md:text-sm text-yellow-300 font-bold mb-10 -mt-24">"마스코트 호랭이"</div>
                 <img
                   src="/images/tiger-head.png"
                   alt="랭구랭구 Tiger Head"
                   className="w-30 h-30 md:w-48 md:h-48 object-contain"
                 />
                 <div className="text-center -mt-2 md:-mt-6">
-                  <div className="text-xs text-orange-400 font-medium mb-1">마스코트 호랭이</div>
                   <div className="text-sm md:text-2xl font-bold text-white mb-1">랭구랭구</div>
                   <div className="text-xs md:text-sm text-blue-100">
                     <span className="font-bold text-yellow-300">랭</span>킹+배
