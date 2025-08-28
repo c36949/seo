@@ -569,7 +569,7 @@ function DivisionRankingTable({
               <h3 className="text-lg font-bold text-gray-800 mb-3">🏅 메달/랭킹 심화 지표</h3>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {/* 우승만 한 팀 */}
+                {/* 완벽주의자 - 1st position */}
                 {advancedMetrics.championshipOnlyTeams.length > 0 && (
                   <div className="p-3 bg-yellow-50 rounded-lg">
                     <h4 className="font-semibold text-yellow-800 mb-2">👑 완벽주의자 (우승만)</h4>
@@ -577,7 +577,7 @@ function DivisionRankingTable({
                       {advancedMetrics.championshipOnlyTeams.map((team) => (
                         <div key={team.teamName} className="text-sm">
                           <span className="font-medium">{team.teamName}</span>
-                          <span className="text-yellow-600 ml-2">{team.championships}회 우승</span>
+                          <span className="text-yellow-600 ml-2">우승 {team.championships}회</span>
                         </div>
                       ))}
                     </div>
@@ -585,7 +585,25 @@ function DivisionRankingTable({
                   </div>
                 )}
 
-                {/* 준우승 최다 */}
+                {/* 결승의 신 - 2nd position */}
+                {advancedMetrics.finalsWinners.length > 0 && (
+                  <div className="p-3 bg-yellow-50 rounded-lg">
+                    <h4 className="font-semibold text-yellow-800 mb-2">🏆 결승의 신</h4>
+                    <div className="space-y-1">
+                      {advancedMetrics.finalsWinners.map((team) => (
+                        <div key={team.teamName} className="text-sm">
+                          <span className="font-medium">{team.teamName}</span>
+                          <span className="text-yellow-600 ml-2">
+                            결승 진출 시 {team.championships}전 {team.championships}승 (승률 100%)
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                    <p className="text-xs text-yellow-700 mt-2">결승에만 가면 반드시 우승하는 클러치 팀들</p>
+                  </div>
+                )}
+
+                {/* 아쉬운 2인자 - 3rd position */}
                 {advancedMetrics.mostRunnerUps.length > 0 && (
                   <div className="p-3 bg-gray-50 rounded-lg">
                     <h4 className="font-semibold text-gray-800 mb-2">🥈 아쉬운 2인자</h4>
@@ -593,7 +611,7 @@ function DivisionRankingTable({
                       {advancedMetrics.mostRunnerUps.slice(0, 3).map((team) => (
                         <div key={team.teamName} className="text-sm">
                           <span className="font-medium">{team.teamName}</span>
-                          <span className="text-gray-600 ml-2">{team.runnerUps}회 준우승</span>
+                          <span className="text-gray-600 ml-2">준우승 {team.runnerUps}회</span>
                         </div>
                       ))}
                     </div>
@@ -601,10 +619,10 @@ function DivisionRankingTable({
                   </div>
                 )}
 
-                {/* 항상 결승 */}
+                {/* 무조건 파이널 - 4th position */}
                 {advancedMetrics.alwaysFinalists.length > 0 && (
                   <div className="p-3 bg-indigo-50 rounded-lg">
-                    <h4 className="font-semibold text-indigo-800 mb-2">🎯 결승 단골</h4>
+                    <h4 className="font-semibold text-indigo-800 mb-2">🎯 무조건 파이널</h4>
                     <div className="space-y-1">
                       {advancedMetrics.alwaysFinalists.slice(0, 3).map((team) => (
                         <div key={team.teamName} className="text-sm">
@@ -619,7 +637,7 @@ function DivisionRankingTable({
                   </div>
                 )}
 
-                {/* 3위 최다 */}
+                {/* 동메달 컬렉터 - 5th position */}
                 {advancedMetrics.mostThirdPlaces.length > 0 && (
                   <div className="p-3 bg-orange-50 rounded-lg">
                     <h4 className="font-semibold text-orange-800 mb-2">🥉 동메달 컬렉터</h4>
@@ -627,7 +645,7 @@ function DivisionRankingTable({
                       {advancedMetrics.mostThirdPlaces.slice(0, 3).map((team) => (
                         <div key={team.teamName} className="text-sm">
                           <span className="font-medium">{team.teamName}</span>
-                          <span className="text-orange-600 ml-2">{team.thirdPlaces}회 3위</span>
+                          <span className="text-orange-600 ml-2">3위 {team.thirdPlaces}회</span>
                         </div>
                       ))}
                     </div>
@@ -635,39 +653,21 @@ function DivisionRankingTable({
                   </div>
                 )}
 
-                {/* 어웨이 최강팀 */}
+                {/* 무적 원정대 - 6th position */}
                 {advancedMetrics.bestAwayPerformers.length > 0 && (
                   <div className="p-3 bg-teal-50 rounded-lg">
-                    <h4 className="font-semibold text-teal-800 mb-2">✈️ 어웨이 최강팀</h4>
+                    <h4 className="font-semibold text-teal-800 mb-2">✈️ 무적 원정대</h4>
                     <div className="space-y-1">
                       {advancedMetrics.bestAwayPerformers.map((team) => (
                         <div key={team.teamName} className="text-sm">
                           <span className="font-medium">{team.teamName}</span>
                           <span className="text-teal-600 ml-2">
-                            어웨이 {team.awayCount}회 입상 (우승 {team.awayWins}회)
+                            어웨이 입상 {team.awayCount}회 (우승 {team.awayWins}회)
                           </span>
                         </div>
                       ))}
                     </div>
                     <p className="text-xs text-teal-700 mt-2">타 지역에서도 뛰어난 실력을 발휘하는 원정 전문팀들</p>
-                  </div>
-                )}
-
-                {/* 결승 승률 100% 팀 */}
-                {advancedMetrics.finalsWinners.length > 0 && (
-                  <div className="p-3 bg-yellow-50 rounded-lg">
-                    <h4 className="font-semibold text-yellow-800 mb-2">🏆 결승 승률 100% 팀</h4>
-                    <div className="space-y-1">
-                      {advancedMetrics.finalsWinners.map((team) => (
-                        <div key={team.teamName} className="text-sm">
-                          <span className="font-medium">{team.teamName}</span>
-                          <span className="text-yellow-600 ml-2">
-                            결승 진출 시 {team.championships}전 {team.championships}승 (승률 100%)
-                          </span>
-                        </div>
-                      ))}
-                    </div>
-                    <p className="text-xs text-yellow-700 mt-2">결승에만 가면 반드시 우승하는 클러치 팀들</p>
                   </div>
                 )}
               </div>
@@ -1367,7 +1367,8 @@ export default function VolleyballRanking() {
                   </div>
                 </div>
                 <div className="space-y-4">
-                  <h3 className="text-base md:text-lg font-bold">🏆 대회 참가 기록</h3>
+                  <h3 className="text-base md:text-lg font-bold">🏆 입상 기록</h3>
+
                   <div className="max-h-48 md:max-h-64 overflow-y-auto space-y-2">
                     {(showAllTournaments ? selectedTeam.tournaments : selectedTeam.tournaments.slice(0, 3)).map(
                       (tournament, index) => (
