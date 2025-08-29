@@ -1145,18 +1145,43 @@ const TournamentCalendar = () => {
 
     for (const pattern of locationPatterns) {
       const match = tournamentName.match(pattern)
-      if (match) return match[1]
-    }
+      if (match) {
+        const location = match[1]
+        // Handle specific cases for 2-character extraction
+        if (location.includes("장성")) return "장성"
+        if (location.includes("남해")) return "남해"
+        if (location.includes("제천")) return "제천"
+        if (location.includes("당진")) return "당진"
+        if (location.includes("보성")) return "보성"
+        if (location.includes("광산")) return "광산"
+        if (location.includes("고성")) return "고성"
+        if (location.includes("이천")) return "이천"
+        if (location.includes("단양")) return "단양"
+        if (location.includes("여수")) return "여수"
+        if (location.includes("전주")) return "전주"
+        if (location.includes("장흥")) return "장흥"
+        if (location.includes("진도")) return "진도"
+        if (location.includes("목포")) return "목포"
+        if (location.includes("완도")) return "완도"
+        if (location.includes("청양")) return "청양"
+        if (location.includes("원주")) return "원주"
+        if (location.includes("강진")) return "강진"
+        if (location.includes("남원")) return "남원"
 
-    // Fallback: extract first word that looks like a location
-    const words = tournamentName.split(" ")
-    for (const word of words) {
-      if (word.length >= 2 && !word.includes("회") && !word.includes("배") && !word.includes("2025")) {
-        return word
+        // Return last 2 characters for other cases
+        return location.slice(-2)
       }
     }
 
-    return tournamentName.slice(0, 4) // Fallback to first 4 characters
+    // Fallback: extract location from tournament name and return 2 characters
+    const words = tournamentName.split(" ")
+    for (const word of words) {
+      if (word.length >= 2 && !word.includes("회") && !word.includes("배") && !word.includes("2025")) {
+        return word.slice(-2) // Return last 2 characters
+      }
+    }
+
+    return tournamentName.slice(0, 2) // Fallback to first 2 characters
   }
 
   const renderCalendarGrid = (month: any) => {
@@ -1237,7 +1262,7 @@ const TournamentCalendar = () => {
     <Card className="shadow-xl border-0 mt-6">
       <CardHeader className="bg-gradient-to-r from-purple-600 via-blue-600 to-green-600 text-white">
         <CardTitle className="text-xl md:text-2xl flex items-center justify-between">
-          <span>📅 2025년 전국 배구대회 일정</span>
+          <span>📅 전국 배구대회 일정</span>
           <div className="flex items-center space-x-2">
             <Button
               variant="outline"
