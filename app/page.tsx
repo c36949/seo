@@ -1121,6 +1121,44 @@ const TournamentCalendar = () => {
 
   const isWeekend = (dayOfWeek: number) => dayOfWeek === 5 || dayOfWeek === 6
 
+  const extractLocationName = (tournamentName: string) => {
+    // Extract location from tournament names like "2025 원주치악배" -> "원주"
+    const locationPatterns = [
+      /(\w+)치악배/, // 원주치악배 -> 원주
+      /(\w+)청자배/, // 강진청자배 -> 강진
+      /(\w+)춘향배/, // 남원춘향배 -> 남원
+      /(\w+)보물섬배/, // 남해보물섬배 -> 남해
+      /(\w+)해나루배/, // 당진해나루배 -> 당진
+      /(\w+)매일배/, // 중부매일배 -> 중부
+      /(\w+)배/, // 온고일배 -> 온고일
+      /(\w+)청호배/, // 청호배 -> 청호
+      /(\w+)구청장기/, // 광산구청장기 -> 광산
+      /(\w+)공룡배/, // 고성공룡배 -> 고성
+      /(\w+)쌀배/, // 이천쌀배 -> 이천
+      /(\w+)거북선기/, // 여수거북선기 -> 여수
+      /(\w+)한옥마을배/, // 전주한옥마을배 -> 전주
+      /(\w+)아리랑배/, // 진도아리랑배 -> 진도
+      /(\w+)유달산배/, // 목포유달산배 -> 목포
+      /(\w+)풀/, // 완도풀 -> 완도
+      /(\w+)체육회장배/, // 청양군체육회장배 -> 청양
+    ]
+
+    for (const pattern of locationPatterns) {
+      const match = tournamentName.match(pattern)
+      if (match) return match[1]
+    }
+
+    // Fallback: extract first word that looks like a location
+    const words = tournamentName.split(" ")
+    for (const word of words) {
+      if (word.length >= 2 && !word.includes("회") && !word.includes("배") && !word.includes("2025")) {
+        return word
+      }
+    }
+
+    return tournamentName.slice(0, 4) // Fallback to first 4 characters
+  }
+
   const renderCalendarGrid = (month: any) => {
     const totalCells = 42 // 6 rows × 7 days
     const cells = []
@@ -1154,7 +1192,10 @@ const TournamentCalendar = () => {
             {tournaments.map((tournament, idx) => (
               <div key={idx} className="text-xs">
                 <div className="bg-gradient-to-r from-orange-100 to-red-100 text-orange-800 px-2 py-1 rounded-md border border-orange-200 mb-1">
-                  <div className="font-semibold leading-tight">{tournament.name}</div>
+                  <div className="font-semibold leading-tight">
+                    <span className="md:hidden text-sm">{extractLocationName(tournament.name)}</span>
+                    <span className="hidden md:block">{tournament.name}</span>
+                  </div>
                   <div className="flex items-center mt-1">
                     <span className="inline-block w-2 h-2 bg-red-500 rounded-full mr-1"></span>
                     <span className="text-red-700 font-medium">{tournament.location}</span>
@@ -1191,7 +1232,8 @@ const TournamentCalendar = () => {
               disabled={currentMonthIndex === 0}
               className="text-gray-700 border-gray-300 hover:bg-white hover:text-purple-600 opacity-100"
             >
-              ← 이전
+              <span className="md:hidden">←</span>
+              <span className="hidden md:inline">← 이전</span>
             </Button>
             <Button
               variant="outline"
@@ -1200,7 +1242,8 @@ const TournamentCalendar = () => {
               disabled={currentMonthIndex === months.length - 1}
               className="text-gray-700 border-gray-300 hover:bg-white hover:text-purple-600 opacity-100"
             >
-              다음 →
+              <span className="md:hidden">→</span>
+              <span className="hidden md:inline">다음 →</span>
             </Button>
           </div>
         </CardTitle>
