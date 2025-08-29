@@ -1299,9 +1299,9 @@ export default function VolleyballRanking() {
             <div className="flex items-center space-x-3 md:space-x-4">
               <div className="flex flex-col items-center">
                 <img
-                  src="/images/tiger-head.png"
+                  src="/images/main-tiger-mascot.png"
                   alt="랭구랭구 Tiger Head"
-                  className="w-30 h-30 md:w-48 md:h-48 object-contain"
+                  className="w-32 h-32 md:w-52 md:h-52 object-contain"
                 />
                 <div className="text-center -mt-2 md:-mt-6">
                   <div className="text-sm md:text-2xl font-bold text-white mb-1">랭구랭구</div>
