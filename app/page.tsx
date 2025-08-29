@@ -463,7 +463,7 @@ function DivisionRankingTable({
       <Card className="mt-6 shadow-lg border-0 bg-gradient-to-br from-blue-50 to-purple-50">
         <CardHeader className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white">
           <CardTitle className="text-lg md:text-xl flex items-center">
-            <img src="/images/tiger-mascot.png" alt="Tiger Mascot" className="w-12 h-12 mr-3" />
+            <img src="/images/new-tiger-mascot.png" alt="Tiger Mascot" className="w-18 h-18 mr-3" />
             랭구랭구 인사이트 리포트
           </CardTitle>
         </CardHeader>
@@ -991,6 +991,250 @@ function DivisionRankingTable({
   )
 }
 
+const tournamentData = [
+  { dates: "8월30일~31일", name: "2025원주치악배전국남여배구대회", location: "강원원주", status: "결과" },
+  { dates: "8월30일~31일", name: "2025. 강진청자배 시니어실버전국남녀배구대회", location: "전남강진", status: "결과" },
+  { dates: "9월6일~7일", name: "제3회 대한스포츠클럽협회장배 전국 배구대회", location: "전남장성", status: "" },
+  { dates: "9월13일~14일", name: "제5회 남해 보물섬배 전국남여생활체육배구대회", location: "경남남해", status: "결과" },
+  { dates: "9월13일~14일", name: "2025당진해나루배전국남녀 생활체육배구대회", location: "충남당진", status: "결과" },
+  { dates: "9월20일~21일", name: "중부매일배내토기전국생활체육배구대회", location: "충북제천", status: "결과" },
+  { dates: "9월20일~21일", name: "온고을배시니어실버배구대회", location: "전북전주", status: "결과" },
+  { dates: "9월27일~28일", name: "제57회청호배생활체육배구대회", location: "전남보성", status: "결과" },
+  {
+    dates: "10월11일~12일",
+    name: "제10회광산구청장기(구.우리밀배)전국남.여배구대회",
+    location: "광주광산",
+    status: "",
+  },
+  { dates: "10월18일~19일", name: "제4회 고성공룡배 전국남녀배구대회", location: "경남고성", status: "결과" },
+  { dates: "10월25일~26일", name: "제10회임금님표 이천쌀배전국배구대회", location: "경기이천", status: "결과" },
+  { dates: "11월8일~9일", name: "제56회여수거북선기전국남여배구대회", location: "전남여수", status: "결과" },
+  { dates: "11월15일~16일", name: "2025전주한옥마을배전국남여배구대회", location: "전북전주", status: "결과" },
+  { dates: "11월29일~30일", name: "제56회 장흥군협회장기 전국 남.여 배구대회", location: "전남장흥", status: "결과" },
+  { dates: "12월6일~7일", name: "제12회 진도아리랑배전국남녀배구대회", location: "전남진도", status: "결과" },
+  { dates: "12월6일~7일", name: "제46회국무총리배 전국9인제배구대회", location: "충북단양", status: "결과" },
+  { dates: "12월6일", name: "2025남원춘향배 시니어ㆍ실버전국남녀배구대회", location: "전북남원", status: "결과" },
+  { dates: "12월13일~14일", name: "제6회 목포유달산배 전국 남,여배구대회", location: "전남목포", status: "결과" },
+  { dates: "12월20일~21일", name: "제2회 완도풀 전국남여 생활체육 배구대회", location: "전남완도", status: "결과" },
+  { dates: "12월20일~21일", name: "2025청양군체육회장배전국남여배구대회", location: "충남청양", status: "" },
+]
+
+const TournamentCalendar = () => {
+  const [currentMonthIndex, setCurrentMonthIndex] = useState(0)
+
+  const months = [
+    { name: "8월", year: 2025, days: 31, startDay: 4 },
+    { name: "9월", year: 2025, days: 30, startDay: 0 },
+    { name: "10월", year: 2025, days: 31, startDay: 2 },
+    { name: "11월", year: 2025, days: 30, startDay: 5 },
+    { name: "12월", year: 2025, days: 31, startDay: 0 },
+  ]
+
+  const dayNames = ["월", "화", "수", "목", "금", "토", "일"]
+
+  const getTournamentsForDate = (month: string, day: number) => {
+    return tournamentData.filter((tournament) => {
+      const dateStr = `${month}${day}일`
+
+      // Check if tournament directly includes this date
+      if (tournament.dates.includes(dateStr)) return true
+
+      // Check if date is in tournament range
+      if (tournament.dates.includes("~") && isDateInRange(month, day, tournament.dates)) return true
+
+      // Check weekend tournament logic
+      if (isWeekendTournament(tournament.dates, month, day)) return true
+
+      // Check if this is Sunday and tournament started on Saturday
+      if (isSundayAfterSaturdayTournament(tournament.dates, month, day)) return true
+
+      return false
+    })
+  }
+
+  const isSundayAfterSaturdayTournament = (dateRange: string, month: string, day: number) => {
+    const currentMonth = months.find((m) => m.name === month)
+    if (!currentMonth) return false
+
+    const currentDayOfWeek = (currentMonth.startDay + day - 1) % 7
+
+    // Only apply to Sundays (now index 6 instead of 0)
+    if (currentDayOfWeek !== 6) return false
+
+    // Check if previous day (Saturday) had a tournament
+    const previousDay = day - 1
+    if (previousDay < 1) return false
+
+    const previousDayOfWeek = (currentMonth.startDay + previousDay - 1) % 7
+
+    // Only apply if previous day was Saturday (now index 5 instead of 6)
+    if (previousDayOfWeek !== 5) return false
+
+    // Check if tournament starts on the previous Saturday
+    const saturdayDateStr = `${month}${previousDay}일`
+
+    // Check direct match or range start
+    if (dateRange.includes(saturdayDateStr)) return true
+
+    // Check if tournament starts on Saturday (for range tournaments)
+    if (dateRange.includes("~")) {
+      const [startStr] = dateRange.split("~")
+      const startDay = Number.parseInt(startStr.replace(/[^0-9]/g, ""))
+      if (dateRange.startsWith(month) && startDay === previousDay) return true
+    }
+
+    return false
+  }
+
+  const isDateInRange = (month: string, day: number, dateRange: string) => {
+    if (!dateRange.includes("~")) return false
+
+    const [startStr, endStr] = dateRange.split("~")
+    const startDay = Number.parseInt(startStr.replace(/[^0-9]/g, ""))
+    const endDay = Number.parseInt(endStr.replace(/[^0-9]/g, ""))
+
+    return day >= startDay && day <= endDay && dateRange.startsWith(month)
+  }
+
+  const isWeekendTournament = (dateRange: string, month: string, day: number) => {
+    if (!dateRange.includes("~")) return false
+
+    const [startStr, endStr] = dateRange.split("~")
+    const startDay = Number.parseInt(startStr.replace(/[^0-9]/g, ""))
+    const endDay = Number.parseInt(endStr.replace(/[^0-9]/g, ""))
+
+    // Check if this is a weekend tournament and current day is within weekend range
+    if (dateRange.startsWith(month)) {
+      const currentMonth = months.find((m) => m.name === month)
+      if (currentMonth) {
+        const startDayOfWeek = (currentMonth.startDay + startDay - 1) % 7
+        const currentDayOfWeek = (currentMonth.startDay + day - 1) % 7
+
+        // If tournament starts on Saturday or Sunday, show on both weekend days
+        if ((startDayOfWeek === 5 || startDayOfWeek === 6) && (currentDayOfWeek === 5 || currentDayOfWeek === 6)) {
+          return day >= startDay && day <= endDay
+        }
+      }
+    }
+    return false
+  }
+
+  const isWeekend = (dayOfWeek: number) => dayOfWeek === 5 || dayOfWeek === 6
+
+  const renderCalendarGrid = (month: any) => {
+    const totalCells = 42 // 6 rows × 7 days
+    const cells = []
+
+    // Empty cells before month starts
+    for (let i = 0; i < month.startDay; i++) {
+      cells.push(<div key={`empty-${i}`} className="h-32 md:h-40 border border-gray-200 bg-gray-50"></div>)
+    }
+
+    // Days of the month
+    for (let day = 1; day <= month.days; day++) {
+      const tournaments = getTournamentsForDate(month.name, day)
+      const dayOfWeek = (month.startDay + day - 1) % 7
+      const isWeekendDay = isWeekend(dayOfWeek)
+
+      cells.push(
+        <div
+          key={day}
+          className={`h-32 md:h-40 border border-gray-200 p-2 overflow-hidden ${
+            isWeekendDay ? "bg-blue-50" : "bg-white"
+          }`}
+        >
+          <div
+            className={`text-sm font-bold mb-2 ${
+              dayOfWeek === 6 ? "text-red-600" : dayOfWeek === 5 ? "text-blue-600" : "text-gray-700"
+            }`}
+          >
+            {day}
+          </div>
+          <div className="space-y-1">
+            {tournaments.map((tournament, idx) => (
+              <div key={idx} className="text-xs">
+                <div className="bg-gradient-to-r from-orange-100 to-red-100 text-orange-800 px-2 py-1 rounded-md border border-orange-200 mb-1">
+                  <div className="font-semibold leading-tight">{tournament.name}</div>
+                  <div className="flex items-center mt-1">
+                    <span className="inline-block w-2 h-2 bg-red-500 rounded-full mr-1"></span>
+                    <span className="text-red-700 font-medium">{tournament.location}</span>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>,
+      )
+    }
+
+    // Fill remaining cells
+    const remainingCells = totalCells - month.startDay - month.days
+    for (let i = 0; i < remainingCells; i++) {
+      cells.push(<div key={`empty-end-${i}`} className="h-32 md:h-40 border border-gray-200 bg-gray-50"></div>)
+    }
+
+    return cells
+  }
+
+  const currentMonth = months[currentMonthIndex]
+
+  return (
+    <Card className="shadow-xl border-0 mt-6">
+      <CardHeader className="bg-gradient-to-r from-purple-600 via-blue-600 to-green-600 text-white">
+        <CardTitle className="text-xl md:text-2xl flex items-center justify-between">
+          <span>📅 2025년 전국 배구대회 일정</span>
+          <div className="flex items-center space-x-2">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setCurrentMonthIndex(Math.max(0, currentMonthIndex - 1))}
+              disabled={currentMonthIndex === 0}
+              className="text-gray-700 border-gray-300 hover:bg-white hover:text-purple-600 opacity-100"
+            >
+              ← 이전
+            </Button>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setCurrentMonthIndex(Math.min(months.length - 1, currentMonthIndex + 1))}
+              disabled={currentMonthIndex === months.length - 1}
+              className="text-gray-700 border-gray-300 hover:bg-white hover:text-purple-600 opacity-100"
+            >
+              다음 →
+            </Button>
+          </div>
+        </CardTitle>
+      </CardHeader>
+      <CardContent className="p-4 md:p-6">
+        <div className="bg-white rounded-lg border shadow-sm">
+          <div className="bg-gradient-to-r from-blue-500 to-purple-500 text-white p-4 rounded-t-lg">
+            <h3 className="text-xl font-bold text-center">
+              {currentMonth.name} {currentMonth.year}
+            </h3>
+          </div>
+
+          {/* Day headers */}
+          <div className="grid grid-cols-7 bg-gray-50">
+            {dayNames.map((day, idx) => (
+              <div
+                key={day}
+                className={`p-3 text-center text-sm font-bold border-r border-gray-200 ${
+                  idx === 6 ? "text-red-600" : idx === 5 ? "text-blue-600" : "text-gray-700"
+                }`}
+              >
+                {day}
+              </div>
+            ))}
+          </div>
+
+          {/* Calendar grid */}
+          <div className="grid grid-cols-7">{renderCalendarGrid(currentMonth)}</div>
+        </div>
+      </CardContent>
+    </Card>
+  )
+}
+
 export default function VolleyballRanking() {
   const [selectedDivision, setSelectedDivision] = useState("남자클럽 3부")
   const [selectedRegion, setSelectedRegion] = useState("전체권역")
@@ -1410,6 +1654,8 @@ export default function VolleyballRanking() {
             </div>
           </div>
         )}
+
+        <TournamentCalendar />
       </main>
     </div>
   )
