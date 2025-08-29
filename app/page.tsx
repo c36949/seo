@@ -1165,7 +1165,14 @@ const TournamentCalendar = () => {
 
     // Empty cells before month starts
     for (let i = 0; i < month.startDay; i++) {
-      cells.push(<div key={`empty-${i}`} className="h-32 md:h-40 border border-gray-200 bg-gray-50"></div>)
+      const dayOfWeek = i % 7
+      const isWeekendDay = isWeekend(dayOfWeek)
+      cells.push(
+        <div
+          key={`empty-${i}`}
+          className={`border border-gray-200 bg-gray-50 ${isWeekendDay ? "h-40 md:h-40" : "h-24 md:h-40"}`}
+        ></div>,
+      )
     }
 
     // Days of the month
@@ -1177,8 +1184,8 @@ const TournamentCalendar = () => {
       cells.push(
         <div
           key={day}
-          className={`h-32 md:h-40 border border-gray-200 p-2 overflow-hidden ${
-            isWeekendDay ? "bg-blue-50" : "bg-white"
+          className={`border border-gray-200 p-2 overflow-hidden ${
+            isWeekendDay ? "bg-blue-50 h-40 md:h-40" : "bg-white h-24 md:h-40"
           }`}
         >
           <div
@@ -1211,7 +1218,14 @@ const TournamentCalendar = () => {
     // Fill remaining cells
     const remainingCells = totalCells - month.startDay - month.days
     for (let i = 0; i < remainingCells; i++) {
-      cells.push(<div key={`empty-end-${i}`} className="h-32 md:h-40 border border-gray-200 bg-gray-50"></div>)
+      const dayOfWeek = (month.startDay + month.days + i) % 7
+      const isWeekendDay = isWeekend(dayOfWeek)
+      cells.push(
+        <div
+          key={`empty-end-${i}`}
+          className={`border border-gray-200 bg-gray-50 ${isWeekendDay ? "h-40 md:h-40" : "h-24 md:h-40"}`}
+        ></div>,
+      )
     }
 
     return cells
