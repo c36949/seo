@@ -335,7 +335,7 @@ export class VolleyballDataProcessor {
         return b.runnerUps - a.runnerUps
       }
       // 3위 횟수
-      return b.thirdPlaces - a.thirdPlaces
+      return b.thirdPlaces - b.thirdPlaces
     })
 
     return sortedTeams
@@ -426,7 +426,7 @@ export class VolleyballDataProcessor {
     // Clear any existing data first
     this.clearAllData()
 
-    // 제3회 인제 내린천배 한국9인제 배구 챔피언쉽 (2025.3.8-3.9)
+    // Tournament 1: 제3회 인제 내린천배 한국9인제 배구 챔피언쉽 (2025.3.8-3.9)
     const tournament1Results: TournamentResult[] = [
       // 남자클럽 2부
       { tournament: "제3회 인제 내린천배", division: "남자클럽 2부", teamName: "서울 엄보스", rank: 1 },
@@ -465,22 +465,31 @@ export class VolleyballDataProcessor {
 
     this.addTournament("제3회 인제 내린천배", tournament1Results, "2025.3.8-3.9")
 
+    // Tournament 2: 제18회 광양백운산기 (2025.3.15-3.16)
     const tournament2Results: TournamentResult[] = [
       // 남자 시니어부
       { tournament: "제18회 광양백운산기", division: "남자 시니어부", teamName: "목포 SMC", rank: 1 },
-      { tournament: "제18회 광양백운산기", division: "남자 시니어부", teamName: "광양 옥곡", rank: 2 },
-      { tournament: "제18회 광양백운산기", division: "남자 시니어부", teamName: "해남 우리", rank: 3 },
+      { tournament: "제18회 광양백운산기", division: "남자 시니어부", teamName: "군산 KST", rank: 2 },
+      { tournament: "제18회 광양백운산기", division: "남자 시니어부", teamName: "서울 VNUE", rank: 3 },
+      { tournament: "제18회 광양백운산기", division: "남자 시니어부", teamName: "순천배구클럽", rank: 3 },
+
+      // 남자클럽 2부
+      { tournament: "제18회 광양백운산기", division: "남자클럽 2부", teamName: "서울 엄보스", rank: 1 },
+      { tournament: "제18회 광양백운산기", division: "남자클럽 2부", teamName: "전남 LBT", rank: 2 },
+      { tournament: "제18회 광양백운산기", division: "남자클럽 2부", teamName: "서울 NWN", rank: 3 },
+      { tournament: "제18회 광양백운산기", division: "남자클럽 2부", teamName: "서울 차차차", rank: 3 },
 
       // 남자클럽 3부
-      { tournament: "제18회 광양백운산기", division: "남자클럽 3부", teamName: "부산 신과함께", rank: 1 },
-      { tournament: "제18회 광양백운산기", division: "남자클럽 3부", teamName: "목포 하나", rank: 2 },
-      { tournament: "제18회 광양백운산기", division: "남자클럽 3부", teamName: "순천 EST", rank: 3 },
-      { tournament: "제18회 광양백운산기", division: "남자클럽 3부", teamName: "진주 행복배구단", rank: 3 },
+      { tournament: "제18회 광양백운산기", division: "남자클럽 3부", teamName: "제천 JSVC", rank: 1 },
+      { tournament: "제18회 광양백운산기", division: "남자클럽 3부", teamName: "서울 샤샤샤", rank: 2 },
+      { tournament: "제18회 광양백운산기", division: "남자클럽 3부", teamName: "용인 오합지존", rank: 3 },
+      { tournament: "제18회 광양백운산기", division: "남자클럽 3부", teamName: "남양주배구사랑", rank: 3 },
 
       // 여자클럽 3부
-      { tournament: "제18회 광양백운산기", division: "여자클럽 3부", teamName: "대전 아리", rank: 1 },
-      { tournament: "제18회 광양백운산기", division: "여자클럽 3부", teamName: "순천 유앤아이", rank: 2 },
-      { tournament: "제18회 광양백운산기", division: "여자클럽 3부", teamName: "부산 CSN", rank: 3 },
+      { tournament: "제18회 광양백운산기", division: "여자클럽 3부", teamName: "세종 맥스", rank: 1 },
+      { tournament: "제18회 광양백운산기", division: "여자클럽 3부", teamName: "서울 차차차", rank: 2 },
+      { tournament: "제18회 광양백운산기", division: "여자클럽 3부", teamName: "서울 우리하모니", rank: 3 },
+      { tournament: "제18회 광양백운산기", division: "여자클럽 3부", teamName: "서울 GVT", rank: 3 },
     ]
 
     this.addTournament("제18회 광양백운산기", tournament2Results, "2025.3.15-3.16")
@@ -527,7 +536,7 @@ export class VolleyballDataProcessor {
 
       // 남자 시니어부
       { tournament: "2025 청양칠갑산배", division: "남자 시니어부", teamName: "서울 한강", rank: 1 },
-      { tournament: "2025 청양칠갑산배", division: "남자 시니어부", teamName: "군산배구클럽", rank: 2 },
+      { tournament: "2025 청양칠갑산배", division: "남자 시니어부", teamName: "군산 KST", rank: 2 },
       { tournament: "2025 청양칠갑산배", division: "남자 시니어부", teamName: "남양주배구사랑", rank: 3 },
       { tournament: "2025 청양칠갑산배", division: "남자 시니어부", teamName: "정읍 지니어스", rank: 3 },
 
@@ -616,7 +625,7 @@ export class VolleyballDataProcessor {
 
     const tournament7Results: TournamentResult[] = [
       // 남자 시니어부
-      { tournament: "제13회 진해군항제기념", division: "남자 시니어부", teamName: "군산배구클럽", rank: 1 },
+      { tournament: "제13회 진해군항제기념", division: "남자 시니어부", teamName: "군산 KST", rank: 1 },
       { tournament: "제13회 진해군항제기념", division: "남자 시니어부", teamName: "창원 바람개비", rank: 2 },
       { tournament: "제13회 진해군항제기념", division: "남자 시니어부", teamName: "통영 배우회", rank: 3 },
       { tournament: "제13회 진해군항제기념", division: "남자 시니어부", teamName: "고성 배구동호회", rank: 3 },
@@ -644,7 +653,7 @@ export class VolleyballDataProcessor {
 
     const tournament8Results: TournamentResult[] = [
       // 남자클럽 2부
-      { tournament: "제4회단양도담삼봉배", division: "남자클럽 2부", teamName: "화성 체인지", rank: 1 },
+      { tournament: "제4회단양도담삼봉배", division: "남자클럽 2부", teamName: "광주 LBT", rank: 1 },
       { tournament: "제4회단양도담삼봉배", division: "남자클럽 2부", teamName: "서울 98즈", rank: 2 },
       { tournament: "제4회단양도담삼봉배", division: "남자클럽 2부", teamName: "수원 HB", rank: 3 },
       { tournament: "제4회단양도담삼봉배", division: "남자클럽 2부", teamName: "대전 WITH WIN", rank: 3 },
@@ -758,7 +767,7 @@ export class VolleyballDataProcessor {
       { tournament: "제53회 생활체육 카네이션", division: "여자 장년부", teamName: "부산 비전", rank: 3 },
 
       // 남자 시니어부
-      { tournament: "제53회 생활체육 카네이션", division: "남자 시니어부", teamName: "군산배구클럽", rank: 1 },
+      { tournament: "제53회 생활체육 카네이션", division: "남자 시니어부", teamName: "군산 KST", rank: 1 },
       { tournament: "제53회 생활체육 카네이션", division: "남자 시니어부", teamName: "창원 바람개비", rank: 2 },
       { tournament: "제53회 생활체육 카네이션", division: "남자 시니어부", teamName: "수원 유에이스", rank: 3 },
       { tournament: "제53회 생활체육 카네이션", division: "남자 시니어부", teamName: "포항 영일만", rank: 3 },
@@ -963,6 +972,8 @@ export class VolleyballDataProcessor {
       // 남자클럽 3부 - 세 번째 그룹 (추가된 KCK 준우승 결과)
       { tournament: "제3회 단양 만천하 스카이배", division: "남자클럽 3부", teamName: "서울 TEAM KCK", rank: 2 },
 
+      { tournament: "제3회 단양 만천하 스카이배", division: "남자클럽 3부", teamName: "안산 WE라온", rank: 3 },
+
       // 남자 대학부
       { tournament: "제3회 단양 만천하 스카이배", division: "남자 대학부", teamName: "국민대 VAT", rank: 1 },
       { tournament: "제3회 단양 만천하 스카이배", division: "남자 대학부", teamName: "삼육대 SU-WINGS", rank: 2 },
@@ -1080,13 +1091,13 @@ export class VolleyballDataProcessor {
       },
       {
         tournament: "제19회 한산대첩기 전국남녀생활체육배구대회",
-        division: "남자클럽 3부",
+        division: "남자클луб 3부",
         teamName: "대구교대OB",
         rank: 3,
       },
       {
         tournament: "제19회 한산대첩기 전국남녀생활체육배구대회",
-        division: "남자클럽 3부",
+        division: "남자클луб 3부",
         teamName: "진주 비봉",
         rank: 3,
       },
@@ -1117,6 +1128,13 @@ export class VolleyballDataProcessor {
         rank: 3,
       },
 
+      {
+        tournament: "제19회 한산대첩기 전국남녀생활체육배구대회",
+        division: "여자클럽 3부",
+        teamName: "진주 WIN",
+        rank: 2,
+      },
+
       // Женский клуб 3부 - 두 번째 그룹
       {
         tournament: "제19회 한산대첩기 전국남녀생활체육배구대회",
@@ -1127,18 +1145,12 @@ export class VolleyballDataProcessor {
       {
         tournament: "제19회 한산대첩기 전국남녀생활체육배구대회",
         division: "여자클럽 3부",
-        teamName: "창원 진해원",
+        teamName: "창원 진해한결",
         rank: 2,
       },
       {
         tournament: "제19회 한산대첩기 전국남녀생활체육배구대회",
-        division: "여자클럽 3부",
-        teamName: "창원 진해한결",
-        rank: 3,
-      },
-      {
-        tournament: "제19회 한산대첩기 전국남녀생활체육배구대회",
-        division: "여자클럽 3부",
+        division: "여자클луб 3부",
         teamName: "여수 여수시배구협회",
         rank: 3,
       },
@@ -1365,7 +1377,7 @@ export class VolleyballDataProcessor {
       },
       {
         tournament: "제3회 청풍명월 의림지배 전국 생활체육 배구대회",
-        division: "남자클럽 3부",
+        division: "남자클луб 3부",
         teamName: "청주 청풍",
         rank: 3,
       },
@@ -1446,7 +1458,7 @@ export class VolleyballDataProcessor {
       { tournament: "제36회 해림배 배구대회", division: "여자클럽 3부", teamName: "광주 GV-23", rank: 3 },
 
       // Мужской 시니어부
-      { tournament: "제36회 해림배 배구대회", division: "남자 시니어부", teamName: "광주 KST", rank: 1 },
+      { tournament: "제36회 해림배 배구대회", division: "남자 시니어부", teamName: "군산 KST", rank: 1 },
       { tournament: "제36회 해림배 배구대회", division: "남자 시니어부", teamName: "광주 SMC", rank: 2 },
       { tournament: "제36회 해림배 배구대회", division: "남자 시니어부", teamName: "광주 렛츠고", rank: 3 },
       { tournament: "제36회 해림배 배구대회", division: "남자 시니어부", teamName: "광주 빛고을", rank: 3 },
@@ -1753,7 +1765,7 @@ export class VolleyballDataProcessor {
       // Мужской клуб 3부
       { tournament: "제18회고흥우주항공배", division: "남자클럽 3부", teamName: "목포 하나", rank: 1 },
       { tournament: "제18회고흥우주항공배", division: "남자클럽 3부", teamName: "장흥 회진", rank: 2 },
-      { tournament: "제18회고흥우주항공배", division: "남자클럽 3부", teamName: "부산 신과함께", rank: 3 },
+      { tournament: "제18회고흥우주항공배", division: "남자클럽 3부", teamName: "김해 디그다", rank: 3 },
       { tournament: "제18회고흥우주항공배", division: "남자클럽 3부", teamName: "광주 썬라이즈", rank: 3 },
 
       // Женский клуб 3부
@@ -2030,7 +2042,12 @@ export class VolleyballDataProcessor {
       { teamName: "서대전 구봉", division: "여자클럽 3부", rank: 3, tournament: "제14회 진안홍삼배 전국남여배구대회" },
 
       // 여자클럽 3부 - 두 번째 그룹
-      { teamName: "광주 썬클럽", division: "여자클럽 3부", rank: 1, tournament: "제14회 진안홍삼배 전국남여배구대회" },
+      {
+        teamName: "광주 썬클럽",
+        division: "여자클럽 3부",
+        rank: 1,
+        tournament: "제14회 진안홍삼배 전국남여배구대회",
+      },
       {
         teamName: "여수시 배구협회",
         division: "여자클럽 3부",
@@ -2151,231 +2168,194 @@ export class VolleyballDataProcessor {
     ]
 
     this.addTournament("제12회 영암 월출산배 전국 남.녀 배구대회", tournament34Results, "2025.8.23.-2025.8.24.")
-  }
 
-  private getRegion(teamName: string): string {
-    if (teamName === "광주 문정") {
-      console.log("[v0] Calculating region for 광주 문정")
-    }
+    const tournament35Results: TournamentResult[] = [
+      // 남자클럽 3부
+      {
+        teamName: "서울 송파창스",
+        division: "남자클럽 3부",
+        rank: 1,
+        tournament: "2025 원주치악배 전국 생활체육 배구대회",
+      },
+      {
+        teamName: "청주 저스트플레이",
+        division: "남자클럽 3부",
+        rank: 2,
+        tournament: "2025 원주치악배 전국 생활체육 배구대회",
+      },
+      {
+        teamName: "서울 샤샤샤",
+        division: "남자클럽 3부",
+        rank: 3,
+        tournament: "2025 원주치악배 전국 생활체육 배구대회",
+      },
+      {
+        teamName: "서울 아스트로하이",
+        division: "남자클럽 3부",
+        rank: 3,
+        tournament: "2025 원주치악배 전국 생활체육 배구대회",
+      },
 
-    if (teamName.includes("광주")) {
-      if (teamName === "광주 문정") {
-        console.log("[v0] 광주 문정 matched 광주 condition, returning 전라권")
-      }
-      return "전라권"
-    }
+      // 여자클럽 3부
+      {
+        teamName: "서울 엑시토",
+        division: "여자클럽 3부",
+        rank: 1,
+        tournament: "2025 원주치악배 전국 생활체육 배구대회",
+      },
+      {
+        teamName: "서울 새로",
+        division: "여자클럽 3부",
+        rank: 2,
+        tournament: "2025 원주치악배 전국 생활체육 배구대회",
+      },
+      {
+        teamName: "서울 GVT",
+        division: "여자클럽 3부",
+        rank: 3,
+        tournament: "2025 원주치악배 전국 생활체육 배구대회",
+      },
+      {
+        teamName: "광명 DMG",
+        division: "여자클럽 3부",
+        rank: 3,
+        tournament: "2025 원주치악배 전국 생활체육 배구대회",
+      },
+    ]
 
-    if (teamName.includes("광명")) return "수도권"
-    if (teamName.includes("과천시")) return "수도권"
-    if (teamName.includes("일산")) {
-      return "수도권"
-    }
-    if (
-      teamName.includes("서울") ||
-      teamName.includes("인천") ||
-      teamName.includes("경기") ||
-      teamName.includes("수원") ||
-      teamName.includes("안양") ||
-      teamName.includes("성남") ||
-      teamName.includes("고양") ||
-      teamName.includes("용인") ||
-      teamName.includes("부천") ||
-      teamName.includes("안산") ||
-      teamName.includes("남양주") ||
-      teamName.includes("화성") ||
-      teamName.includes("평택") ||
-      teamName.includes("의정부") ||
-      teamName.includes("시흥") ||
-      teamName.includes("파주") ||
-      teamName.includes("김포") ||
-      teamName.includes("군포") ||
-      teamName.includes("오산") ||
-      teamName.includes("이천") ||
-      teamName.includes("양주") ||
-      teamName.includes("구리") ||
-      teamName.includes("안성") ||
-      teamName.includes("포천") ||
-      teamName.includes("의왕") ||
-      teamName.includes("하남") ||
-      teamName.includes("여주") ||
-      teamName.includes("양평") ||
-      teamName.includes("동두천") ||
-      teamName.includes("과천") ||
-      teamName.includes("가평") ||
-      teamName.includes("연천")
-    ) {
-      return "수도권"
-    }
-    if (
-      teamName.includes("부산") ||
-      teamName.includes("울산") ||
-      teamName.includes("대구") ||
-      teamName.includes("창원") ||
-      teamName.includes("진주") ||
-      teamName.includes("김해") ||
-      teamName.includes("포항") ||
-      teamName.includes("경주") ||
-      teamName.includes("구미") ||
-      teamName.includes("양산") ||
-      teamName.includes("거제") ||
-      teamName.includes("통영") ||
-      teamName.includes("사천") ||
-      teamName.includes("밀양") ||
-      teamName.includes("경산") ||
-      teamName.includes("안동") ||
-      teamName.includes("김천") ||
-      teamName.includes("충무") ||
-      teamName.includes("마산") ||
-      teamName.includes("진해") ||
-      teamName.includes("경남") ||
-      teamName.includes("경북") ||
-      teamName.includes("영천") ||
-      teamName.includes("상주") ||
-      teamName.includes("문경") ||
-      teamName.includes("군위") ||
-      teamName.includes("의성") ||
-      teamName.includes("청송") ||
-      teamName.includes("영양") ||
-      teamName.includes("영덕") ||
-      teamName.includes("청도") ||
-      teamName.includes("고령") ||
-      teamName.includes("성주") ||
-      teamName.includes("칠곡") ||
-      teamName.includes("예천") ||
-      teamName.includes("봉화") ||
-      teamName.includes("울진") ||
-      teamName.includes("울릉") ||
-      teamName.includes("의령") ||
-      teamName.includes("함안") ||
-      teamName.includes("창녕") ||
-      teamName.includes("고성") ||
-      teamName.includes("남해") ||
-      teamName.includes("하동") ||
-      teamName.includes("산청") ||
-      teamName.includes("함양") ||
-      teamName.includes("거창") ||
-      teamName.includes("합천")
-    ) {
-      return "경상권"
-    }
-    if (
-      teamName.includes("대전") ||
-      teamName.includes("세종") ||
-      teamName.includes("충남") ||
-      teamName.includes("충북") ||
-      teamName.includes("천안") ||
-      teamName.includes("청주") ||
-      teamName.includes("공주") ||
-      teamName.includes("보령") ||
-      teamName.includes("아산") ||
-      teamName.includes("서산") ||
-      teamName.includes("논산") ||
-      teamName.includes("계룡") ||
-      teamName.includes("당진") ||
-      teamName.includes("금산") ||
-      teamName.includes("부여") ||
-      teamName.includes("서천") ||
-      teamName.includes("청양") ||
-      teamName.includes("홍성") ||
-      teamName.includes("예산") ||
-      teamName.includes("태안") ||
-      teamName.includes("서대전") ||
-      teamName.includes("충주") ||
-      teamName.includes("제천") ||
-      teamName.includes("보은") ||
-      teamName.includes("옥천") ||
-      teamName.includes("영동") ||
-      teamName.includes("진천") ||
-      teamName.includes("괴산") ||
-      teamName.includes("음성") ||
-      teamName.includes("단양") ||
-      teamName.includes("증평")
-    ) {
-      return "충청권"
-    }
-    if (
-      teamName.includes("전주") ||
-      teamName.includes("군산") ||
-      teamName.includes("익산") ||
-      teamName.includes("정읍") ||
-      teamName.includes("남원") ||
-      teamName.includes("김제") ||
-      teamName.includes("완주") ||
-      teamName.includes("진안") ||
-      teamName.includes("무주") ||
-      teamName.includes("장수") ||
-      teamName.includes("임실") ||
-      teamName.includes("순창") ||
-      teamName.includes("고창") ||
-      teamName.includes("부안") ||
-      teamName.includes("목포") ||
-      teamName.includes("여수") ||
-      teamName.includes("순천") ||
-      teamName.includes("나주") ||
-      teamName.includes("광양") ||
-      teamName.includes("담양") ||
-      teamName.includes("곡성") ||
-      teamName.includes("구례") ||
-      teamName.includes("고흥") ||
-      teamName.includes("보성") ||
-      teamName.includes("화순") ||
-      teamName.includes("장흥") ||
-      teamName.includes("강진") ||
-      teamName.includes("해남") ||
-      teamName.includes("영암") ||
-      teamName.includes("무안") ||
-      teamName.includes("함평") ||
-      teamName.includes("영광") ||
-      teamName.includes("장성") ||
-      teamName.includes("완도") ||
-      teamName.includes("진도") ||
-      teamName.includes("신안") ||
-      teamName.includes("전남") ||
-      teamName.includes("전북")
-    ) {
-      return "전라권"
-    }
-    if (
-      teamName.includes("강원") ||
-      teamName.includes("춘천") ||
-      teamName.includes("원주") ||
-      teamName.includes("강릉") ||
-      teamName.includes("동해") ||
-      teamName.includes("태백") ||
-      teamName.includes("속초") ||
-      teamName.includes("삼척") ||
-      teamName.includes("홍천") ||
-      teamName.includes("횡성") ||
-      teamName.includes("영월") ||
-      teamName.includes("평창") ||
-      teamName.includes("정선") ||
-      teamName.includes("철원") ||
-      teamName.includes("화천") ||
-      teamName.includes("양구") ||
-      teamName.includes("인제") ||
-      teamName.includes("고성") ||
-      teamName.includes("양양")
-    ) {
-      return "강원권"
-    }
-    if (teamName.includes("제주") || teamName.includes("서귀포")) {
-      return "제주권"
-    }
-    return "기타"
-  }
+    this.addTournament("2025 원주치악배 전국 생활체육 배구대회", tournament35Results, "2025.8.30.-2025.8.31.")
 
-  // 팀 상세 정보 가져오기
-  getTeamRegion(teamName: string): string {
-    const region = this.getRegion(teamName)
-    if (teamName === "광주 문정") {
-      console.log("[v0] getTeamRegion for 광주 문정 returning:", region)
-    }
-    return region
+    const tournament36Results: TournamentResult[] = [
+      // Men's Club 3rd Division
+      {
+        teamName: "전주 V9",
+        division: "남자클럽 3부",
+        rank: 1,
+        tournament: "제1회 서천 맥문동배 생활체육 전국동호인 배구대회",
+      },
+      {
+        teamName: "강화 KST",
+        division: "남자클럽 3부",
+        rank: 2,
+        tournament: "제1회 서천 맥문동배 생활체육 전국동호인 배구대회",
+      },
+      {
+        teamName: "정읍 배사모",
+        division: "남자클럽 3부",
+        rank: 3,
+        tournament: "제1회 서천 맥문동배 생활체육 전국동호인 배구대회",
+      },
+      {
+        teamName: "태안 해파리",
+        division: "남자클럽 3부",
+        rank: 3,
+        tournament: "제1회 서천 맥문동배 생활체육 전국동호인 배구대회",
+      },
+      // Women's Club 3rd Division
+      {
+        teamName: "세종 맥스",
+        division: "여자클럽 3부",
+        rank: 1,
+        tournament: "제1회 서천 맥문동배 생활체육 전국동호인 배구대회",
+      },
+      {
+        teamName: "서울 우리하모니",
+        division: "여자클럽 3부",
+        rank: 2,
+        tournament: "제1회 서천 맥문동배 생활체육 전국동호인 배구대회",
+      },
+      {
+        teamName: "정읍시",
+        division: "여자클럽 3부",
+        rank: 3,
+        tournament: "제1회 서천 맥문동배 생활체육 전국동호인 배구대회",
+      },
+      {
+        teamName: "과천시",
+        division: "여자클럽 3부",
+        rank: 3,
+        tournament: "제1회 서천 맥문동배 생활체육 전국동호인 배구대회",
+      },
+    ]
+
+    this.addTournament("제1회 서천 맥문동배 생활체육 전국동호인 배구대회", tournament36Results, "2025.8.30.-2025.8.31.")
+
+    const tournament37Results: TournamentResult[] = [
+      {
+        tournament: "2025 강진 청자배 시니어.실버 전국남녀 배구대회",
+        division: "남자 시니어부",
+        teamName: "광주 빛고을",
+        rank: 1,
+      },
+      {
+        tournament: "2025 강진 청자배 시니어.실버 전국남녀 배구대회",
+        division: "남자 시니어부",
+        teamName: "목포 SMC",
+        rank: 2,
+      },
+      {
+        tournament: "2025 강진 청자배 시니어.실버 전국남녀 배구대회",
+        division: "남자 시니어부",
+        teamName: "남해 남면",
+        rank: 3,
+      },
+      {
+        tournament: "2025 강진 청자배 시니어.실버 전국남녀 배구대회",
+        division: "남자 시니어부",
+        teamName: "마산 아구",
+        rank: 3,
+      },
+      {
+        tournament: "2025 강진 청자배 시니어.실버 전국남녀 배구대회",
+        division: "남자 실버부",
+        teamName: "통영 실버",
+        rank: 1,
+      },
+      {
+        tournament: "2025 강진 청자배 시니어.실버 전국남녀 배구대회",
+        division: "남자 실버부",
+        teamName: "광주 한울타리",
+        rank: 2,
+      },
+      {
+        tournament: "2025 강진 청자배 시니어.실버 전국남녀 배구대회",
+        division: "남자 실버부",
+        teamName: "광주 렛츠코",
+        rank: 3,
+      },
+      {
+        tournament: "2025 강진 청자배 시니어.실버 전국남녀 배구대회",
+        division: "여자 장년부",
+        teamName: "목포 레전드",
+        rank: 1,
+      },
+      {
+        tournament: "2025 강진 청자배 시니어.실버 전국남녀 배구대회",
+        division: "여자 장년부",
+        teamName: "광주 스톰",
+        rank: 2,
+      },
+      {
+        tournament: "2025 강진 청자배 시니어.실버 전국남녀 배구대회",
+        division: "여자 장년부",
+        teamName: "목포 클럽",
+        rank: 3,
+      },
+      {
+        tournament: "2025 강진 청자배 시니어.실버 전국남녀 배구대회",
+        division: "여자 장년부",
+        teamName: "무안 생체",
+        rank: 3,
+      },
+    ]
+
+    this.addTournament("2025 강진 청자배 시니어.실버 전국남녀 배구대회", tournament37Results, "2025.8.30.-2025.8.31.")
   }
 }
 
-// 전역 데이터 프로세서 인스턴스
-export const volleyballData = new VolleyballDataProcessor()
-
-// 데이터 초기화 실행
+// Create and initialize global instance
+const volleyballData = new VolleyballDataProcessor()
 volleyballData.initializeRealData()
+
+// Export the global instance
+export { volleyballData }
