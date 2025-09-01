@@ -480,7 +480,7 @@ export class VolleyballDataProcessor {
       { tournament: "제18회 광양백운산기", division: "남자클럽 2부", teamName: "서울 차차차", rank: 3 },
 
       // 남자클럽 3부
-      { tournament: "제18회 광양백운산기", division: "남자클럽 3부", teamName: "제천 JSVC", rank: 1 },
+      { tournament: "제18회 광양백운산기", division: "남자클럽 3부", teamName: "부산 신과함께", rank: 1 },
       { tournament: "제18회 광양백운산기", division: "남자클럽 3부", teamName: "서울 샤샤샤", rank: 2 },
       { tournament: "제18회 광양백운산기", division: "남자클럽 3부", teamName: "용인 오합지존", rank: 3 },
       { tournament: "제18회 광양백운산기", division: "남자클럽 3부", teamName: "남양주배구사랑", rank: 3 },
