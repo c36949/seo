@@ -335,7 +335,7 @@ export class VolleyballDataProcessor {
         return b.runnerUps - a.runnerUps
       }
       // 3위 횟수
-      return b.thirdPlaces - b.thirdPlaces
+      return b.thirdPlaces - a.thirdPlaces
     })
 
     return sortedTeams
