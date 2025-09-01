@@ -465,34 +465,26 @@ export class VolleyballDataProcessor {
 
     this.addTournament("제3회 인제 내린천배", tournament1Results, "2025.3.8-3.9")
 
-    // Tournament 2: 제18회 광양백운산기 (2025.3.15-3.16)
+    // Tournament 2: 제18회 광양백운산기 (2025.3.29-3.30)
     const tournament2Results: TournamentResult[] = [
       // 남자 시니어부
       { tournament: "제18회 광양백운산기", division: "남자 시니어부", teamName: "목포 SMC", rank: 1 },
-      { tournament: "제18회 광양백운산기", division: "남자 시니어부", teamName: "군산 KST", rank: 2 },
-      { tournament: "제18회 광양백운산기", division: "남자 시니어부", teamName: "서울 VNUE", rank: 3 },
-      { tournament: "제18회 광양백운산기", division: "남자 시니어부", teamName: "순천배구클럽", rank: 3 },
-
-      // 남자클럽 2부
-      { tournament: "제18회 광양백운산기", division: "남자클럽 2부", teamName: "서울 엄보스", rank: 1 },
-      { tournament: "제18회 광양백운산기", division: "남자클럽 2부", teamName: "전남 LBT", rank: 2 },
-      { tournament: "제18회 광양백운산기", division: "남자클럽 2부", teamName: "서울 NWN", rank: 3 },
-      { tournament: "제18회 광양백운산기", division: "남자클럽 2부", teamName: "서울 차차차", rank: 3 },
+      { tournament: "제18회 광양백운산기", division: "남자 시니어부", teamName: "광양 옥곡", rank: 2 },
+      { tournament: "제18회 광양백운산기", division: "남자 시니어부", teamName: "해남 우리", rank: 3 },
 
       // 남자클럽 3부
       { tournament: "제18회 광양백운산기", division: "남자클럽 3부", teamName: "부산 신과함께", rank: 1 },
-      { tournament: "제18회 광양백운산기", division: "남자클럽 3부", teamName: "서울 샤샤샤", rank: 2 },
-      { tournament: "제18회 광양백운산기", division: "남자클럽 3부", teamName: "용인 오합지존", rank: 3 },
-      { tournament: "제18회 광양백운산기", division: "남자클럽 3부", teamName: "남양주배구사랑", rank: 3 },
+      { tournament: "제18회 광양백운산기", division: "남자클럽 3부", teamName: "목포 하나", rank: 2 },
+      { tournament: "제18회 광양백운산기", division: "남자클럽 3부", teamName: "순천 EST", rank: 3 },
+      { tournament: "제18회 광양백운산기", division: "남자클럽 3부", teamName: "진주 행복배구단", rank: 3 },
 
       // 여자클럽 3부
-      { tournament: "제18회 광양백운산기", division: "여자클럽 3부", teamName: "세종 맥스", rank: 1 },
-      { tournament: "제18회 광양백운산기", division: "여자클럽 3부", teamName: "서울 차차차", rank: 2 },
-      { tournament: "제18회 광양백운산기", division: "여자클럽 3부", teamName: "서울 우리하모니", rank: 3 },
-      { tournament: "제18회 광양백운산기", division: "여자클럽 3부", teamName: "서울 GVT", rank: 3 },
+      { tournament: "제18회 광양백운산기", division: "여자클럽 3부", teamName: "대전 아리", rank: 1 },
+      { tournament: "제18회 광양백운산기", division: "여자클럽 3부", teamName: "순천 유앤아이", rank: 2 },
+      { tournament: "제18회 광양백운산기", division: "여자클럽 3부", teamName: "부산 CSN", rank: 3 },
     ]
 
-    this.addTournament("제18회 광양백운산기", tournament2Results, "2025.3.15-3.16")
+    this.addTournament("제18회 광양백운산기", tournament2Results, "2025.3.29-3.30")
 
     const tournament3Results: TournamentResult[] = [
       // 남자 시니어부
