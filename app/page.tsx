@@ -239,10 +239,10 @@ function DivisionRankingTable({
     const totalThirdPlaces = divisionTeams.reduce((sum, team) => sum + team.thirdPlaces, 0)
 
     const analyzeTournamentTrends = () => {
-      const totalTournaments = 34 // Current total tournaments
-      const earlyEnd = Math.ceil(totalTournaments / 3) // 1-11
-      const midEnd = Math.ceil((totalTournaments * 2) / 3) // 12-22
-      // Late period: 23-34
+      const totalTournaments = 37 // Current total tournaments
+      const earlyEnd = Math.ceil(totalTournaments / 3) // 1-12 (12 tournaments)
+      const midEnd = Math.ceil((totalTournaments * 2) / 3) // 13-25 (13 tournaments)
+      // Late period: 26-37 (12 tournaments)
 
       const findTournamentIndex = (tournamentName: string) => {
         // First try exact match
@@ -260,7 +260,11 @@ function DivisionRankingTable({
       }
 
       const teamsWithPeriods = divisionTeams.map((team) => {
-        const earlyTournaments = team.tournaments.filter((t) => {
+        const uniqueTournaments = team.tournaments.filter(
+          (tournament, index, self) => index === self.findIndex((t) => t.tournament === tournament.tournament),
+        )
+
+        const earlyTournaments = uniqueTournaments.filter((t) => {
           const tournamentIndex = findTournamentIndex(t.tournament)
           const tournamentNumber = tournamentIndex + 1
           const isEarly = tournamentIndex !== -1 && tournamentNumber >= 1 && tournamentNumber <= earlyEnd
@@ -272,7 +276,7 @@ function DivisionRankingTable({
           return isEarly
         })
 
-        const midTournaments = team.tournaments.filter((t) => {
+        const midTournaments = uniqueTournaments.filter((t) => {
           const tournamentIndex = findTournamentIndex(t.tournament)
           const tournamentNumber = tournamentIndex + 1
           const isMid = tournamentIndex !== -1 && tournamentNumber > earlyEnd && tournamentNumber <= midEnd
@@ -284,7 +288,7 @@ function DivisionRankingTable({
           return isMid
         })
 
-        const lateTournaments = team.tournaments.filter((t) => {
+        const lateTournaments = uniqueTournaments.filter((t) => {
           const tournamentIndex = findTournamentIndex(t.tournament)
           const tournamentNumber = tournamentIndex + 1
           const isLate = tournamentIndex !== -1 && tournamentNumber > midEnd && tournamentNumber <= totalTournaments
@@ -298,37 +302,46 @@ function DivisionRankingTable({
 
         if (team.teamName === "전주 V9" || team.teamName === "목포하나") {
           console.log(
-            `[v0] ${team.teamName} totals: early=${earlyTournaments.length}, mid=${midTournaments.length}, late=${lateTournaments.length}, total=${team.tournaments.length}`,
+            `[v0] ${team.teamName} totals: early=${earlyTournaments.length}, mid=${midTournaments.length}, late=${lateTournaments.length}, total=${uniqueTournaments.length}`,
           )
         }
 
         return {
           ...team,
+          tournaments: uniqueTournaments, // Use deduplicated tournaments
           earlyPerformance: earlyTournaments.length,
           midPerformance: midTournaments.length,
           latePerformance: lateTournaments.length,
         }
       })
 
-      // 신흥 강자 (Rising Stars) - teams with increasing performance over time
+      // 신흥 강자 (Rising Stars) - teams with significant improvement in late period
       const risingStars = teamsWithPeriods
-        .filter((team) => team.latePerformance > team.earlyPerformance && team.latePerformance >= 2)
+        .filter((team) => {
+          const improvement = team.latePerformance - team.earlyPerformance
+          return improvement >= 1 && team.latePerformance >= 2 && team.tournaments.length >= 3
+        })
         .sort((a, b) => b.latePerformance - b.earlyPerformance - (a.latePerformance - a.earlyPerformance))
         .slice(0, 3)
 
-      // 잠자는 용 (Sleeping Dragons) - teams with early success but recent decline
+      // 잠자는 용 (Sleeping Dragons) - teams with early dominance but recent decline
       const sleepingDragons = teamsWithPeriods
-        .filter((team) => team.earlyPerformance > team.latePerformance && team.earlyPerformance >= 2)
+        .filter((team) => {
+          const decline = team.earlyPerformance - team.latePerformance
+          return decline >= 1 && team.earlyPerformance >= 2 && team.tournaments.length >= 3
+        })
         .sort((a, b) => b.earlyPerformance - b.latePerformance - (a.earlyPerformance - a.latePerformance))
         .slice(0, 3)
 
-      // 꾸준함 지수 (Consistency Index) - teams with steady performance across all periods
+      // 꾸준함 지수 (Consistency Index) - teams with balanced performance across all periods
       const consistentPerformers = teamsWithPeriods
         .filter((team) => {
           const performances = [team.earlyPerformance, team.midPerformance, team.latePerformance]
           const maxDiff = Math.max(...performances) - Math.min(...performances)
-          return maxDiff <= 1 && team.tournaments.length >= 3
+          const totalPerformance = team.tournaments.length
+          return maxDiff <= 1 && totalPerformance >= 4 && Math.min(...performances) >= 1
         })
+        .sort((a, b) => b.tournaments.length - a.tournaments.length)
         .slice(0, 3)
 
       return { risingStars, sleepingDragons, consistentPerformers, earlyEnd, midEnd, totalTournaments }
