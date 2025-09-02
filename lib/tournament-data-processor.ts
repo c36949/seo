@@ -957,9 +957,14 @@ export class VolleyballDataProcessor {
 
       // 남자클럽 3부 - 두 번째 그룹
       { tournament: "제3회 단양 만천하 스카이배", division: "남자클럽 3부", teamName: "서울 송파창스", rank: 1 },
-      { tournament: "제3회 단양 만천하 스카이배", division: "남자클럽 3부", teamName: "서울 TEAM KCK", rank: 2 },
-      { tournament: "제3회 단양 만천하 스카이배", division: "남자클럽 3부", teamName: "서울 중랑구", rank: 3 },
+      { tournament: "제3회 단양 만천하 스카이배", division: "남자클럽 3부", teamName: "서울 중랑구", rank: 2 },
+      { tournament: "제3회 단양 만천하 스카이배", division: "남자클럽 3부", teamName: "전주 하랑", rank: 3 },
       { tournament: "제3회 단양 만천하 스카이배", division: "남자클럽 3부", teamName: "서울 서초배사모", rank: 3 },
+
+      // 남자클럽 3부 - 세 번째 그룹 (추가된 KCK 준우승 결과)
+      { tournament: "제3회 단양 만천하 스카이배", division: "남자클럽 3부", teamName: "서울 TEAM KCK", rank: 2 },
+
+      { tournament: "제3회 단양 만천하 스카이배", division: "남자클럽 3부", teamName: "안산 WE라온", rank: 3 },
 
       // 남자 대학부
       { tournament: "제3회 단양 만천하 스카이배", division: "남자 대학부", teamName: "국민대 VAT", rank: 1 },
@@ -979,6 +984,12 @@ export class VolleyballDataProcessor {
       { tournament: "제3회 단양 만천하 스카이배", division: "여자클럽 3부", teamName: "서울 앞라대구클럽", rank: 3 },
       { tournament: "제3회 단양 만천하 스카이배", division: "여자클럽 3부", teamName: "하남 유미온", rank: 3 },
 
+      // 여자클럽 3부 - 세 번째 그룹
+      { tournament: "제3회 단양 만천하 스카이배", division: "여자클럽 3부", teamName: "대전 아리", rank: 1 },
+      { tournament: "제3회 단양 만천하 스카이배", division: "여자클럽 3부", teamName: "서울 우리하모니", rank: 2 },
+      { tournament: "제3회 단양 만천하 스카이배", division: "여자클럽 3부", teamName: "서울 VNUE", rank: 3 },
+      { tournament: "제3회 단양 만천하 스카이배", division: "여자클럽 3부", teamName: "강릉 율곡클럽", rank: 3 },
+
       // 여자 대학부
       { tournament: "제3회 단양 만천하 스카이배", division: "여자 대학부", teamName: "성신여대 하랑", rank: 1 },
       { tournament: "제3회 단양 만천하 스카이배", division: "여자 대학부", teamName: "삼육대 SU-WINGS", rank: 2 },
@@ -989,13 +1000,13 @@ export class VolleyballDataProcessor {
     this.addTournament("제3회 단양 만천하 스카이배", tournament17Results, "2025.6.6.-2025.6.8.")
 
     const tournament18Results: TournamentResult[] = [
-      // 남자클럽 3부
+      // Мужской клуб 3부
       { tournament: "제2회보성녹차배", division: "남자클럽 3부", teamName: "진주교대OB", rank: 1 },
       { tournament: "제2회보성녹차배", division: "남자클럽 3부", teamName: "목포 하나", rank: 2 },
       { tournament: "제2회보성녹차배", division: "남자클럽 3부", teamName: "목포 문공", rank: 3 },
       { tournament: "제2회보성녹차배", division: "남자클럽 3부", teamName: "거창 가가가가", rank: 3 },
 
-      // 여자클럽 3부
+      // Женский клуб 3부
       { tournament: "제2회보성녹차배", division: "여자클럽 3부", teamName: "진주 HAMO", rank: 1 },
       { tournament: "제2회보성녹차배", division: "여자클럽 3부", teamName: "광주 썬클럽", rank: 2 },
       { tournament: "제2회보성녹차배", division: "여자클럽 3부", teamName: "전주 V9", rank: 3 },
@@ -1005,7 +1016,7 @@ export class VolleyballDataProcessor {
     this.addTournament("제2회보성녹차배", tournament18Results, "2025.7.5-7.6")
 
     const tournament19Results: TournamentResult[] = [
-      // 남자클럽 2부
+      // Мужской клуб 2부
       {
         tournament: "제19회 한산대첩기 전국남녀생활체육배구대회",
         division: "남자클럽 2부",
@@ -1031,7 +1042,7 @@ export class VolleyballDataProcessor {
         rank: 3,
       },
 
-      // 남자클럽 3부 - 첫 번째 그룹
+      // Мужской клуб 3부 - 첫 번째 그룹
       {
         tournament: "제19회 한산대첩기 전국남녀생활체육배구대회",
         division: "남자클럽 3부",
@@ -1057,7 +1068,33 @@ export class VolleyballDataProcessor {
         rank: 3,
       },
 
-      // 여자클럽 3부 - 첫 번째 그룹
+      // Мужской клуб 3부 - 두 번째 그룹
+      {
+        tournament: "제19회 한산대첩기 전국남녀생활체육배구대회",
+        division: "남자클럽 3부",
+        teamName: "울산 레인보우",
+        rank: 1,
+      },
+      {
+        tournament: "제19회 한산대첩기 전국남녀생활체육배구대회",
+        division: "남자클럽 3부",
+        teamName: "창원 마산 베스트",
+        rank: 2,
+      },
+      {
+        tournament: "제19회 한산대첩기 전국남녀생활체육배구대회",
+        division: "남자클луб 3부",
+        teamName: "대구교대OB",
+        rank: 3,
+      },
+      {
+        tournament: "제19회 한산대첩기 전국남녀생활체육배구대회",
+        division: "남자클луб 3부",
+        teamName: "진주 비봉",
+        rank: 3,
+      },
+
+      // Женский клуб 3부 - 첫 번째 그룹
       {
         tournament: "제19회 한산대첩기 전국남녀생활체육배구대회",
         division: "여자클럽 3부",
@@ -1090,7 +1127,7 @@ export class VolleyballDataProcessor {
         rank: 2,
       },
 
-      // 여자클럽 3부 - 두 번째 그룹
+      // Женский клуб 3부 - 두 번째 그룹
       {
         tournament: "제19회 한산대첩기 전국남녀생활체육배구대회",
         division: "여자클럽 3부",
@@ -1105,12 +1142,12 @@ export class VolleyballDataProcessor {
       },
       {
         tournament: "제19회 한산대첩기 전국남녀생활체육배구대회",
-        division: "여자클럽 3부",
+        division: "여자클луб 3부",
         teamName: "여수 여수시배구협회",
         rank: 3,
       },
 
-      // 남자 장년부
+      // Мужской 장년부
       {
         tournament: "제19회 한산대첩기 전국남녀생활체육배구대회",
         division: "남자 장년부",
@@ -1136,7 +1173,7 @@ export class VolleyballDataProcessor {
         rank: 3,
       },
 
-      // 남자 시니어부
+      // Мужской 시니어부
       {
         tournament: "제19회 한산대첩기 전국남녀생활체육배구대회",
         division: "남자 시니어부",
@@ -1166,33 +1203,33 @@ export class VolleyballDataProcessor {
     this.addTournament("제19회 한산대첩기 전국남녀생활체육배구대회", tournament19Results, "2025.7.12-7.13")
 
     const tournament20Results: TournamentResult[] = [
-      // 남자 시니어부
+      // Мужской клуб 3부
       {
         tournament: "2025 고창군수배 전국 남녀배구대회",
-        division: "남자클럽 2부",
+        division: "남자클럽 3부",
         teamName: "전주 V9",
         rank: 1,
       },
       {
         tournament: "2025 고창군수배 전국 남녀배구대회",
-        division: "남자클럽 2부",
+        division: "남자클럽 3부",
         teamName: "목포 하나",
         rank: 2,
       },
       {
         tournament: "2025 고창군수배 전국 남녀배구대회",
-        division: "남자클럽 2부",
+        division: "남자클럽 3부",
         teamName: "전주 V9",
         rank: 3,
       },
       {
         tournament: "2025 고창군수배 전국 남녀배구대회",
-        division: "남자클럽 2부",
+        division: "남자클럽 3부",
         teamName: "광주 문정",
         rank: 3,
       },
 
-      // 여자클럽 3부
+      // Женский клуб 3부
       {
         tournament: "2025 고창군수배 전국 남녀배구대회",
         division: "여자클럽 3부",
@@ -1218,7 +1255,7 @@ export class VolleyballDataProcessor {
         rank: 3,
       },
 
-      // 남자 장년부
+      // Мужской 장년부
       {
         tournament: "2025 고창군수배 전국 남녀배구대회",
         division: "남자 장년부",
@@ -1249,7 +1286,7 @@ export class VolleyballDataProcessor {
 
     // Tournament 21: 제9회기장미역다시마배전국남.여배구대회 (2025.6.28.-2025.6.29)
     const tournament21Results: TournamentResult[] = [
-      // 남자클럽 3부
+      // Мужской клуб 3부
       { tournament: "제9회기장미역다시마배전국남.여배구대회", division: "남자클럽 3부", teamName: "전주 V9", rank: 1 },
       {
         tournament: "제9회기장미역다시마배전국남.여배구대회",
@@ -1265,7 +1302,7 @@ export class VolleyballDataProcessor {
         rank: 3,
       },
 
-      // 여자클럽 3부
+      // Женский клуб 3부
       {
         tournament: "제9회기장미역다시마배전국남.여배구대회",
         division: "여자클럽 3부",
@@ -1291,7 +1328,7 @@ export class VolleyballDataProcessor {
 
     // Tournament 22: 제3회 청풍명월 의림지배 전국 생활체육 배구대회 (2025.6.28.-2025.6.29)
     const tournament22Results: TournamentResult[] = [
-      // 남자클럽 3부 (첫 번째 그룹)
+      // Мужской клуб 3부 (첫 번째 그룹)
       {
         tournament: "제3회 청풍명월 의림지배 전국 생활체육 배구대회",
         division: "남자클럽 3부",
@@ -1317,7 +1354,7 @@ export class VolleyballDataProcessor {
         rank: 3,
       },
 
-      // 남자클럽 3부 (두 번째 그룹)
+      // Мужской клуб 3부 (두 번째 그룹)
       {
         tournament: "제3회 청풍명월 의림지배 전국 생활체육 배구대회",
         division: "남자클럽 3부",
@@ -1332,18 +1369,18 @@ export class VolleyballDataProcessor {
       },
       {
         tournament: "제3회 청풍명월 의림지배 전국 생활체육 배구대회",
-        division: "남자클럽 3부",
+        division: "남자클луб 3부",
         teamName: "청주 청풍",
         rank: 3,
       },
       {
         tournament: "제3회 청풍명월 의림지배 전국 생활체육 배구대회",
-        division: "남자클럽 3부",
+        division: "남자클луб 3부",
         teamName: "청주 저스트플레이",
         rank: 3,
       },
 
-      // 여자클럽 3부
+      // Женский клуб 3부
       {
         tournament: "제3회 청풍명월 의림지배 전국 생활체육 배구대회",
         division: "여자클럽 3부",
@@ -1369,7 +1406,7 @@ export class VolleyballDataProcessor {
         rank: 3,
       },
 
-      // 남자 장년부
+      // Мужской 장년부
       {
         tournament: "제3회 청풍명월 의림지배 전국 생활체육 배구대회",
         division: "남자 장년부",
@@ -1400,19 +1437,19 @@ export class VolleyballDataProcessor {
 
     // Tournament 23: 제36회 해림배 배구대회
     const tournament23Results: TournamentResult[] = [
-      // 남자클럽 3부
+      // Мужской клуб 3부
       { tournament: "제36회 해림배 배구대회", division: "남자클럽 3부", teamName: "목포 하나", rank: 1 },
       { tournament: "제36회 해림배 배구대회", division: "남자클럽 3부", teamName: "목포 열공", rank: 2 },
       { tournament: "제36회 해림배 배구대회", division: "남자클럽 3부", teamName: "목포 낭만", rank: 3 },
       { tournament: "제36회 해림배 배구대회", division: "남자클럽 3부", teamName: "나주 일출", rank: 3 },
 
-      // 여자클럽 3부
+      // Женский клуб 3부
       { tournament: "제36회 해림배 배구대회", division: "여자클럽 3부", teamName: "광주 썬클럽", rank: 1 },
       { tournament: "제36회 해림배 배구대회", division: "여자클럽 3부", teamName: "전주 토리", rank: 2 },
       { tournament: "제36회 해림배 배구대회", division: "여자클럽 3부", teamName: "여수 시니어", rank: 3 },
       { tournament: "제36회 해림배 배구대회", division: "여자클럽 3부", teamName: "광주 GV-23", rank: 3 },
 
-      // 남자 시니어부
+      // Мужской 시니어부
       { tournament: "제36회 해림배 배구대회", division: "남자 시니어부", teamName: "군산 KST", rank: 1 },
       { tournament: "제36회 해림배 배구대회", division: "남자 시니어부", teamName: "광주 SMC", rank: 2 },
       { tournament: "제36회 해림배 배구대회", division: "남자 시니어부", teamName: "광주 렛츠고", rank: 3 },
@@ -1423,7 +1460,7 @@ export class VolleyballDataProcessor {
 
     // Tournament 24: 2025년 안산 상록수 9인제 남·여 배구대회
     const tournament24Results: TournamentResult[] = [
-      // 남자클럽 3부
+      // Мужской клуб 3부
       {
         tournament: "2025년 안산 상록수 9인제 남·여 배구대회",
         division: "남자클럽 3부",
@@ -1449,7 +1486,7 @@ export class VolleyballDataProcessor {
         rank: 3,
       },
 
-      // 여자클럽 3부
+      // Женский клуб 3부
       {
         tournament: "2025년 안산 상록수 9인제 남·여 배구대회",
         division: "여자클럽 3부",
@@ -1475,7 +1512,7 @@ export class VolleyballDataProcessor {
         rank: 3,
       },
 
-      // 여자 장년부
+      // Женский 장년부
       {
         tournament: "2025년 안산 상록수 9인제 남·여 배구대회",
         division: "여자 장년부",
@@ -1501,7 +1538,7 @@ export class VolleyballDataProcessor {
 
     // Tournament 25: 제7회 남원춘향배 전국남녀 배구대회
     const tournament25Results: TournamentResult[] = [
-      // 남자 시니어부
+      // Мужской 시니어부
       {
         tournament: "제7회 남원춘향배 전국남녀 배구대회",
         division: "남자 시니어부",
@@ -1527,7 +1564,7 @@ export class VolleyballDataProcessor {
         rank: 3,
       },
 
-      // 남자 장년부
+      // Мужской 장년부
       {
         tournament: "제7회 남원춘향배 전국남녀 배구대회",
         division: "남자 장년부",
@@ -1553,7 +1590,7 @@ export class VolleyballDataProcessor {
         rank: 3,
       },
 
-      // 남자 클럽 3부
+      // Мужской клуб 3부
       {
         tournament: "제7회 남원춘향배 전국남녀 배구대회",
         division: "남자클럽 3부",
@@ -1579,7 +1616,7 @@ export class VolleyballDataProcessor {
         rank: 3,
       },
 
-      // 여자클럽 3부
+      // Женский клуб 3부
       {
         tournament: "제7회 남원춘향배 전국남녀 배구대회",
         division: "여자클럽 3부",
@@ -1605,7 +1642,7 @@ export class VolleyballDataProcessor {
         rank: 3,
       },
 
-      // 남자 클럽 2부
+      // Мужской клуб 2부
       {
         tournament: "제7회 남원춘향배 전국남녀 배구대회",
         division: "남자클럽 2부",
@@ -1636,25 +1673,25 @@ export class VolleyballDataProcessor {
 
     // 제2회 영양 별천지배 스포츠클럽 배구대회 (2025.7.5-7.6)
     const tournament26Results: TournamentResult[] = [
-      // 남자 시니어부
+      // Мужской 시니어부
       { tournament: "제2회 영양 별천지배", division: "남자 시니어부", teamName: "남양주 배구사랑", rank: 1 },
       { tournament: "제2회 영양 별천지배", division: "남자 시니어부", teamName: "수원 유에이스", rank: 2 },
       { tournament: "제2회 영양 별천지배", division: "남자 시니어부", teamName: "구미 HVC", rank: 3 },
       { tournament: "제2회 영양 별천지배", division: "남자 시니어부", teamName: "서울 한강", rank: 3 },
 
-      // 여자 장년부
+      // Женский 장년부
       { tournament: "제2회 영양 별천지배", division: "여자 장년부", teamName: "부산 비전", rank: 1 },
       { tournament: "제2회 영양 별천지배", division: "여자 장년부", teamName: "남양주 나인걸스", rank: 2 },
       { tournament: "제2회 영양 별천지배", division: "여자 장년부", teamName: "구미 하비홀릭", rank: 3 },
       { tournament: "제2회 영양 별천지배", division: "여자 장년부", teamName: "남양주 나인폭스", rank: 3 },
 
-      // 남자 클럽 3부
+      // Мужской клуб 3부
       { tournament: "제2회 영양 별천지배", division: "남자클럽 3부", teamName: "청주 저스트플레이", rank: 1 },
       { tournament: "제2회 영양 별천지배", division: "남자클럽 3부", teamName: "대전 디그팡팡", rank: 2 },
       { tournament: "제2회 영양 별천지배", division: "남자클럽 3부", teamName: "남양주배구사랑", rank: 3 },
       { tournament: "제2회 영양 별천지배", division: "남자클럽 3부", teamName: "부산배구클럽", rank: 3 },
 
-      // 여자클럽 3부
+      // Женский клуб 3부
       { tournament: "제2회 영양 별천지배", division: "여자클럽 3부", teamName: "대구 브이라인", rank: 1 },
       { tournament: "제2회 영양 별천지배", division: "여자클럽 3부", teamName: "대전SVA", rank: 2 },
       { tournament: "제2회 영양 별천지배", division: "여자클럽 3부", teamName: "일산 라라클럽", rank: 3 },
@@ -1665,7 +1702,7 @@ export class VolleyballDataProcessor {
 
     // 제19회 문화체육관광부장관기 전국생활체육배구대회 (2025.7.12-7.13)
     const tournament27Results: TournamentResult[] = [
-      // 남자클럽 3부 (첫 번째 그룹)
+      // Мужской клуб 3부 (첫 번째 그룹)
       { tournament: "제19회 문화체육관광부장관기", division: "남자클럽 3부", teamName: "대구교대OB", rank: 1 },
       { tournament: "제19회 문화체육관광부장관기", division: "남자클럽 3부", teamName: "구미 거북클럽", rank: 2 },
       { tournament: "제19회 문화체육관광부장관기", division: "남자클럽 3부", teamName: "구미 HVC", rank: 3 },
@@ -1676,37 +1713,37 @@ export class VolleyballDataProcessor {
         rank: 3,
       },
 
-      // 남자클럽 3부 (두 번째 그룹)
+      // Мужской клуб 3부 (두 번째 그룹)
       { tournament: "제19회 문화체육관광부장관기", division: "남자클럽 3부", teamName: "부산 연산", rank: 1 },
       { tournament: "제19회 문화체육관광부장관기", division: "남자클럽 3부", teamName: "청주 저스트플레이", rank: 2 },
       { tournament: "제19회 문화체육관광부장관기", division: "남자클럽 3부", teamName: "서울 DGZ", rank: 3 },
       { tournament: "제19회 문화체육관광부장관기", division: "남자클럽 3부", teamName: "울산 레인보우", rank: 3 },
 
-      // 남자 장년부
+      // Мужской 장년부
       { tournament: "제19회 문화체육관광부장관기", division: "남자 장년부", teamName: "울산 레인보우", rank: 1 },
       { tournament: "제19회 문화체육관광부장관기", division: "남자 장년부", teamName: "서울배구클럽", rank: 2 },
       { tournament: "제19회 문화체육관광부장관기", division: "남자 장년부", teamName: "대전 마벤져스", rank: 3 },
       { tournament: "제19회 문화체육관광부장관기", division: "남자 장년부", teamName: "부산 연산", rank: 3 },
 
-      // 여자클럽 3부 (첫 번째 그룹)
+      // Женский клуб 3부 (첫 번째 그룹)
       { tournament: "제19회 문화체육관광부장관기", division: "여자클럽 3부", teamName: "대구교대OB", rank: 1 },
       { tournament: "제19회 문화체육관광부장관기", division: "여자클럽 3부", teamName: "서울 네오클럽", rank: 2 },
       { tournament: "제19회 문화체육관광부장관기", division: "여자클럽 3부", teamName: "울진 마더 WIN", rank: 3 },
       { tournament: "제19회 문화체육관광부장관기", division: "여자클럽 3부", teamName: "서울 차차차", rank: 3 },
 
-      // 여자클럽 3부 (두 번째 그룹)
+      // Женский клуб 3부 (두 번째 그룹)
       { tournament: "제19회 문화체육관광부장관기", division: "여자클럽 3부", teamName: "청주 게스트하우스", rank: 1 },
       { tournament: "제19회 문화체육관광부장관기", division: "여자클럽 3부", teamName: "서울 DGZ", rank: 2 },
       { tournament: "제19회 문화체육관광부장관기", division: "여자클럽 3부", teamName: "서울배구클럽", rank: 3 },
       { tournament: "제19회 문화체육관광부장관기", division: "여자클럽 3부", teamName: "구미 하비홀릭", rank: 3 },
 
-      // 여자 장년부
+      // Женский 장년부
       { tournament: "제19회 문화체육관광부장관기", division: "여자 장년부", teamName: "서울 목동에이스", rank: 1 },
       { tournament: "제19회 문화체육관광부장관기", division: "여자 장년부", teamName: "부산 나이스", rank: 2 },
       { tournament: "제19회 문화체육관광부장관기", division: "여자 장년부", teamName: "성남시", rank: 3 },
       { tournament: "제19회 문화체육관광부장관기", division: "여자 장년부", teamName: "구미 HVC", rank: 3 },
 
-      // 남자 국제부
+      // Мужской 국제부
       { tournament: "제19회 문화체육관광부장관기", division: "남자 국제부", teamName: "김밥지옥", rank: 1 },
       { tournament: "제19회 문화체육관광부장관기", division: "남자 국제부", teamName: "베트남", rank: 2 },
       { tournament: "제19회 문화체육관광부장관기", division: "남자 국제부", teamName: "OP", rank: 3 },
@@ -1717,13 +1754,13 @@ export class VolleyballDataProcessor {
 
     // 제18회고흥우주항공배생활체육동호인배구대회 (2025.7.12-7.13)
     const tournament28Results: TournamentResult[] = [
-      // 남자클럽 3부
+      // Мужской клуб 3부
       { tournament: "제18회고흥우주항공배", division: "남자클럽 3부", teamName: "목포 하나", rank: 1 },
       { tournament: "제18회고흥우주항공배", division: "남자클럽 3부", teamName: "장흥 회진", rank: 2 },
       { tournament: "제18회고흥우주항공배", division: "남자클럽 3부", teamName: "김해 디그다", rank: 3 },
       { tournament: "제18회고흥우주항공배", division: "남자클럽 3부", teamName: "광주 썬라이즈", rank: 3 },
 
-      // 여자클럽 3부
+      // Женский клуб 3부
       { tournament: "제18회고흥우주항공배", division: "여자클럽 3부", teamName: "순천 유앤아이", rank: 1 },
       { tournament: "제18회고흥우주항공배", division: "여자클럽 3부", teamName: "목포 레전드", rank: 2 },
       { tournament: "제18회고흥우주항공배", division: "여자클럽 3부", teamName: "목포 하나", rank: 3 },
@@ -2094,6 +2131,32 @@ export class VolleyballDataProcessor {
         rank: 3,
         tournament: "제12회 영암 월출산배 전국 남.녀 배구대회",
       },
+
+      // 남자 시니어부
+      {
+        teamName: "광주 문정",
+        division: "남자 시니어부",
+        rank: 1,
+        tournament: "제12회 영암 월출산배 전국 남.녀 배구대회",
+      },
+      {
+        teamName: "광주 무등산",
+        division: "남자 시니어부",
+        rank: 2,
+        tournament: "제12회 영암 월출산배 전국 남.녀 배구대회",
+      },
+      {
+        teamName: "목포 SMC",
+        division: "남자 시니어부",
+        rank: 3,
+        tournament: "제12회 영암 월출산배 전국 남.녀 배구대회",
+      },
+      {
+        teamName: "광주 무등산",
+        division: "남자 시니어부",
+        rank: 3,
+        tournament: "제12회 영암 월출산배 전국 남.녀 배구대회",
+      },
     ]
 
     this.addTournament("제12회 영암 월출산배 전국 남.녀 배구대회", tournament34Results, "2025.8.23.-2025.8.24.")
@@ -2145,7 +2208,7 @@ export class VolleyballDataProcessor {
         tournament: "2025 원주치악배 전국 생활체육 배구대회",
       },
       {
-        teamName: "서울 DMG",
+        teamName: "광명 DMG",
         division: "여자클럽 3부",
         rank: 3,
         tournament: "2025 원주치악배 전국 생활체육 배구대회",
