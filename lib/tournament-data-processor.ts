@@ -482,6 +482,7 @@ export class VolleyballDataProcessor {
       { tournament: "제18회 광양백운산기", division: "여자클럽 3부", teamName: "대전 아리", rank: 1 },
       { tournament: "제18회 광양백운산기", division: "여자클럽 3부", teamName: "순천 유앤아이", rank: 2 },
       { tournament: "제18회 광양백운산기", division: "여자클럽 3부", teamName: "부산 CSN", rank: 3 },
+      { tournament: "제18회 광양백운산기", division: "여자클럽 3부", teamName: "김해내외배구클럽", rank: 3 },
     ]
 
     this.addTournament("제18회 광양백운산기", tournament2Results, "2025.3.29-3.30")
@@ -1451,7 +1452,7 @@ export class VolleyballDataProcessor {
 
       // Мужской 시니어부
       { tournament: "제36회 해림배 배구대회", division: "남자 시니어부", teamName: "군산 KST", rank: 1 },
-      { tournament: "제36회 해림배 배구대회", division: "남자 시니어부", teamName: "광주 SMC", rank: 2 },
+      { tournament: "제36회 해림배 배구대회", division: "남자 시니어부", teamName: "목포 SMC", rank: 2 },
       { tournament: "제36회 해림배 배구대회", division: "남자 시니어부", teamName: "광주 렛츠고", rank: 3 },
       { tournament: "제36회 해림배 배구대회", division: "남자 시니어부", teamName: "광주 빛고을", rank: 3 },
     ]
@@ -1516,10 +1517,15 @@ export class VolleyballDataProcessor {
       {
         tournament: "2025년 안산 상록수 9인제 남·여 배구대회",
         division: "여자 장년부",
-        teamName: "서울 우리하모니",
+        teamName: "서울 VTS",
         rank: 1,
       },
-      { tournament: "2025년 안산 상록수 9인제 남·여 배구대회", division: "여자 장년부", teamName: "서울 VTS", rank: 2 },
+      {
+        tournament: "2025년 안산 상록수 9인제 남·여 배구대회",
+        division: "여자 장년부",
+        teamName: "서울 우리하모니",
+        rank: 2,
+      },
       {
         tournament: "2025년 안산 상록수 9인제 남·여 배구대회",
         division: "여자 장년부",
@@ -1717,7 +1723,7 @@ export class VolleyballDataProcessor {
       { tournament: "제19회 문화체육관광부장관기", division: "남자클럽 3부", teamName: "부산 연산", rank: 1 },
       { tournament: "제19회 문화체육관광부장관기", division: "남자클럽 3부", teamName: "청주 저스트플레이", rank: 2 },
       { tournament: "제19회 문화체육관광부장관기", division: "남자클럽 3부", teamName: "서울 DGZ", rank: 3 },
-      { tournament: "제19회 문화체육관광부장관기", division: "남자클럽 3부", teamName: "울산 레인보우", rank: 3 },
+      { tournament: "제19회 문화체육관광부장관기", division: "남자클луб 3부", teamName: "울산 레인보우", rank: 3 },
 
       // Мужской 장년부
       { tournament: "제19회 문화체육관광부장관기", division: "남자 장년부", teamName: "울산 레인보우", rank: 1 },
@@ -1754,6 +1760,10 @@ export class VolleyballDataProcessor {
 
     // 제18회고흥우주항공배생활체육동호인배구대회 (2025.7.12-7.13)
     const tournament28Results: TournamentResult[] = [
+      { tournament: "제18회고흥우주항공배", division: "남자 시니어부", teamName: "전주 하나로", rank: 1 },
+      { tournament: "제18회고흥우주항공배", division: "남자 시니어부", teamName: "광주 빛고을", rank: 2 },
+      { tournament: "제18회고흥우주항공배", division: "남자 시니어부", teamName: "고흥 우주항공", rank: 3 },
+
       // Мужской клуб 3부
       { tournament: "제18회고흥우주항공배", division: "남자클럽 3부", teamName: "목포 하나", rank: 1 },
       { tournament: "제18회고흥우주항공배", division: "남자클럽 3부", teamName: "장흥 회진", rank: 2 },
@@ -2342,6 +2352,155 @@ export class VolleyballDataProcessor {
     ]
 
     this.addTournament("2025 강진 청자배 시니어.실버 전국남녀 배구대회", tournament37Results, "2025.8.30.-2025.8.31.")
+
+    const tournament38Results: TournamentResult[] = [
+      {
+        tournament: "제3회 대한스포츠클럽협회장배 전국배구대회",
+        division: "남자 실버부",
+        teamName: "광주 무등산",
+        rank: 1,
+      },
+      {
+        tournament: "제3회 대한스포츠클럽협회장배 전국배구대회",
+        division: "남자 실버부",
+        teamName: "정읍 샘골",
+        rank: 2,
+      },
+      {
+        tournament: "제3회 대한스포츠클럽협회장배 전국배구대회",
+        division: "남자 실버부",
+        teamName: "대전 배구클럽",
+        rank: 3,
+      },
+      {
+        tournament: "제3회 대한스포츠클럽협회장배 전국배구대회",
+        division: "남자 실버부",
+        teamName: "광주 한울타리",
+        rank: 3,
+      },
+      {
+        tournament: "제3회 대한스포츠클럽협회장배 전국배구대회",
+        division: "남자 시니어부",
+        teamName: "광주 빛고을",
+        rank: 1,
+      },
+      {
+        tournament: "제3회 대한스포츠클럽협회장배 전국배구대회",
+        division: "남자 시니어부",
+        teamName: "군산 KST",
+        rank: 2,
+      },
+      {
+        tournament: "제3회 대한스포츠클럽협회장배 전국배구대회",
+        division: "남자 시니어부",
+        teamName: "서울 한강",
+        rank: 3,
+      },
+      {
+        tournament: "제3회 대한스포츠클럽협회장배 전국배구대회",
+        division: "남자 시니어부",
+        teamName: "광주 독도렌트카",
+        rank: 3,
+      },
+      {
+        tournament: "제3회 대한스포츠클럽협회장배 전국배구대회",
+        division: "남자클럽 3부",
+        teamName: "전주 V9",
+        rank: 1,
+      },
+      {
+        tournament: "제3회 대한스포츠클럽협회장배 전국배구대회",
+        division: "남자클럽 3부",
+        teamName: "전주 V9",
+        rank: 2,
+      },
+      {
+        tournament: "제3회 대한스포츠클럽협회장배 전국배구대회",
+        division: "남자클럽 3부",
+        teamName: "무안 청호",
+        rank: 3,
+      },
+      {
+        tournament: "제3회 대한스포츠클럽협회장배 전국배구대회",
+        division: "남자클럽 3부",
+        teamName: "광주 블루윙즈",
+        rank: 3,
+      },
+      {
+        tournament: "제3회 대한스포츠클럽협회장배 전국배구대회",
+        division: "남자클럽 2부",
+        teamName: "대전 WITH WIN",
+        rank: 1,
+      },
+      {
+        tournament: "제3회 대한스포츠클럽협회장배 전국배구대회",
+        division: "남자클럽 2부",
+        teamName: "광주 신세대캐터링",
+        rank: 2,
+      },
+      {
+        tournament: "제3회 대한스포츠클럽협회장배 전국배구대회",
+        division: "남자클럽 2부",
+        teamName: "대전 동그라미",
+        rank: 3,
+      },
+      {
+        tournament: "제3회 대한스포츠클럽협회장배 전국배구대회",
+        division: "남자클럽 2부",
+        teamName: "순천 순광패밀리",
+        rank: 3,
+      },
+      {
+        tournament: "제3회 대한스포츠클럽협회장배 전국배구대회",
+        division: "여자 장년부",
+        teamName: "목포 레전드",
+        rank: 1,
+      },
+      {
+        tournament: "제3회 대한스포츠클럽협회장배 전국배구대회",
+        division: "여자 장년부",
+        teamName: "군산 파란",
+        rank: 2,
+      },
+      {
+        tournament: "제3회 대한스포츠클럽협회장배 전국배구대회",
+        division: "여자 장년부",
+        teamName: "광주 다이나믹",
+        rank: 3,
+      },
+      {
+        tournament: "제3회 대한스포츠클럽협회장배 전국배구대회",
+        division: "여자 장년부",
+        teamName: "광주 빛남아리",
+        rank: 3,
+      },
+      {
+        tournament: "제3회 대한스포츠클럽협회장배 전국배구대회",
+        division: "여자클럽 3부",
+        teamName: "광주 썬클럽",
+        rank: 1,
+      },
+      {
+        tournament: "제3회 대한스포츠클럽협회장배 전국배구대회",
+        division: "여자클럽 3부",
+        teamName: "전주 V9",
+        rank: 2,
+      },
+      {
+        tournament: "제3회 대한스포츠클럽협회장배 전국배구대회",
+        division: "여자클럽 3부",
+        teamName: "광주 곰과여우",
+        rank: 3,
+      },
+      {
+        tournament: "제3회 대한스포츠클럽협회장배 전국배구대회",
+        division: "여자클럽 3부",
+        teamName: "전주 토리",
+        rank: 3,
+      },
+    ]
+
+    this.addTournament("제3회 대한스포츠클럽협회장배 전국배구대회", tournament38Results, "2025.9.6.-2025.9.7.")
   }
 }
 
