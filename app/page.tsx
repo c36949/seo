@@ -23,14 +23,7 @@ interface TeamData {
   }>
 }
 
-const MENS_DIVISIONS_MOBILE = [
-  ["남자 초등부", "남자 중등부", "남자 고등부", "남자 대학부"],
-  ["남자클럽 2부", "남자클럽 3부", "남자 국제부"],
-  ["남자 장년부", "남자 시니어부", "남자 실버부"],
-  ["남자 골드실버부", "남자 황금실버부", "남자 6인제부"],
-]
-
-const MENS_DIVISIONS_PC = [
+const MENS_DIVISIONS = [
   "남자 초등부",
   "남자 중등부",
   "남자 고등부",
@@ -1414,51 +1407,27 @@ export default function VolleyballRanking() {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-orange-50">
       <header className="bg-gradient-to-r from-blue-600 via-blue-700 to-orange-600 shadow-2xl">
         <div className="container mx-auto px-4 py-6 md:py-8">
-          <div className="flex flex-col items-center justify-center mb-6 md:mb-8 space-y-4 md:flex-row md:items-center md:justify-between md:space-y-0">
-            {/* Mobile layout - side by side */}
-            <div className="flex md:hidden items-center justify-center space-x-4 w-full">
+          <div className="flex items-center justify-between mb-6 md:mb-8">
+            <div className="flex items-center space-x-4 md:space-x-6">
               <div className="flex flex-col items-center">
                 <img
                   src="/images/main-tiger-mascot.png"
                   alt="랭구랭구 Tiger Head"
-                  className="w-24 h-24 object-contain"
+                  className="w-24 h-24 md:w-40 md:h-40 object-contain"
                 />
-                <div className="text-center -mt-2">
-                  <div className="text-sm font-bold !text-white mb-1">랭구랭구</div>
-                  <div className="text-xs !text-blue-100">
-                    <span className="font-bold !text-yellow-300">랭</span>킹+배
-                    <span className="font-bold !text-yellow-300">구</span>=랭구
-                  </div>
-                </div>
-              </div>
-              <div className="text-center">
-                <h1 className="text-xl font-bold !text-white mb-1">전국 배구 클럽 랭킹</h1>
-                <p className="text-sm !text-blue-100 mb-1">National Volleyball Club Rankings</p>
-                <p className="text-xs !text-blue-200">{stats.totalTournaments}개 대회 분석 완료</p>
-              </div>
-            </div>
-
-            {/* Desktop layout - original */}
-            <div className="hidden md:flex flex-col items-center md:flex-row md:items-center md:space-x-4">
-              <div className="flex flex-col items-center">
-                <img
-                  src="/images/main-tiger-mascot.png"
-                  alt="랭구랭구 Tiger Head"
-                  className="w-52 h-52 object-contain"
-                />
-                <div className="text-center -mt-6">
-                  <div className="text-2xl font-bold !text-white mb-1">랭구랭구</div>
-                  <div className="text-sm !text-blue-100">
+                <div className="text-center -mt-1 md:-mt-4">
+                  <div className="text-xs md:text-xl font-bold !text-white mb-1">랭구랭구</div>
+                  <div className="text-xs md:text-sm !text-blue-100">
                     <span className="font-bold !text-yellow-300">랭</span>킹+배
                     <span className="font-bold !text-yellow-300">구</span>=랭구
                   </div>
                 </div>
               </div>
             </div>
-            <div className="hidden md:block text-center">
-              <h1 className="text-4xl font-bold !text-white mb-2">전국 배구 클럽 랭킹</h1>
-              <p className="text-lg !text-blue-100 mb-2">National Volleyball Club Rankings</p>
-              <p className="text-sm !text-blue-200">{stats.totalTournaments}개 대회 분석 완료</p>
+            <div className="text-center md:text-right">
+              <h1 className="text-xl md:text-4xl font-bold !text-white mb-2">전국 배구 클럽 랭킹</h1>
+              <p className="text-sm md:text-lg !text-blue-100 mb-2">National Volleyball Club Rankings</p>
+              <p className="text-xs md:text-sm !text-blue-200">{stats.totalTournaments}개 대회 분석 완료</p>
             </div>
           </div>
         </div>
@@ -1477,59 +1446,36 @@ export default function VolleyballRanking() {
               <CardContent className="p-3 md:p-4 space-y-3">
                 <div>
                   <div className="text-sm font-medium text-gray-700 mb-2">남자부</div>
-                  <div className="block md:hidden space-y-2">
-                    {MENS_DIVISIONS_MOBILE.map((row, rowIndex) => (
-                      <div key={rowIndex} className="flex flex-wrap gap-1">
-                        {row.map((division) => (
-                          <Button
-                            key={division}
-                            variant={selectedDivision === division ? "default" : "outline"}
-                            size="sm"
-                            onClick={() => setSelectedDivision(division)}
-                            className={`text-xs px-2 py-1 flex-1 min-w-0 ${
-                              selectedDivision === division
-                                ? "!bg-gradient-to-r !from-blue-500 !to-blue-700 !text-white hover:!from-blue-600 hover:!to-blue-800"
-                                : "hover:bg-blue-50"
-                            }`}
-                          >
-                            {division}
-                          </Button>
-                        ))}
-                      </div>
+                  <div className="flex flex-wrap gap-2">
+                    {MENS_DIVISIONS.map((division) => (
+                      <Button
+                        key={division}
+                        variant={selectedDivision === division ? "default" : "outline"}
+                        size="sm"
+                        onClick={() => setSelectedDivision(division)}
+                        className={`text-xs md:text-sm ${
+                          selectedDivision === division
+                            ? "!bg-gradient-to-r !from-blue-500 !to-purple-600 !text-white hover:!from-blue-600 hover:!to-purple-700"
+                            : "hover:bg-blue-50"
+                        }`}
+                      >
+                        {division}
+                      </Button>
                     ))}
-                  </div>
-                  <div className="hidden md:block">
-                    <div className="flex flex-wrap gap-2">
-                      {MENS_DIVISIONS_PC.map((division) => (
-                        <Button
-                          key={division}
-                          variant={selectedDivision === division ? "default" : "outline"}
-                          size="sm"
-                          onClick={() => setSelectedDivision(division)}
-                          className={`text-sm ${
-                            selectedDivision === division
-                              ? "!bg-gradient-to-r !from-blue-500 !to-blue-700 !text-white hover:!from-blue-600 hover:!to-blue-800"
-                              : "hover:bg-blue-50"
-                          }`}
-                        >
-                          {division}
-                        </Button>
-                      ))}
-                    </div>
                   </div>
                 </div>
                 <div>
                   <div className="text-sm font-medium text-gray-700 mb-2">여자부</div>
-                  <div className="flex flex-wrap gap-1 md:gap-2">
+                  <div className="flex flex-wrap gap-2">
                     {WOMENS_DIVISIONS.map((division) => (
                       <Button
                         key={division}
                         variant={selectedDivision === division ? "default" : "outline"}
                         size="sm"
                         onClick={() => setSelectedDivision(division)}
-                        className={`text-xs md:text-sm px-2 py-1 md:px-3 md:py-2 flex-1 md:flex-none min-w-0 ${
+                        className={`text-xs md:text-sm ${
                           selectedDivision === division
-                            ? "!bg-gradient-to-r !from-pink-500 !to-pink-700 !text-white hover:!from-pink-600 hover:!to-pink-800"
+                            ? "!bg-gradient-to-r !from-pink-500 !to-fuchsia-600 !text-white hover:!from-pink-600 hover:!to-fuchsia-700"
                             : "hover:bg-pink-50"
                         }`}
                       >
@@ -1567,7 +1513,7 @@ export default function VolleyballRanking() {
                       onClick={() => setSelectedRegion("전체권역")}
                       className={`px-4 py-2 md:px-6 md:py-3 text-sm md:text-base font-medium w-full max-w-lg ${
                         selectedRegion === "전체권역"
-                          ? "!bg-gradient-to-r !from-green-500 !to-teal-500 !text-white"
+                          ? "!bg-green-500 !text-white hover:!bg-green-600"
                           : "hover:bg-green-50 border-green-300 text-green-700"
                       }`}
                     >
@@ -1584,7 +1530,7 @@ export default function VolleyballRanking() {
                         onClick={() => setSelectedRegion(region)}
                         className={`text-xs md:text-sm px-2 py-1 md:px-4 md:py-2 h-7 md:h-10 flex-shrink-0 ${
                           selectedRegion === region
-                            ? "!bg-gradient-to-r !from-green-500 !to-teal-500 !text-white"
+                            ? "!bg-green-500 !text-white hover:!bg-green-600"
                             : "hover:bg-green-50 border-green-300 text-green-700"
                         }`}
                       >
