@@ -1415,26 +1415,50 @@ export default function VolleyballRanking() {
       <header className="bg-gradient-to-r from-blue-600 via-blue-700 to-orange-600 shadow-2xl">
         <div className="container mx-auto px-4 py-6 md:py-8">
           <div className="flex flex-col items-center justify-center mb-6 md:mb-8 space-y-4 md:flex-row md:items-center md:justify-between md:space-y-0">
-            <div className="flex flex-col items-center md:flex-row md:items-center md:space-x-4">
+            {/* Mobile layout - side by side */}
+            <div className="flex md:hidden items-center justify-center space-x-4 w-full">
               <div className="flex flex-col items-center">
                 <img
                   src="/images/main-tiger-mascot.png"
                   alt="랭구랭구 Tiger Head"
-                  className="w-32 h-32 md:w-52 md:h-52 object-contain"
+                  className="w-24 h-24 object-contain"
                 />
-                <div className="text-center -mt-2 md:-mt-6">
-                  <div className="text-sm md:text-2xl font-bold !text-white mb-1">랭구랭구</div>
-                  <div className="text-xs md:text-sm !text-blue-100">
+                <div className="text-center -mt-2">
+                  <div className="text-sm font-bold !text-white mb-1">랭구랭구</div>
+                  <div className="text-xs !text-blue-100">
+                    <span className="font-bold !text-yellow-300">랭</span>킹+배
+                    <span className="font-bold !text-yellow-300">구</span>=랭구
+                  </div>
+                </div>
+              </div>
+              <div className="text-center">
+                <h1 className="text-xl font-bold !text-white mb-1">전국 배구 클럽 랭킹</h1>
+                <p className="text-sm !text-blue-100 mb-1">National Volleyball Club Rankings</p>
+                <p className="text-xs !text-blue-200">{stats.totalTournaments}개 대회 분석 완료</p>
+              </div>
+            </div>
+
+            {/* Desktop layout - original */}
+            <div className="hidden md:flex flex-col items-center md:flex-row md:items-center md:space-x-4">
+              <div className="flex flex-col items-center">
+                <img
+                  src="/images/main-tiger-mascot.png"
+                  alt="랭구랭구 Tiger Head"
+                  className="w-52 h-52 object-contain"
+                />
+                <div className="text-center -mt-6">
+                  <div className="text-2xl font-bold !text-white mb-1">랭구랭구</div>
+                  <div className="text-sm !text-blue-100">
                     <span className="font-bold !text-yellow-300">랭</span>킹+배
                     <span className="font-bold !text-yellow-300">구</span>=랭구
                   </div>
                 </div>
               </div>
             </div>
-            <div className="text-center">
-              <h1 className="text-2xl md:text-4xl font-bold !text-white mb-2">전국 배구 클럽 랭킹</h1>
-              <p className="text-sm md:text-lg !text-blue-100 mb-2">National Volleyball Club Rankings</p>
-              <p className="text-xs md:text-sm !text-blue-200">{stats.totalTournaments}개 대회 분석 완료</p>
+            <div className="hidden md:block text-center">
+              <h1 className="text-4xl font-bold !text-white mb-2">전국 배구 클럽 랭킹</h1>
+              <p className="text-lg !text-blue-100 mb-2">National Volleyball Club Rankings</p>
+              <p className="text-sm !text-blue-200">{stats.totalTournaments}개 대회 분석 완료</p>
             </div>
           </div>
         </div>
@@ -1455,16 +1479,16 @@ export default function VolleyballRanking() {
                   <div className="text-sm font-medium text-gray-700 mb-2">남자부</div>
                   <div className="block md:hidden space-y-2">
                     {MENS_DIVISIONS_MOBILE.map((row, rowIndex) => (
-                      <div key={rowIndex} className="flex flex-wrap gap-2">
+                      <div key={rowIndex} className="flex flex-wrap gap-1">
                         {row.map((division) => (
                           <Button
                             key={division}
                             variant={selectedDivision === division ? "default" : "outline"}
                             size="sm"
                             onClick={() => setSelectedDivision(division)}
-                            className={`text-xs ${
+                            className={`text-xs px-2 py-1 flex-1 min-w-0 ${
                               selectedDivision === division
-                                ? "!bg-blue-600 !text-white hover:!bg-blue-700"
+                                ? "!bg-gradient-to-r !from-blue-500 !to-blue-700 !text-white hover:!from-blue-600 hover:!to-blue-800"
                                 : "hover:bg-blue-50"
                             }`}
                           >
@@ -1484,7 +1508,7 @@ export default function VolleyballRanking() {
                           onClick={() => setSelectedDivision(division)}
                           className={`text-sm ${
                             selectedDivision === division
-                              ? "!bg-blue-600 !text-white hover:!bg-blue-700"
+                              ? "!bg-gradient-to-r !from-blue-500 !to-blue-700 !text-white hover:!from-blue-600 hover:!to-blue-800"
                               : "hover:bg-blue-50"
                           }`}
                         >
@@ -1496,16 +1520,16 @@ export default function VolleyballRanking() {
                 </div>
                 <div>
                   <div className="text-sm font-medium text-gray-700 mb-2">여자부</div>
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-1 md:gap-2">
                     {WOMENS_DIVISIONS.map((division) => (
                       <Button
                         key={division}
                         variant={selectedDivision === division ? "default" : "outline"}
                         size="sm"
                         onClick={() => setSelectedDivision(division)}
-                        className={`text-xs md:text-sm ${
+                        className={`text-xs md:text-sm px-2 py-1 md:px-3 md:py-2 flex-1 md:flex-none min-w-0 ${
                           selectedDivision === division
-                            ? "!bg-pink-600 !text-white hover:!bg-pink-700"
+                            ? "!bg-gradient-to-r !from-pink-500 !to-pink-700 !text-white hover:!from-pink-600 hover:!to-pink-800"
                             : "hover:bg-pink-50"
                         }`}
                       >
