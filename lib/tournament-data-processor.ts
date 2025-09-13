@@ -1,4 +1,7 @@
 // 전국 배구대회 결과 데이터 처리 시스템
+import { tournament41Results } from "./tournament41results"
+import { tournament42Results } from "./tournament42results"
+
 export interface TournamentResult {
   tournament: string
   division: string
@@ -1239,7 +1242,7 @@ export class VolleyballDataProcessor {
       },
       {
         tournament: "2025 고창군수배 전국 남녀배구대회",
-        division: "여자클럽 3부",
+        division: "여자클луб 3부",
         teamName: "목포 레전드",
         rank: 2,
       },
@@ -2062,7 +2065,6 @@ export class VolleyballDataProcessor {
         rank: 3,
         tournament: "제14회 진안홍삼배 전국남여배구대회",
       },
-      { teamName: "군산 서로엘", division: "여자클럽 3부", rank: 3, tournament: "제14회 진안홍삼배 전국남여배구대회" },
     ]
 
     this.addTournament("제14회 진안홍삼배 전국남여배구대회", tournament32Results, "2025.8.16.-2025.8.17.")
@@ -2501,12 +2503,321 @@ export class VolleyballDataProcessor {
     ]
 
     this.addTournament("제3회 대한스포츠클럽협회장배 전국배구대회", tournament38Results, "2025.9.6.-2025.9.7.")
+
+    const tournament39Results: TournamentResult[] = [
+      {
+        tournament: "2025 대한배구협회장기 전국생활체육배구대회",
+        division: "남자 중등부",
+        teamName: "천안 TEAM CUBE",
+        rank: 1,
+      },
+      {
+        tournament: "2025 대한배구협회장기 전국생활체육배구대회",
+        division: "남자 중등부",
+        teamName: "인천 계산 VC",
+        rank: 2,
+      },
+      {
+        tournament: "2025 대한배구협회장기 전국생활체육배구대회",
+        division: "남자 중등부",
+        teamName: "서울 이츠발리",
+        rank: 3,
+      },
+      {
+        tournament: "2025 대한배구협회장기 전국생활체육배구대회",
+        division: "남자 중등부",
+        teamName: "하남 미사 유스",
+        rank: 3,
+      },
+      {
+        tournament: "2025 대한배구협회장기 전국생활체육배구대회",
+        division: "여자 중등부",
+        teamName: "서울 TEAM WITH",
+        rank: 1,
+      },
+      {
+        tournament: "2025 대한배구협회장기 전국생활체육배구대회",
+        division: "여자 중등부",
+        teamName: "용인 JB스포츠",
+        rank: 2,
+      },
+      {
+        tournament: "2025 대한배구협회장기 전국생활체육배구대회",
+        division: "여자 중등부",
+        teamName: "서울 ESTEEM 잠실",
+        rank: 3,
+      },
+      {
+        tournament: "2025 대한배구협회장기 전국생활체육배구대회",
+        division: "여자 중등부",
+        teamName: "서울 TEAM 강남",
+        rank: 3,
+      },
+      {
+        tournament: "2025 대한배구협회장기 전국생활체육배구대회",
+        division: "남자 고등부",
+        teamName: "서울 TEAM 강남",
+        rank: 1,
+      },
+      {
+        tournament: "2025 대한배구협회장기 전국생활체육배구대회",
+        division: "남자 고등부",
+        teamName: "서울 에이스 발리볼",
+        rank: 2,
+      },
+      {
+        tournament: "2025 대한배구협회장기 전국생활체육배구대회",
+        division: "남자 고등부",
+        teamName: "김포 제일고",
+        rank: 3,
+      },
+      {
+        tournament: "2025 대한배구협회장기 전국생활체육배구대회",
+        division: "남자 고등부",
+        teamName: "서울 우리카드 유스",
+        rank: 3,
+      },
+      {
+        tournament: "2025 대한배구협회장기 전국생활체육배구대회",
+        division: "여자 고등부",
+        teamName: "서울 TEAM WITH",
+        rank: 1,
+      },
+      {
+        tournament: "2025 대한배구협회장기 전국생활체육배구대회",
+        division: "여자 고등부",
+        teamName: "서울 IMV",
+        rank: 2,
+      },
+      {
+        tournament: "2025 대한배구협회장기 전국생활체육배구대회",
+        division: "여자 고등부",
+        teamName: "서울 ESTEEM",
+        rank: 3,
+      },
+      {
+        tournament: "2025 대한배구협회장기 전국생활체육배구대회",
+        division: "여자 고등부",
+        teamName: "서울 TEAM 한남",
+        rank: 3,
+      },
+      {
+        tournament: "2025 대한배구협회장기 전국생활체육배구대회",
+        division: "남자클럽 3부",
+        teamName: "서울 TEAM WITH",
+        rank: 1,
+      },
+      {
+        tournament: "2025 대한배구협회장기 전국생활체육배구대회",
+        division: "남자클럽 3부",
+        teamName: "서울 ASRTOHIGH",
+        rank: 2,
+      },
+      {
+        tournament: "2025 대한배구협회장기 전국생활체육배구대회",
+        division: "남자클럽 3부",
+        teamName: "서울TEAM KCK",
+        rank: 3,
+      },
+      {
+        tournament: "2025 대한배구협회장기 전국생활체육배구대회",
+        division: "남자클럽 3부",
+        teamName: "서울 알파배구클럽",
+        rank: 3,
+      },
+      {
+        tournament: "2025 대한배구협회장기 전국생활체육배구대회",
+        division: "여자클럽 3부",
+        teamName: "용인 티토스",
+        rank: 1,
+      },
+      {
+        tournament: "2025 대한배구협회장기 전국생활체육배구대회",
+        division: "여자클럽 3부",
+        teamName: "서울대학교",
+        rank: 2,
+      },
+      {
+        tournament: "2025 대한배구협회장기 전국생활체육배구대회",
+        division: "여자클럽 3부",
+        teamName: "인천 PVC",
+        rank: 3,
+      },
+      {
+        tournament: "2025 대한배구협회장기 전국생활체육배구대회",
+        division: "여자클럽 3부",
+        teamName: "제천 유플러스",
+        rank: 3,
+      },
+    ]
+
+    this.addTournament("2025 대한배구협회장기 전국생활체육배구대회", tournament39Results, "2025.4.25.-2025.4.27.")
+
+    const tournament40Results: TournamentResult[] = [
+      // 남자 초등부
+      {
+        division: "남자 초등부",
+        teamName: "서산 성연초",
+        rank: 1,
+        tournament: "2025 대한배구협회장기 전국유소년배구대회",
+      },
+      {
+        division: "남자 초등부",
+        teamName: "당진 대덕",
+        rank: 2,
+        tournament: "2025 대한배구협회장기 전국유소년배구대회",
+      },
+      {
+        division: "남자 초등부",
+        teamName: "서울 THE VOLLEYBALL ACADEMY",
+        rank: 3,
+        tournament: "2025 대한배구협회장기 전국유소년배구대회",
+      },
+      {
+        division: "남자 초등부",
+        teamName: "함안 가야초",
+        rank: 3,
+        tournament: "2025 대한배구협회장기 전국유소년배구대회",
+      },
+
+      // 여자 초등부
+      {
+        division: "여자 초등부",
+        teamName: "당진 기지초",
+        rank: 1,
+        tournament: "2025 대한배구협회장기 전국유소년배구대회",
+      },
+      {
+        division: "여자 초등부",
+        teamName: "철원 와수초",
+        rank: 2,
+        tournament: "2025 대한배구협회장기 전국유소년배구대회",
+      },
+      {
+        division: "여자 초등부",
+        teamName: "경산 평산초",
+        rank: 3,
+        tournament: "2025 대한배구협회장기 전국유소년배구대회",
+      },
+      {
+        division: "여자 초등부",
+        teamName: "부산 가평초",
+        rank: 3,
+        tournament: "2025 대한배구협회장기 전국유소년배구대회",
+      },
+
+      // 남자 중등부
+      {
+        division: "남자 중등부",
+        teamName: "고양 하이발리",
+        rank: 1,
+        tournament: "2025 대한배구협회장기 전국유소년배구대회",
+      },
+      {
+        division: "남자 중등부",
+        teamName: "음성 한일중",
+        rank: 2,
+        tournament: "2025 대한배구협회장기 전국유소년배구대회",
+      },
+      {
+        division: "남자 중등부",
+        teamName: "서울 광진클럽",
+        rank: 3,
+        tournament: "2025 대한배구협회장기 전국유소년배구대회",
+      },
+      {
+        division: "남자 중등부",
+        teamName: "서울 NVC",
+        rank: 3,
+        tournament: "2025 대한배구협회장기 전국유소년배구대회",
+      },
+
+      // 여자 중등부
+      {
+        division: "여자 중등부",
+        teamName: "함안여중",
+        rank: 1,
+        tournament: "2025 대한배구협회장기 전국유소년배구대회",
+      },
+      {
+        division: "여자 중등부",
+        teamName: "인천 PVC",
+        rank: 2,
+        tournament: "2025 대한배구협회장기 전국유소년배구대회",
+      },
+      {
+        division: "여자 중등부",
+        teamName: "인천 송도 VC",
+        rank: 3,
+        tournament: "2025 대한배구협회장기 전국유소년배구대회",
+      },
+      {
+        division: "여자 중등부",
+        teamName: "서울 TEAM 강남",
+        rank: 3,
+        tournament: "2025 대한배구협회장기 전국유소년배구대회",
+      },
+
+      // 남자 고등부
+      {
+        division: "남자 고등부",
+        teamName: "이천 JVC",
+        rank: 1,
+        tournament: "2025 대한배구협회장기 전국유소년배구대회",
+      },
+      {
+        division: "남자 고등부",
+        teamName: "서울 TEAM 강남",
+        rank: 2,
+        tournament: "2025 대한배구협회장기 전국유소년배구대회",
+      },
+      {
+        division: "남자 고등부",
+        teamName: "서울 우리카드 유스",
+        rank: 3,
+        tournament: "2025 대한배구협회장기 전국유소년배구대회",
+      },
+      {
+        division: "남자 고등부",
+        teamName: "천안 TEAM CUBE",
+        rank: 3,
+        tournament: "2025 대한배구협회장기 전국유소년배구대회",
+      },
+
+      // 여자 고등부
+      {
+        division: "여자 고등부",
+        teamName: "서울 TEAM WITH",
+        rank: 1,
+        tournament: "2025 대한배구협회장기 전국유소년배구대회",
+      },
+      {
+        division: "여자 고등부",
+        teamName: "서울 IMV",
+        rank: 2,
+        tournament: "2025 대한배구협회장기 전국유소년배구대회",
+      },
+      {
+        division: "여자 고등부",
+        teamName: "서울 TEAM 강남",
+        rank: 3,
+        tournament: "2025 대한배구협회장기 전국유소년배구대회",
+      },
+      {
+        division: "여자 고등부",
+        teamName: "서울 아스트로하이",
+        rank: 3,
+        tournament: "2025 대한배구협회장기 전국유소년배구대회",
+      },
+    ]
+
+    this.addTournament("2025 대한배구협회장기 전국유소년배구대회", tournament40Results)
+
+    this.addTournament("2025 대한체육회장기 전국생활체육배구대회", tournament41Results, "2025.11.1-11.2")
+    this.addTournament("제6회 진안마이산배 시니어ㆍ실버 전국남여 배구대회", tournament42Results, "2025.11.15-11.16")
   }
 }
 
-// Create and initialize global instance
-const volleyballData = new VolleyballDataProcessor()
+export const volleyballData = new VolleyballDataProcessor()
 volleyballData.initializeRealData()
-
-// Export the global instance
-export { volleyballData }
+export default volleyballData

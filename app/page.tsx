@@ -1401,6 +1401,7 @@ export default function VolleyballRanking() {
   }
 
   const divisions = volleyballData.getAllDivisions()
+  const stats = volleyballData.getTournamentStats()
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-orange-50">
@@ -1415,18 +1416,18 @@ export default function VolleyballRanking() {
                   className="w-32 h-32 md:w-52 md:h-52 object-contain"
                 />
                 <div className="text-center -mt-2 md:-mt-6">
-                  <div className="text-sm md:text-2xl font-bold text-white mb-1">랭구랭구</div>
-                  <div className="text-xs md:text-sm text-blue-100">
-                    <span className="font-bold text-yellow-300">랭</span>킹+배
-                    <span className="font-bold text-yellow-300">구</span>=랭구
+                  <div className="text-sm md:text-2xl font-bold !text-white mb-1">랭구랭구</div>
+                  <div className="text-xs md:text-sm !text-blue-100">
+                    <span className="font-bold !text-yellow-300">랭</span>킹+배
+                    <span className="font-bold !text-yellow-300">구</span>=랭구
                   </div>
                 </div>
               </div>
-              <div>
-                <h1 className="text-xl md:text-4xl font-bold text-white mb-1">전국 배구 클럽 랭킹</h1>
-                <p className="text-blue-100 text-xs md:text-lg">National Volleyball Club Rankings</p>
-                <p className="text-blue-200 text-xs md:text-sm">34개 대회 분석 완료</p>
-              </div>
+            </div>
+            <div className="text-center md:text-right">
+              <h1 className="text-2xl md:text-4xl font-bold !text-white mb-2">전국 배구 클럽 랭킹</h1>
+              <p className="text-sm md:text-lg !text-blue-100 mb-2">National Volleyball Club Rankings</p>
+              <p className="text-xs md:text-sm !text-blue-200">{stats.totalTournaments}개 대회 분석 완료</p>
             </div>
           </div>
         </div>
@@ -1436,10 +1437,10 @@ export default function VolleyballRanking() {
         {currentView === "home" && dataLoaded && (
           <div className="space-y-4 md:space-y-6">
             <Card className="shadow-xl border-0">
-              <CardHeader className="bg-gradient-to-r from-blue-600 via-purple-600 to-orange-600 text-white p-3 md:p-4">
+              <CardHeader className="!bg-gradient-to-r !from-blue-600 !via-purple-600 !to-orange-600 !text-white p-3 md:p-4">
                 <CardTitle className="text-lg md:text-xl flex items-center">
                   <img src="/images/volleyball-small.png" alt="Volleyball" className="w-8 h-8 md:w-9 md:h-9 mr-2" />
-                  부별 선택
+                  <span className="!text-white">부별 선택</span>
                 </CardTitle>
               </CardHeader>
               <CardContent className="p-3 md:p-4 space-y-3">
@@ -1450,10 +1451,11 @@ export default function VolleyballRanking() {
                       <Button
                         key={division}
                         variant={selectedDivision === division ? "default" : "outline"}
+                        size="sm"
                         onClick={() => setSelectedDivision(division)}
-                        className={`text-xs md:text-sm px-2 md:px-3 py-1 md:py-2 ${
+                        className={`text-xs md:text-sm ${
                           selectedDivision === division
-                            ? "bg-gradient-to-r from-blue-500 to-purple-500 text-white"
+                            ? "!bg-blue-600 !text-white hover:!bg-blue-700"
                             : "hover:bg-blue-50"
                         }`}
                       >
@@ -1469,10 +1471,11 @@ export default function VolleyballRanking() {
                       <Button
                         key={division}
                         variant={selectedDivision === division ? "default" : "outline"}
+                        size="sm"
                         onClick={() => setSelectedDivision(division)}
-                        className={`text-xs md:text-sm px-2 md:px-3 py-1 md:py-2 ${
+                        className={`text-xs md:text-sm ${
                           selectedDivision === division
-                            ? "bg-gradient-to-r from-pink-500 to-purple-500 text-white"
+                            ? "!bg-pink-600 !text-white hover:!bg-pink-700"
                             : "hover:bg-pink-50"
                         }`}
                       >
@@ -1485,11 +1488,11 @@ export default function VolleyballRanking() {
             </Card>
 
             <Card className="shadow-xl border-0">
-              <CardHeader className="bg-gradient-to-r from-green-600 via-teal-600 to-blue-600 text-white p-3 md:p-4">
+              <CardHeader className="!bg-gradient-to-r !from-green-600 !via-teal-600 !to-blue-600 !text-white p-3 md:p-4">
                 <CardTitle className="text-lg md:text-xl flex items-center justify-between">
                   <div className="flex items-center">
                     <img src="/images/volleyball-small.png" alt="Volleyball" className="w-8 h-8 md:w-9 md:h-9 mr-2" />
-                    권역별 선택
+                    <span className="!text-white">권역별 선택</span>
                   </div>
                   <Button
                     variant="outline"
@@ -1510,7 +1513,7 @@ export default function VolleyballRanking() {
                       onClick={() => setSelectedRegion("전체권역")}
                       className={`px-4 py-2 md:px-6 md:py-3 text-sm md:text-base font-medium w-full max-w-lg ${
                         selectedRegion === "전체권역"
-                          ? "bg-gradient-to-r from-green-500 to-teal-500 text-white"
+                          ? "!bg-gradient-to-r !from-green-500 !to-teal-500 !text-white"
                           : "hover:bg-green-50 border-green-300 text-green-700"
                       }`}
                     >
@@ -1527,7 +1530,7 @@ export default function VolleyballRanking() {
                         onClick={() => setSelectedRegion(region)}
                         className={`text-xs md:text-sm px-2 py-1 md:px-4 md:py-2 h-7 md:h-10 flex-shrink-0 ${
                           selectedRegion === region
-                            ? "bg-gradient-to-r from-green-500 to-teal-500 text-white"
+                            ? "!bg-gradient-to-r !from-green-500 !to-teal-500 !text-white"
                             : "hover:bg-green-50 border-green-300 text-green-700"
                         }`}
                       >
@@ -1554,7 +1557,7 @@ export default function VolleyballRanking() {
             </Card>
 
             <Card className="shadow-2xl border-0 overflow-hidden">
-              <CardHeader className="bg-gradient-to-r from-blue-600 via-purple-600 to-orange-600 text-white p-2 md:p-4">
+              <CardHeader className="!bg-gradient-to-r !from-blue-600 !via-purple-600 !to-orange-600 !text-white p-2 md:p-4">
                 <CardTitle className="text-xl md:text-2xl flex flex-col md:flex-row md:items-center justify-between space-y-2 md:space-y-0">
                   <div className="flex items-center">
                     <img
@@ -1564,22 +1567,22 @@ export default function VolleyballRanking() {
                     />
                     <div className="flex items-center">
                       <div>
-                        <div className="text-2xl md:text-3xl font-bold">{selectedDivision}</div>
-                        <div className="text-2xl md:text-3xl font-bold">순위표</div>
+                        <div className="text-2xl md:text-3xl font-bold !text-white">{selectedDivision}</div>
+                        <div className="text-2xl md:text-3xl font-bold !text-white">순위표</div>
                         {selectedRegion !== "전체권역" && (
-                          <div className="text-base md:text-lg text-blue-100 mt-1">📍 {selectedRegion}</div>
+                          <div className="text-base md:text-lg !text-blue-100 mt-1">📍 {selectedRegion}</div>
                         )}
                       </div>
                     </div>
                   </div>
                   <div className="text-left md:text-right hidden md:block">
-                    <div className="text-sm md:text-lg font-bold">
+                    <div className="text-sm md:text-lg font-bold !text-white">
                       {selectedDivision === "모든부 종합"
                         ? filteredTeams.length
                         : filteredTeams.filter((t) => t.division === selectedDivision).length}
                       개 팀
                     </div>
-                    <div className="text-xs md:text-sm text-blue-100">
+                    <div className="text-xs md:text-sm !text-blue-100">
                       {tournamentStats.totalTournaments}개 대회 집계
                     </div>
                   </div>
@@ -1660,10 +1663,10 @@ export default function VolleyballRanking() {
         {currentView === "regional" && (
           <div className="space-y-6">
             <Card className="shadow-xl border-0">
-              <CardHeader className="bg-gradient-to-r from-green-600 to-blue-600 text-white">
+              <CardHeader className="!bg-gradient-to-r !from-green-600 !to-blue-600 !text-white">
                 <CardTitle className="text-2xl flex items-center">
                   <MapPin className="w-6 h-6 mr-2" />
-                  🗺️ 권역별 배구클럽 분포 (인제 내린천배 대회)
+                  <span className="!text-white">🗺️ 권역별 배구클럽 분포 (인제 내린천배 대회)</span>
                 </CardTitle>
               </CardHeader>
               <CardContent className="p-8">
@@ -1680,17 +1683,19 @@ export default function VolleyballRanking() {
         {selectedTeam && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-2 md:p-4">
             <div className="bg-white rounded-lg max-w-4xl w-full max-h-[95vh] md:max-h-[90vh] overflow-y-auto">
-              <div className="p-4 md:p-6 border-b bg-gradient-to-r from-blue-600 to-orange-600 text-white rounded-t-lg">
+              <div className="p-4 md:p-6 border-b !bg-gradient-to-r !from-blue-600 !to-orange-600 !text-white rounded-t-lg">
                 <div className="flex justify-between items-start">
                   <div>
-                    <h2 className="text-2xl md:text-3xl font-bold mb-2">{selectedTeam.teamName}</h2>
+                    <h2 className="text-2xl md:text-3xl font-bold mb-2 !text-white">{selectedTeam.teamName}</h2>
                     <div className="flex flex-wrap space-x-2 md:space-x-4 text-xs md:text-sm">
-                      <span>📋 {selectedTeam.division}</span>
-                      <span>🗺️ {selectedTeam.region === "기타" ? "수도권" : selectedTeam.region}</span>
-                      <span>🏆 총 {selectedTeam.tournaments.length}개 대회 입상</span>
+                      <span className="!text-white">📋 {selectedTeam.division}</span>
+                      <span className="!text-white">
+                        🗺️ {selectedTeam.region === "기타" ? "수도권" : selectedTeam.region}
+                      </span>
+                      <span className="!text-white">🏆 총 {selectedTeam.tournaments.length}개 대회 입상</span>
                     </div>
                   </div>
-                  <button onClick={() => setSelectedTeam(null)} className="text-white hover:text-gray-200 text-2xl">
+                  <button onClick={() => setSelectedTeam(null)} className="!text-white hover:text-gray-200 text-2xl">
                     ×
                   </button>
                 </div>
