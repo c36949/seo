@@ -23,7 +23,14 @@ interface TeamData {
   }>
 }
 
-const MENS_DIVISIONS = [
+const MENS_DIVISIONS_MOBILE = [
+  ["남자 초등부", "남자 중등부", "남자 고등부", "남자 대학부"],
+  ["남자클럽 2부", "남자클럽 3부", "남자 국제부"],
+  ["남자 장년부", "남자 시니어부", "남자 실버부"],
+  ["남자 골드실버부", "남자 황금실버부", "남자 6인제부"],
+]
+
+const MENS_DIVISIONS_PC = [
   "남자 초등부",
   "남자 중등부",
   "남자 고등부",
@@ -1407,8 +1414,8 @@ export default function VolleyballRanking() {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-orange-50">
       <header className="bg-gradient-to-r from-blue-600 via-blue-700 to-orange-600 shadow-2xl">
         <div className="container mx-auto px-4 py-6 md:py-8">
-          <div className="flex flex-col md:flex-row md:items-center justify-between mb-6 md:mb-8 space-y-4 md:space-y-0">
-            <div className="flex items-center space-x-3 md:space-x-4">
+          <div className="flex flex-col items-center justify-center mb-6 md:mb-8 space-y-4 md:flex-row md:items-center md:justify-between md:space-y-0">
+            <div className="flex flex-col items-center md:flex-row md:items-center md:space-x-4">
               <div className="flex flex-col items-center">
                 <img
                   src="/images/main-tiger-mascot.png"
@@ -1424,7 +1431,7 @@ export default function VolleyballRanking() {
                 </div>
               </div>
             </div>
-            <div className="text-center md:text-right">
+            <div className="text-center">
               <h1 className="text-2xl md:text-4xl font-bold !text-white mb-2">전국 배구 클럽 랭킹</h1>
               <p className="text-sm md:text-lg !text-blue-100 mb-2">National Volleyball Club Rankings</p>
               <p className="text-xs md:text-sm !text-blue-200">{stats.totalTournaments}개 대회 분석 완료</p>
@@ -1446,22 +1453,45 @@ export default function VolleyballRanking() {
               <CardContent className="p-3 md:p-4 space-y-3">
                 <div>
                   <div className="text-sm font-medium text-gray-700 mb-2">남자부</div>
-                  <div className="flex flex-wrap gap-2">
-                    {MENS_DIVISIONS.map((division) => (
-                      <Button
-                        key={division}
-                        variant={selectedDivision === division ? "default" : "outline"}
-                        size="sm"
-                        onClick={() => setSelectedDivision(division)}
-                        className={`text-xs md:text-sm ${
-                          selectedDivision === division
-                            ? "!bg-blue-600 !text-white hover:!bg-blue-700"
-                            : "hover:bg-blue-50"
-                        }`}
-                      >
-                        {division}
-                      </Button>
+                  <div className="block md:hidden space-y-2">
+                    {MENS_DIVISIONS_MOBILE.map((row, rowIndex) => (
+                      <div key={rowIndex} className="flex flex-wrap gap-2">
+                        {row.map((division) => (
+                          <Button
+                            key={division}
+                            variant={selectedDivision === division ? "default" : "outline"}
+                            size="sm"
+                            onClick={() => setSelectedDivision(division)}
+                            className={`text-xs ${
+                              selectedDivision === division
+                                ? "!bg-blue-600 !text-white hover:!bg-blue-700"
+                                : "hover:bg-blue-50"
+                            }`}
+                          >
+                            {division}
+                          </Button>
+                        ))}
+                      </div>
                     ))}
+                  </div>
+                  <div className="hidden md:block">
+                    <div className="flex flex-wrap gap-2">
+                      {MENS_DIVISIONS_PC.map((division) => (
+                        <Button
+                          key={division}
+                          variant={selectedDivision === division ? "default" : "outline"}
+                          size="sm"
+                          onClick={() => setSelectedDivision(division)}
+                          className={`text-sm ${
+                            selectedDivision === division
+                              ? "!bg-blue-600 !text-white hover:!bg-blue-700"
+                              : "hover:bg-blue-50"
+                          }`}
+                        >
+                          {division}
+                        </Button>
+                      ))}
+                    </div>
                   </div>
                 </div>
                 <div>
