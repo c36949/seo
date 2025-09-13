@@ -1446,18 +1446,19 @@ export default function VolleyballRanking() {
               <CardContent className="p-3 md:p-4 space-y-3">
                 <div>
                   <div className="text-sm font-medium text-gray-700 mb-2">남자부</div>
-                  <div className="flex flex-wrap gap-2">
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 md:flex md:flex-wrap md:gap-2">
                     {MENS_DIVISIONS.map((division) => (
                       <Button
                         key={division}
                         variant={selectedDivision === division ? "default" : "outline"}
                         size="sm"
                         onClick={() => setSelectedDivision(division)}
-                        className={`text-xs md:text-sm ${
+                        className={`text-sm md:text-sm px-2 py-1.5 md:px-3 md:py-2 h-auto min-w-0 flex-1 md:flex-initial whitespace-nowrap ${
                           selectedDivision === division
                             ? "!bg-gradient-to-r !from-blue-500 !to-purple-600 !text-white hover:!from-blue-600 hover:!to-purple-700"
                             : "hover:bg-blue-50"
                         }`}
+                        style={{ fontSize: "14px", padding: "6px 10px" }}
                       >
                         {division}
                       </Button>
@@ -1466,18 +1467,19 @@ export default function VolleyballRanking() {
                 </div>
                 <div>
                   <div className="text-sm font-medium text-gray-700 mb-2">여자부</div>
-                  <div className="flex flex-wrap gap-2">
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 md:flex md:flex-wrap md:gap-2">
                     {WOMENS_DIVISIONS.map((division) => (
                       <Button
                         key={division}
                         variant={selectedDivision === division ? "default" : "outline"}
                         size="sm"
                         onClick={() => setSelectedDivision(division)}
-                        className={`text-xs md:text-sm ${
+                        className={`text-sm md:text-sm px-2 py-1.5 md:px-3 md:py-2 h-auto min-w-0 flex-1 md:flex-initial whitespace-nowrap ${
                           selectedDivision === division
                             ? "!bg-gradient-to-r !from-pink-500 !to-fuchsia-600 !text-white hover:!from-pink-600 hover:!to-fuchsia-700"
                             : "hover:bg-pink-50"
                         }`}
+                        style={{ fontSize: "14px", padding: "6px 10px" }}
                       >
                         {division}
                       </Button>
