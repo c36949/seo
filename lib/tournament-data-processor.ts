@@ -1,6 +1,8 @@
 // 전국 배구대회 결과 데이터 처리 시스템
 import { tournament41Results } from "./tournament41results"
 import { tournament42Results } from "./tournament42results"
+import { tournament43Results } from "./tournament43results"
+import { tournament44Results } from "./tournament44results"
 
 export interface TournamentResult {
   tournament: string
@@ -2815,9 +2817,10 @@ export class VolleyballDataProcessor {
 
     this.addTournament("2025 대한체육회장기 전국생활체육배구대회", tournament41Results, "2025.11.1-11.2")
     this.addTournament("제6회 진안마이산배 시니어ㆍ실버 전국남여 배구대회", tournament42Results, "2025.11.15-11.16")
+    this.addTournament("제5회 남해보물섬배 전국 남여 생활체육 배구대회", tournament43Results, "2025.11.22-11.23")
+    this.addTournament("44번 대회", tournament44Results, "2025.12.1-12.2")
   }
 }
 
 export const volleyballData = new VolleyballDataProcessor()
 volleyballData.initializeRealData()
-export default volleyballData

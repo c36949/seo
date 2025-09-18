@@ -1440,12 +1440,12 @@ export default function VolleyballRanking() {
               <CardHeader className="!bg-gradient-to-r !from-blue-600 !via-purple-600 !to-orange-600 !text-white p-3 md:p-4">
                 <CardTitle className="text-lg md:text-xl flex items-center">
                   <img src="/images/volleyball-small.png" alt="Volleyball" className="w-8 h-8 md:w-9 md:h-9 mr-2" />
-                  <span className="!text-white">부별 선택</span>
+                  <span className="!text-white font-bold">부별 선택</span>
                 </CardTitle>
               </CardHeader>
               <CardContent className="p-3 md:p-4 space-y-3">
                 <div>
-                  <div className="text-sm font-medium text-gray-700 mb-2">남자부</div>
+                  <div className="text-sm font-bold text-gray-800 mb-2">남자부</div>
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 md:flex md:flex-wrap md:gap-2">
                     {MENS_DIVISIONS.map((division) => (
                       <Button
@@ -1453,10 +1453,10 @@ export default function VolleyballRanking() {
                         variant={selectedDivision === division ? "default" : "outline"}
                         size="sm"
                         onClick={() => setSelectedDivision(division)}
-                        className={`text-sm md:text-sm px-2 py-1.5 md:px-3 md:py-2 h-auto min-w-0 flex-1 md:flex-initial whitespace-nowrap ${
+                        className={`text-sm md:text-sm px-2 py-1.5 md:px-3 md:py-2 h-auto min-w-0 flex-1 md:flex-initial whitespace-nowrap font-bold ${
                           selectedDivision === division
-                            ? "!bg-gradient-to-r !from-blue-500 !to-purple-600 !text-white hover:!from-blue-600 hover:!to-purple-700"
-                            : "hover:bg-blue-50"
+                            ? "!bg-gradient-to-r !from-blue-500 !to-purple-600 !text-white hover:!from-blue-600 hover:!to-purple-700 font-bold"
+                            : "hover:bg-blue-50 text-gray-700 font-semibold"
                         }`}
                         style={{ fontSize: "14px", padding: "6px 10px" }}
                       >
@@ -1466,7 +1466,7 @@ export default function VolleyballRanking() {
                   </div>
                 </div>
                 <div>
-                  <div className="text-sm font-medium text-gray-700 mb-2">여자부</div>
+                  <div className="text-sm font-bold text-gray-800 mb-2">여자부</div>
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 md:flex md:flex-wrap md:gap-2">
                     {WOMENS_DIVISIONS.map((division) => (
                       <Button
@@ -1474,10 +1474,10 @@ export default function VolleyballRanking() {
                         variant={selectedDivision === division ? "default" : "outline"}
                         size="sm"
                         onClick={() => setSelectedDivision(division)}
-                        className={`text-sm md:text-sm px-2 py-1.5 md:px-3 md:py-2 h-auto min-w-0 flex-1 md:flex-initial whitespace-nowrap ${
+                        className={`text-sm md:text-sm px-2 py-1.5 md:px-3 md:py-2 h-auto min-w-0 flex-1 md:flex-initial whitespace-nowrap font-bold ${
                           selectedDivision === division
-                            ? "!bg-gradient-to-r !from-pink-500 !to-fuchsia-600 !text-white hover:!from-pink-600 hover:!to-fuchsia-700"
-                            : "hover:bg-pink-50"
+                            ? "!bg-gradient-to-r !from-pink-500 !to-fuchsia-600 !text-white hover:!from-pink-600 hover:!to-fuchsia-700 font-bold"
+                            : "hover:bg-pink-50 text-gray-700 font-semibold"
                         }`}
                         style={{ fontSize: "14px", padding: "6px 10px" }}
                       >
@@ -1494,7 +1494,7 @@ export default function VolleyballRanking() {
                 <CardTitle className="text-lg md:text-xl flex items-center justify-between">
                   <div className="flex items-center">
                     <img src="/images/volleyball-small.png" alt="Volleyball" className="w-8 h-8 md:w-9 md:h-9 mr-2" />
-                    <span className="!text-white">권역별 선택</span>
+                    <span className="!text-white font-bold">권역별 선택</span>
                   </div>
                   <Button
                     variant="outline"
@@ -1513,10 +1513,10 @@ export default function VolleyballRanking() {
                     <Button
                       variant={selectedRegion === "전체권역" ? "default" : "outline"}
                       onClick={() => setSelectedRegion("전체권역")}
-                      className={`px-4 py-2 md:px-6 md:py-3 text-sm md:text-base font-medium w-full max-w-lg ${
+                      className={`px-4 py-2 md:px-6 md:py-3 text-sm md:text-base font-bold w-full max-w-lg ${
                         selectedRegion === "전체권역"
-                          ? "!bg-green-500 !text-white hover:!bg-green-600"
-                          : "hover:bg-green-50 border-green-300 text-green-700"
+                          ? "!bg-green-500 !text-white hover:!bg-green-600 font-bold"
+                          : "hover:bg-green-50 border-green-300 text-green-700 font-bold"
                       }`}
                     >
                       전체권역
@@ -1530,10 +1530,10 @@ export default function VolleyballRanking() {
                         key={region}
                         variant={selectedRegion === region ? "default" : "outline"}
                         onClick={() => setSelectedRegion(region)}
-                        className={`text-xs md:text-sm px-2 py-1 md:px-4 md:py-2 h-7 md:h-10 flex-shrink-0 ${
+                        className={`text-xs md:text-sm px-2 py-1 md:px-4 md:py-2 h-7 md:h-10 flex-shrink-0 font-bold ${
                           selectedRegion === region
-                            ? "!bg-green-500 !text-white hover:!bg-green-600"
-                            : "hover:bg-green-50 border-green-300 text-green-700"
+                            ? "!bg-green-500 !text-white hover:!bg-green-600 font-bold"
+                            : "hover:bg-green-50 border-green-300 text-green-700 font-bold"
                         }`}
                       >
                         {region}
